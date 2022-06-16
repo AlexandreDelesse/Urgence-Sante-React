@@ -8,11 +8,11 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/User.context";
-import { BiUser } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
 
 export default function MainNavbar() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleOnNavLinkClick = (link) => {
     navigate(link);
@@ -45,12 +45,24 @@ export default function MainNavbar() {
                 {/* <NavDropdown.Divider /> */}
               </NavDropdown>
             </Nav>
-            {user && (
+            {user ? (
               <Nav>
                 <Navbar.Brand>
-                  <span>{user.name}</span>
-                  <BiUser className="m-auto ms-2" size={24} />
+                  <span onClick={() => handleOnNavLinkClick("user")}>
+                    {user.name}
+                  </span>
+                  <FiLogOut
+                    onClick={() => setUser(null)}
+                    className="m-auto ms-2"
+                    size={16}
+                  />
                 </Navbar.Brand>
+              </Nav>
+            ) : (
+              <Nav>
+                <Nav.Link onClick={() => handleOnNavLinkClick("login")}>
+                  Login
+                </Nav.Link>
               </Nav>
             )}
           </Offcanvas.Body>

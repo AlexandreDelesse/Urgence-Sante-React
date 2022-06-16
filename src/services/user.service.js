@@ -6,4 +6,8 @@ const login = ({ name }) => {
   return user;
 };
 
-export { login };
+const getUserDetail = ({ name }) => {
+  return usersData.find((user) => user.name === name);
+};
+
+export { login, getUserDetail };

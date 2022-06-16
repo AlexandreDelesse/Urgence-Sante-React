@@ -1,4 +1,4 @@
-export default [
+const userData = [
   {
     name: "alexandre",
   },
@@ -9,3 +9,4 @@ export default [
     name: "frederic",
   },
 ];
+export default userData;

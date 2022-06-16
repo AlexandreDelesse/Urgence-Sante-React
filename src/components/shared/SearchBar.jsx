@@ -19,7 +19,7 @@ export default function SearchBar({ onFilterChange }) {
     } else {
       onFilterChange(input);
     }
-  }, [input]);
+  }, [input, onFilterChange]);
 
   const types = ["sang", "ambulance", "vsl"];
 

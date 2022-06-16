@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { getVehiculeById } from "../../services/vehicule.service";
-import { Badge, Card, Dropdown } from "react-bootstrap";
+import { Badge,  Dropdown } from "react-bootstrap";
 import DateFormatter from "../../components/shared/DateFormatter";
 import "./vehiculeDetail.scss";
 

@@ -4,6 +4,7 @@ import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import AddVehiculeForm from "../components/forms/AddVehiculeForm";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import User from "../pages/User";
 import VehiculeDetail from "../pages/vehicules/VehiculeDetail";
 import Vehicules from "../pages/vehicules/Vehicules";
 import AuthenticatedRoute from "./AuthenticatedRoute";
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="user" element={<User />} />
         <Route
           path="vehicules"
           element={<AuthenticatedRoute element={<Outlet />} />}

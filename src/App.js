@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row } from "react-bootstrap";
 import MainNavbar from "./routing/MainNavbar";
 import { HashRouter } from "react-router-dom";
 import AppRoutes from "./routing/AppRoutes";
@@ -22,7 +21,6 @@ function App() {
     <HashRouter>
       <UserContext.Provider value={{ user, setUser }}>
         <MainNavbar />
-
         <AppRoutes />
       </UserContext.Provider>
     </HashRouter>

@@ -1,4 +1,4 @@
-export default [
+const vehiculesData = [
   {
     id: 1,
     name: "s01",
@@ -32,7 +32,6 @@ export default [
         date: "2022-02-14T20:13:58.284Z",
       },
     ],
-
   },
   {
     id: 2,
@@ -100,3 +99,5 @@ export default [
     ],
   },
 ];
+
+export default vehiculesData;
