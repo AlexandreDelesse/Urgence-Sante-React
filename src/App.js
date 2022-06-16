@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row } from "react-bootstrap";
+import MainNavbar from "./routing/MainNavbar";
+import { HashRouter } from "react-router-dom";
+import AppRoutes from "./routing/AppRoutes";
+import UserContext from "./contexts/User.context";
+
+//TODO: Create Vehicules Components
+//      --> Edit page
+//      --> Delete Vehicule
+//TODO: Create Home Page
+//TODO: Test Navigation and Login
+//TODO: Create AsyncWrapper Component ( later )
+//TODO: Create Data access Hooks ( later )
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <UserContext.Provider value={{ user, setUser }}>
+        <MainNavbar />
+
+        <AppRoutes />
+      </UserContext.Provider>
+    </HashRouter>
   );
 }
 
