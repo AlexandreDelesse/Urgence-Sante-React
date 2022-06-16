@@ -10,12 +10,12 @@ export default function VehiculesTable({ vehicules }) {
   };
 
   return (
-    <Table striped hover className="my-3">
+    <Table striped hover className="my-3" size="sm" responsive='sm'>
       <thead>
         <tr>
           <th>#</th>
           <th>Nom</th>
-          <th>Immatriculation</th>
+          <th>Immat</th>
           <th>Type</th>
           <th>Km</th>
         </tr>

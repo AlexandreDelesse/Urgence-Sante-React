@@ -19,7 +19,7 @@ export default function VehiculeDetail() {
         <h2 className="col">
           {vehicule.name.toUpperCase()} <Badge>{vehicule.immat}</Badge>{" "}
         </h2>
-        <Dropdown className="col d-flex justify-content-end p-0 align-items-center ">
+        <Dropdown className="col d-flex justify-content-end p-0 align-items-center me-3">
           <Dropdown.Toggle variant="secondary">Actions</Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item>Supprimer</Dropdown.Item>
