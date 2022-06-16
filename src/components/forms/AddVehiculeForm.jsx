@@ -16,7 +16,7 @@ export default function AddVehiculeForm() {
   };
 
   return (
-    <Form as="div" className="col-3 mt-5 m-auto">
+    <Form as="div" className="col-sm-8 col-md-5 mt-5 m-auto">
       <Form.Group className="my-3">
         <Form.Label>Nom du vehicule</Form.Label>
         <Form.Control
