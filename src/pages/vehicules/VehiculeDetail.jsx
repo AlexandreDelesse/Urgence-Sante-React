@@ -3,6 +3,7 @@ import { useParams, Navigate } from "react-router-dom";
 import { getVehiculeById } from "../../services/vehicule.service";
 import { Badge, Card, Dropdown } from "react-bootstrap";
 import DateFormatter from "../../components/shared/DateFormatter";
+import "./vehiculeDetail.scss";
 
 export default function VehiculeDetail() {
   const { id } = useParams();
@@ -36,20 +37,18 @@ const MissionHistory = ({ missionHistory }) => {
   return (
     <div className="mt-5">
       <h4>Historique de missions</h4>
-      <div className="d-flex mt-3">
+      <div className="mission-history mt-3">
         {missionHistory.length ? (
           missionHistory.map((mission) => (
-            <Card className="me-4 col-4">
-              <Card.Header>
-                <Card.Title className="text-capitalize">
+            <div className="mission-history__wrapper">
+              <div className="mission-history__content">
+                <h5>
                   <DateFormatter isoDate={mission.date} />
-                </Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <Card.Text>Départ : {mission.from}</Card.Text>
-                <Card.Text>Arrivé : {mission.to}</Card.Text>
-              </Card.Body>
-            </Card>
+                </h5>
+                <p>Départ: {mission.from}</p>
+                <p>Arrivé: {mission.to}</p>
+              </div>
+            </div>
           ))
         ) : (
           <> Pas de mission pour ce vehicule</>

@@ -1,0 +1,33 @@
+.mission-history {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__wrapper {
+    border-left: 2px solid orange;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  &__wrapper::after {
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    background-color: orange;
+    display: block;
+
+    position: absolute;
+    left: -1px;
+    top: 22%;
+    transform: translate(-50%, 0);
+  }
+  
+  &__content {
+    padding: 16px;
+  }
+}
