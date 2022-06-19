@@ -31,19 +31,12 @@ export default function MainNavbar() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto">
-              <NavDropdown title="Ressourses" id="basic-nav-dropdown">
-                <NavDropdown.Item
-                  onClick={() => handleOnNavLinkClick("vehicules")}
-                >
-                  Vehicules
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  onClick={() => handleOnNavLinkClick("Personnes")}
-                >
-                  Personnes
-                </NavDropdown.Item>
-                {/* <NavDropdown.Divider /> */}
-              </NavDropdown>
+              <Nav.Link onClick={() => handleOnNavLinkClick("vehicules")}>
+                Vehicules
+              </Nav.Link>
+              <Nav.Link onClick={() => handleOnNavLinkClick("employees")}>
+                Personel
+              </Nav.Link>
             </Nav>
             {user ? (
               <Nav>

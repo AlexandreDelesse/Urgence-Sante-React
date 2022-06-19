@@ -9,7 +9,6 @@ export default function VehiculeDetail() {
   const { id } = useParams();
 
   const vehicule = getVehiculeById(id);
-  console.log(vehicule);
 
   if (!vehicule) return <Navigate to="/404" />;
 
