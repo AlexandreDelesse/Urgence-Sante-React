@@ -1,0 +1,6 @@
+.employee-absence-listgroup {
+  &__item {
+    display: grid;
+    grid-template-columns: 8px 1fr;
+  }
+}

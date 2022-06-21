@@ -20,7 +20,7 @@ export default function AppRoutes() {
         <Route path="user" element={<User />} />
         <Route path="employees" element={<Outlet />}>
           <Route index element={<Employees />} />
-          <Route path=":id/detail" element={<EmployeeDetail />} />
+          <Route path=":id/detail/*" element={<EmployeeDetail />} />
         </Route>
         <Route
           path="vehicules"

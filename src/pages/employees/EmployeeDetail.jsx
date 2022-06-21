@@ -1,6 +1,7 @@
 import React from "react";
-import { Tabs, Tab } from "react-bootstrap";
-import { useParams, Navigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { useParams, Navigate, Routes, Route, Outlet } from "react-router-dom";
+import EmployeeNavbar from "../../routing/EmployeeNavbar";
 import { getEmployeeById } from "../../services/employee.service";
 import EmployeeAbsences from "./EmployeeAbsences";
 import EmployeeContrats from "./EmployeeContrats";
@@ -15,18 +16,20 @@ export default function EmployeeDetail() {
 
   return (
     <div>
-      <h2 className="text-center">EmployeeDetail</h2>
-      <Tabs defaultActiveKey="infos">
-        <Tab eventKey="infos" title="Infos">
-          <EmployeeInfos employee={employee} />
-        </Tab>
-        <Tab eventKey="contrats" title="Contrats">
-          <EmployeeContrats />
-        </Tab>
-        <Tab eventKey="absences" title="Absences">
-          <EmployeeAbsences />
-        </Tab>
-      </Tabs>
+      <h2 className="mt-3 text-center">{employee.name}</h2>
+      <EmployeeNavbar />
+      <Routes>
+        <Route index element={<EmployeeInfos employee={employee} />} />
+        <Route
+          path="contrats"
+          element={<EmployeeContrats contrats={employee.contrats} />}
+        />
+        <Route
+          path="absences"
+          element={<EmployeeAbsences absences={employee.absences} />}
+        />
+      </Routes>
     </div>
   );
 }
+
