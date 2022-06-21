@@ -1,11 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown,
-  Offcanvas,
-} from "react-bootstrap";
+import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/User.context";
 import { FiLogOut } from "react-icons/fi";

@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Form } from "react-bootstrap";
 import SearchBar from "../../components/shared/SearchBar";
 import VehiculesTable from "../../components/tables/VehiculesTable";
 import useVehiculeFilter from "../../hooks/filters/useVehiculeFilter";
 import { getVehicules } from "../../services/vehicule.service";
 import { useNavigate, Outlet } from "react-router-dom";
+import VehiculeCardList from "../../components/cardList/VehiculeCardList";
 
 export default function Vehicules() {
   const [filters, setFilters] = useState(null);
+  const [displayCard, setDisplayCard] = useState(false);
 
   const navigate = useNavigate();
 
   const handleOnFilterChange = (filter) => {
     setFilters(filter);
+  };
+
+  const toggleDisplayCard = () => {
+    setDisplayCard(!displayCard);
   };
 
   const vehicules = useVehiculeFilter({ list: getVehicules(), filters });
@@ -23,8 +29,31 @@ export default function Vehicules() {
         Nouveau vehicule
       </Button>
       <SearchBar onFilterChange={handleOnFilterChange} />
-      <VehiculesTable vehicules={vehicules} />
+      <DisplayToggler
+        toggleDisplay={toggleDisplayCard}
+        displayValue={displayCard}
+      />
+      {displayCard ? (
+        <VehiculeCardList vehicules={vehicules} />
+      ) : (
+        <VehiculesTable vehicules={vehicules} />
+      )}
       <Outlet />
     </Container>
   );
 }
+
+const DisplayToggler = ({ toggleDisplay, displayValue }) => {
+  return (
+    <div>
+      Affichage
+      <Form.Check
+        onChange={toggleDisplay}
+        isValid={displayValue}
+        type="switch"
+        id="custom-switch"
+        label={displayValue ? "card" : "list"}
+      />
+    </div>
+  );
+};

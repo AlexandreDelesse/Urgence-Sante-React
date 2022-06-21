@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Navigate, Routes, Route, Outlet } from "react-router-dom";
+import { useParams, Navigate, Routes, Route } from "react-router-dom";
 import EmployeeNavbar from "../../routing/EmployeeNavbar";
 import { getEmployeeById } from "../../services/employee.service";
 import EmployeeAbsences from "./EmployeeAbsences";
