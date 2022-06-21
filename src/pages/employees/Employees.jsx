@@ -10,10 +10,6 @@ export default function Employees() {
 
   return (
     <Container>
-      <Button onClick={() => navigate("nouveau-vehicule")} className="my-3">
-        Nouveau vehicule
-      </Button>
-      {/* <SearchBar onFilterChange={handleOnFilterChange} /> */}
       <EmployeesTable employees={employees} />
       <Outlet />
     </Container>

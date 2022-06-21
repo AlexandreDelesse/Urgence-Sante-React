@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { useParams, Navigate, Routes, Route, Outlet } from "react-router-dom";
 import EmployeeNavbar from "../../routing/EmployeeNavbar";
 import { getEmployeeById } from "../../services/employee.service";
@@ -32,4 +31,3 @@ export default function EmployeeDetail() {
     </div>
   );
 }
-

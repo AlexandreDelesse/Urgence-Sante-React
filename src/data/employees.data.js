@@ -21,6 +21,22 @@ const employees = [
         cause: "maladie",
         isJustified: true,
       },
+      {
+        id: 4,
+
+        from: "2022-06-19T18:34:20.935Z",
+        to: "2022-06-26T18:34:20.935Z",
+        cause: "Conge",
+        isJustified: true,
+      },
+      {
+        id: 5,
+
+        from: "2022-07-19T18:34:20.935Z",
+        to: "2022-07-26T18:34:20.935Z",
+        cause: "maladie",
+        isJustified: true,
+      },
     ],
     contrats: [
       {

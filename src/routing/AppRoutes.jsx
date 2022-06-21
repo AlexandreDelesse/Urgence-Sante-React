@@ -18,10 +18,12 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="user" element={<User />} />
+
         <Route path="employees" element={<Outlet />}>
           <Route index element={<Employees />} />
           <Route path=":id/detail/*" element={<EmployeeDetail />} />
         </Route>
+
         <Route
           path="vehicules"
           element={<AuthenticatedRoute element={<Outlet />} />}
@@ -30,6 +32,7 @@ export default function AppRoutes() {
           <Route path="nouveau-vehicule" element={<AddVehiculeForm />} />
           <Route path=":id/detail" element={<VehiculeDetail />} />
         </Route>
+        
         <Route path="/*" element={<Page404 />} />
       </Routes>
     </Container>
