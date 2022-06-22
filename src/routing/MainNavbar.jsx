@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/User.context";
@@ -7,9 +7,11 @@ import { FiLogOut } from "react-icons/fi";
 export default function MainNavbar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleOnNavLinkClick = (link) => {
     navigate(link);
+    setShowOffcanvas(false);
   };
 
   return (
@@ -18,8 +20,16 @@ export default function MainNavbar() {
         <Navbar.Brand onClick={() => handleOnNavLinkClick("/")}>
           Urgence Sante
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Offcanvas id="basic-navbar-nav" placement="end">
+        <Navbar.Toggle
+          onClick={() => setShowOffcanvas(true)}
+          aria-controls="basic-navbar-nav"
+        />
+        <Navbar.Offcanvas
+          show={showOffcanvas}
+          onHide={() => setShowOffcanvas(false)}
+          id="basic-navbar-nav"
+          placement="end"
+        >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Menu</Offcanvas.Title>
           </Offcanvas.Header>
