@@ -3,9 +3,9 @@ import { Container, Button, Form } from "react-bootstrap";
 import SearchBar from "../../components/shared/SearchBar";
 import VehiculesTable from "../../components/tables/VehiculesTable";
 import useVehiculeFilter from "../../hooks/filters/useVehiculeFilter";
-import { getVehicules } from "../../services/vehicule.service";
 import { useNavigate, Outlet } from "react-router-dom";
 import VehiculeCardList from "../../components/cardList/VehiculeCardList";
+import useGetVehicules from "../../hooks/getter/useGetVehicules";
 
 export default function Vehicules() {
   const [filters, setFilters] = useState(null);
@@ -21,7 +21,9 @@ export default function Vehicules() {
     setDisplayCard(!displayCard);
   };
 
-  const vehicules = useVehiculeFilter({ list: getVehicules(), filters });
+  const vehicules = useGetVehicules();
+
+  const filteredVehicules = useVehiculeFilter({ list: vehicules, filters });
 
   return (
     <Container>
@@ -34,9 +36,9 @@ export default function Vehicules() {
         displayValue={displayCard}
       />
       {displayCard ? (
-        <VehiculeCardList vehicules={vehicules} />
+        <VehiculeCardList vehicules={filteredVehicules} />
       ) : (
-        <VehiculesTable vehicules={vehicules} />
+        <VehiculesTable vehicules={filteredVehicules} />
       )}
       <Outlet />
     </Container>

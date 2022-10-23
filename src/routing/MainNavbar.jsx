@@ -16,7 +16,7 @@ export default function MainNavbar() {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
+      <Container fluid>
         <Navbar.Brand onClick={() => handleOnNavLinkClick("/")}>
           Urgence Sante
         </Navbar.Brand>

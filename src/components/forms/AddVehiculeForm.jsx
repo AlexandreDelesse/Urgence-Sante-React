@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { createVehicule } from "../../services/vehicule.service";
 
 export default function AddVehiculeForm() {
   const [input, setInput] = useState({ name: "" });
@@ -13,6 +14,16 @@ export default function AddVehiculeForm() {
   const handleOnInputChange = (e) => {
     const { name, value } = e.target;
     setInput((old) => ({ ...old, [name]: value }));
+  };
+
+  const handleOnValidateClick = async () => {
+    console.log("click");
+    try {
+      await createVehicule(input);
+      navigate(-1);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -73,7 +84,7 @@ export default function AddVehiculeForm() {
           {error}
         </Alert>
       )}
-      <Button type="button" onChange={() => {}} className="mt-2">
+      <Button type="button" onClick={handleOnValidateClick} className="mt-2">
         Ajouter
       </Button>
       <Button

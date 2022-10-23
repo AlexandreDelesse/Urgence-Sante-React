@@ -6,6 +6,7 @@ import EmployeeDetail from "../pages/employees/EmployeeDetail";
 import Employees from "../pages/employees/Employees";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import TestApi from "../pages/TestApi";
 import User from "../pages/User";
 import VehiculeDetail from "../pages/vehicules/VehiculeDetail";
 import Vehicules from "../pages/vehicules/Vehicules";
@@ -17,6 +18,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="testApi" element={<TestApi />} />
         <Route path="user" element={<User />} />
 
         <Route path="employees" element={<Outlet />}>
@@ -32,7 +34,7 @@ export default function AppRoutes() {
           <Route path="nouveau-vehicule" element={<AddVehiculeForm />} />
           <Route path=":id/detail" element={<VehiculeDetail />} />
         </Route>
-        
+
         <Route path="/*" element={<Page404 />} />
       </Routes>
     </Container>

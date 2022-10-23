@@ -1,11 +1,41 @@
-import vehiculesData from "../data/vehicules.data";
+import { api } from "./api.config";
 
-const getVehicules = () => {
-  return vehiculesData;
+const getVehicules = async () => {
+  try {
+    const { data: vehicules } = await api.get("vehicules");
+    return vehicules;
+  } catch (error) {
+    throw error;
+  }
 };
 
-const getVehiculeById = (id) => {
-  return vehiculesData.find((vehicule) => vehicule.id === parseInt(id));
+const getVehiculeById = async (id) => {
+  console.log("hi from function getVehiculeById");
+  try {
+    const { data: vehicule } = await api.get(`vehicule/${id}`);
+    console.log("vehicule : ", vehicule);
+    return vehicule;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export { getVehicules, getVehiculeById };
+const createVehicule = async (vehicule) => {
+  try {
+    const { data } = await api.post("vehicules", vehicule);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteVehiculeById = async (id) => {
+  try {
+    const response = await api.delete(`vehicule/${id}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { getVehicules, getVehiculeById, createVehicule, deleteVehiculeById };
