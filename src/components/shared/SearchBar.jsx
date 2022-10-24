@@ -42,7 +42,7 @@ export default function SearchBar({ onFilterChange }) {
           <ButtonGroup aria-label="Basic example">
             <Button
               onClick={() => handleOnButtonChange("")}
-              variant={input.type === "" ? "success" : "primary"}
+              variant={input.type === "" ? "warning" : "secondary"}
             >
               All
             </Button>
@@ -50,7 +50,7 @@ export default function SearchBar({ onFilterChange }) {
               <Button
                 key={type}
                 onClick={() => handleOnButtonChange(type)}
-                variant={input.type === type ? "success" : "primary"}
+                variant={input.type === type ? "warning" : "secondary"}
               >
                 {type}
               </Button>
