@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import AddVehiculeForm from "../components/forms/AddVehiculeForm";
 import EmployeeDetail from "../pages/employees/EmployeeDetail";
@@ -13,8 +13,10 @@ import Vehicules from "../pages/vehicules/Vehicules";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 
 export default function AppRoutes() {
+  const navigation = useNavigate();
   return (
     <Container>
+      <Button variant="link" onClick={() => navigation(-1)}>Retour</Button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
