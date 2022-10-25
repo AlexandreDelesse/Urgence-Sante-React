@@ -1,7 +1,14 @@
 import React from 'react'
-import { Button, Container } from 'react-bootstrap'
-import { Routes, Route, Outlet, useNavigate } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
+import {
+  Routes,
+  Route,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom'
 import AddVehiculeForm from '../components/forms/AddVehiculeForm'
+import BackButton from '../components/shared/BackButton'
 import EmployeeDetail from '../pages/employees/EmployeeDetail'
 import Employees from '../pages/employees/Employees'
 import Home from '../pages/Home'
@@ -12,12 +19,12 @@ import VehiculeDetail from '../pages/vehicules/VehiculeDetail'
 import Vehicules from '../pages/vehicules/Vehicules'
 
 export default function AppRoutes() {
-  const navigation = useNavigate()
+  const pathBackButtonExeptions = ['/', '/login']
+  const { pathname } = useLocation()
+
   return (
     <Container>
-      <Button variant="link" onClick={() => navigation(-1)}>
-        Retour
-      </Button>
+      {pathBackButtonExeptions.includes(pathname) || <BackButton />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />

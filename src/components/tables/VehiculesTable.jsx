@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import useVehiculeFilter from '../../hooks/filters/useVehiculeFilter'
 
 export default function VehiculesTable({ vehicules, filters }) {
-  console.log('this is my vehicules', vehicules)
   const navigate = useNavigate()
   const filteredVehicules = useVehiculeFilter({ list: vehicules, filters })
 

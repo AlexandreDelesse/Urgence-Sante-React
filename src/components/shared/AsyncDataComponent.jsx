@@ -8,7 +8,6 @@ export default function AsyncDataComponent({
   onSuccess,
 }) {
   //TODO: Add context error message
-  console.log('data from async', data)
   if (data.status === 'loading')
     return (
       <div className=" d-flex w-100 justify-content-center align-items-center">
