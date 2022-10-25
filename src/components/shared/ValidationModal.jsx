@@ -10,7 +10,7 @@ export default function ValidationModal({
   message,
 }) {
   return (
-    <Modal show={show} onHide={onClose}>
+    <Modal show={show} onHide={onClose} centered>
       {title && (
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
