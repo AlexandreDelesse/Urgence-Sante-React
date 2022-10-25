@@ -9,7 +9,6 @@ export default function ValidationModal({
   title,
   message,
 }) {
-  //TODO:Loading Button
   return (
     <Modal show={show} onHide={onClose}>
       {title && (
@@ -17,7 +16,9 @@ export default function ValidationModal({
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
       )}
-      <Modal.Body>{message || 'Etes-vous sûr de vouloir éffectuer cette action ?'} </Modal.Body>
+      <Modal.Body>
+        {message || 'Etes-vous sûr de vouloir éffectuer cette action ?'}{' '}
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={onValidate}>
           {loading && (
