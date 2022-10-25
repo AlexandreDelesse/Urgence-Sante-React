@@ -1,14 +1,14 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import "./vehiculeCardList.scss";
+import React from 'react'
+import { Card } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import './vehiculeCardList.scss'
 
 export default function VehiculeCardList({ vehicules }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleOnVehiculeClick = ({ id }) => {
-    navigate(`${id}/detail`);
-  };
+    navigate(`${id}/detail`)
+  }
 
   return (
     <div className="vehicule-card-list my-5">
@@ -20,7 +20,7 @@ export default function VehiculeCardList({ vehicules }) {
         />
       ))}
     </div>
-  );
+  )
 }
 
 const VehiculeCard = ({ vehicule, onClick }) => {
@@ -35,5 +35,5 @@ const VehiculeCard = ({ vehicule, onClick }) => {
         <Card.Text>Km : {vehicule.km}</Card.Text>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}

@@ -1,16 +1,19 @@
-import React from "react";
-import { Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { Table } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import useVehiculeFilter from '../../hooks/filters/useVehiculeFilter'
 
-export default function VehiculesTable({ vehicules }) {
-  const navigate = useNavigate();
+export default function VehiculesTable({ vehicules, filters }) {
+  console.log('this is my vehicules', vehicules)
+  const navigate = useNavigate()
+  const filteredVehicules = useVehiculeFilter({ list: vehicules, filters })
 
   const handleOnRowClick = ({ id }) => {
-    navigate(`${id}/detail`);
-  };
+    navigate(`${id}/detail`)
+  }
 
   return (
-    <Table striped hover className="my-3" size="sm" responsive='sm'>
+    <Table striped hover className="my-3" size="sm" responsive="sm">
       <thead>
         <tr>
           <th>#</th>
@@ -21,7 +24,7 @@ export default function VehiculesTable({ vehicules }) {
         </tr>
       </thead>
       <tbody>
-        {vehicules.map((vehicule) => (
+        {filteredVehicules.map((vehicule) => (
           <tr onClick={() => handleOnRowClick(vehicule)} key={vehicule.id}>
             <td>{vehicule.id}</td>
             <td>{vehicule.name}</td>
@@ -32,5 +35,5 @@ export default function VehiculesTable({ vehicules }) {
         ))}
       </tbody>
     </Table>
-  );
+  )
 }

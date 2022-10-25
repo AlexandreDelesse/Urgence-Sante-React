@@ -1,30 +1,39 @@
-import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { createVehicule } from "../../services/vehicule.service";
+import React, { useState } from 'react'
+import { Form, Button, Alert, Spinner } from 'react-bootstrap'
+import { useMutation, useQueryClient } from 'react-query'
+import { useNavigate } from 'react-router-dom'
+import { createVehicule } from '../../services/vehicule.service'
 
 export default function AddVehiculeForm() {
-  const [input, setInput] = useState({ name: "" });
-  const [error, setError] = useState(null);
+  const [input, setInput] = useState({ name: '' })
+  const [error, setError] = useState(null)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
-  const types = ["vsl", "ambulance", "sang"];
+  const mutation = useMutation(createVehicule, {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries('vehicules')
+    },
+  })
+
+  const types = ['vsl', 'ambulance', 'sang']
 
   const handleOnInputChange = (e) => {
-    const { name, value } = e.target;
-    setInput((old) => ({ ...old, [name]: value }));
-  };
+    const { name, value } = e.target
+    setInput((old) => ({ ...old, [name]: value }))
+  }
 
   const handleOnValidateClick = async () => {
-    console.log("click");
+    console.log('click')
     try {
-      await createVehicule(input);
-      navigate(-1);
+      await mutation.mutateAsync(input)
+      navigate(-1)
     } catch (err) {
-      setError(err.message);
+      setError(err.message)
     }
-  };
+  }
 
   return (
     <Form as="div" className="col-sm-8 col-md-5 mt-5 m-auto">
@@ -84,17 +93,26 @@ export default function AddVehiculeForm() {
           {error}
         </Alert>
       )}
-      <Button type="button" onClick={handleOnValidateClick} className="mt-2">
-        Ajouter
-      </Button>
       <Button
         type="button"
         variant="outline-danger"
         onClick={() => navigate(-1)}
-        className="mt-2 ms-3"
+        className="mt-2"
       >
         Annuler
       </Button>
+      <Button type="button" onClick={handleOnValidateClick} className="mt-2 ms-3">
+        {mutation.isLoading && (
+          <Spinner
+            className="me-2"
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+          />
+        )}
+        Ajouter
+      </Button>
     </Form>
-  );
+  )
 }

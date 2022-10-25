@@ -1,16 +1,8 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { getVehicules } from "../../services/vehicule.service";
+import { useQuery } from 'react-query'
+import { getVehicules } from '../../services/vehicule.service'
 
 export default function useGetVehicules() {
-  const [vehicules, setVehicules] = useState([]);
+  const vehicules = useQuery('vehicules', getVehicules)
 
-  useEffect(() => {
-    getVehicules()
-      .then((data) => setVehicules(data))
-      .catch(() => setVehicules([]));
-  }, []);
-
-  return vehicules;
+  return vehicules
 }

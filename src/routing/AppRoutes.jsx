@@ -1,22 +1,23 @@
-import React from "react";
-import { Button, Container } from "react-bootstrap";
-import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
-import AddVehiculeForm from "../components/forms/AddVehiculeForm";
-import EmployeeDetail from "../pages/employees/EmployeeDetail";
-import Employees from "../pages/employees/Employees";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import TestApi from "../pages/TestApi";
-import User from "../pages/User";
-import VehiculeDetail from "../pages/vehicules/VehiculeDetail";
-import Vehicules from "../pages/vehicules/Vehicules";
-import AuthenticatedRoute from "./AuthenticatedRoute";
+import React from 'react'
+import { Button, Container } from 'react-bootstrap'
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom'
+import AddVehiculeForm from '../components/forms/AddVehiculeForm'
+import EmployeeDetail from '../pages/employees/EmployeeDetail'
+import Employees from '../pages/employees/Employees'
+import Home from '../pages/Home'
+import Login from '../pages/Login'
+import TestApi from '../pages/TestApi'
+import User from '../pages/User'
+import VehiculeDetail from '../pages/vehicules/VehiculeDetail'
+import Vehicules from '../pages/vehicules/Vehicules'
 
 export default function AppRoutes() {
-  const navigation = useNavigate();
+  const navigation = useNavigate()
   return (
     <Container>
-      <Button variant="link" onClick={() => navigation(-1)}>Retour</Button>
+      <Button variant="link" onClick={() => navigation(-1)}>
+        Retour
+      </Button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
@@ -28,10 +29,7 @@ export default function AppRoutes() {
           <Route path=":id/detail/*" element={<EmployeeDetail />} />
         </Route>
 
-        <Route
-          path="vehicules"
-          element={<AuthenticatedRoute element={<Outlet />} />}
-        >
+        <Route path="vehicules" element={<Outlet />}>
           <Route index element={<Vehicules />} />
           <Route path="nouveau-vehicule" element={<AddVehiculeForm />} />
           <Route path=":id/detail" element={<VehiculeDetail />} />
@@ -40,17 +38,17 @@ export default function AppRoutes() {
         <Route path="/*" element={<Page404 />} />
       </Routes>
     </Container>
-  );
+  )
 }
 
 const Page404 = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Container>
       <h1 className="text-center mt-5">404 Not found</h1>
-      <p onClick={() => navigate("/")} className="text-center">
+      <p onClick={() => navigate('/')} className="text-center">
         Retour au menu principal
       </p>
     </Container>
-  );
-};
+  )
+}
