@@ -8,11 +8,14 @@ import {
   useLocation,
 } from 'react-router-dom'
 import AddVehiculeForm from '../components/forms/AddVehiculeForm'
+import MissionDetail from '../components/mission/MissionDetail'
+
 import BackButton from '../components/shared/BackButton'
 import EmployeeDetail from '../pages/employees/EmployeeDetail'
 import Employees from '../pages/employees/Employees'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import Mission from '../pages/missions/Mission'
 import TestApi from '../pages/TestApi'
 import User from '../pages/User'
 import VehiculeDetail from '../pages/vehicules/VehiculeDetail'
@@ -28,8 +31,12 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="login/:crewid" element={<Login />} />
         <Route path="testApi" element={<TestApi />} />
         <Route path="user" element={<User />} />
+
+        <Route path="missions" element={<Mission />} />
+        <Route path="mission/:missionIndex" element={<MissionDetail />} />
 
         <Route path="employees" element={<Outlet />}>
           <Route index element={<Employees />} />

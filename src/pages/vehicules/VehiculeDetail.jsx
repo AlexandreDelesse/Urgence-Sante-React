@@ -27,7 +27,6 @@ export default function VehiculeDetail() {
   const handleOnOpenModal = () => setShowValidationModal(true)
 
   const vehicule = useGetVehiculeById(id)
-  console.log(Object.keys(vehicule).length)
 
   if (!vehicule) return <Navigate to="/404" />
   if (Object.keys(vehicule).length === 0) return <>Coucou</>

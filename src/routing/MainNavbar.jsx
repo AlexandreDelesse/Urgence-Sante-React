@@ -35,11 +35,14 @@ export default function MainNavbar() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto">
-              <Nav.Link onClick={() => handleOnNavLinkClick("vehicules")}>
+              {/* <Nav.Link onClick={() => handleOnNavLinkClick("vehicules")}>
                 Vehicules
               </Nav.Link>
               <Nav.Link onClick={() => handleOnNavLinkClick("employees")}>
                 Personel
+              </Nav.Link> */}
+              <Nav.Link onClick={() => handleOnNavLinkClick("missions")}>
+                Missions
               </Nav.Link>
             </Nav>
             {user ? (
@@ -57,7 +60,7 @@ export default function MainNavbar() {
               </Nav>
             ) : (
               <Nav>
-                <Nav.Link onClick={() => handleOnNavLinkClick("login")}>
+                <Nav.Link onClick={() => handleOnNavLinkClick("login/")}>
                   Login
                 </Nav.Link>
               </Nav>

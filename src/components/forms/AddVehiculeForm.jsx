@@ -26,7 +26,6 @@ export default function AddVehiculeForm() {
   }
 
   const handleOnValidateClick = async () => {
-    console.log('click')
     try {
       await mutation.mutateAsync(input)
       navigate(-1)
