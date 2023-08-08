@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useQuery, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { getMissions } from '../../services/mission.service'
 import AsyncDataComponent from '../shared/AsyncDataComponent'
 import DateFormatter from '../shared/DateFormatter'
 import TransportType from '../shared/TransportType'
-import { AiOutlineCheckCircle } from 'react-icons/ai'
+import { BsHandThumbsUpFill } from 'react-icons/bs'
 import './mission.css'
+import { transportModeEnum } from '../../data/enum.data'
+// import missionGif from '../../assets/icons8-amnulance.gif'
 
 export default function MissionList() {
   const navigate = useNavigate()
@@ -32,18 +34,17 @@ export default function MissionList() {
           {data.length === 0 ? (
             <div>Pas de missions</div>
           ) : (
-            <ListGroup variant="flush">
+            <div>
               {data.map((el) => (
-                <ListGroupItem
-                  key={el.index}
-                  onClick={() => onMissionClick(el.index)}
-                  className="d-flex justify-content-between"
-                >
-                  <div className="d-flex flex-column">
-                    <div className="fs-5">
+                <Card className="my-3">
+                  <Card.Body
+                    onClick={() => onMissionClick(el.index)}
+                    key={el.index}
+                  >
+                    <div className="d-flex fs-5">
                       <DateFormatter dateSpecial={el.schedule} />
                     </div>
-                    <span>{el.transportMode}</span>
+                    <span>{transportModeEnum[el.transportMode]}</span>
                     <div className="fw-bold">{el.patient}</div>
                     <div>
                       Rdv :{' '}
@@ -64,13 +65,67 @@ export default function MissionList() {
                     <div>
                       <TransportType transportType={el.transportType} />
                     </div>
-                  </div>
-                  <Button className='h-25' onClick={onButtonClick} size="sm" variant="outline-success">
-                    <AiOutlineCheckCircle size={30} />
-                  </Button>
-                </ListGroupItem>
+                  </Card.Body>
+                  <Card.Footer className="d-flex justify-content-end">
+                    {el.isAck ? (
+                      <img
+                        className="ms-3 align-middle"
+                        style={{ height: '32px' }}
+                        src={require('../../assets/ambulance.gif')}
+                        alt="loading..."
+                      />
+                    ) : (
+                      <Button
+                        onClick={onButtonClick}
+                        size="sm"
+                        variant="success"
+                      >
+                        Accepter <BsHandThumbsUpFill size={12} />
+                      </Button>
+                    )}
+                  </Card.Footer>
+                </Card>
               ))}
-            </ListGroup>
+            </div>
+            // <ListGroup variant="flush">
+            //   {data.map((el) => (
+            //     <ListGroupItem
+            //       key={el.index}
+            //       onClick={() => onMissionClick(el.index)}
+            //       className="d-flex justify-content-between"
+            //     >
+            //       <div className="d-flex flex-column">
+            //         <div className="fs-5">
+            //           <DateFormatter dateSpecial={el.schedule} />
+            //         </div>
+            // <span>{el.transportMode}</span>
+            // <div className="fw-bold">{el.patient}</div>
+            // <div>
+            //   Rdv :{' '}
+            //   {el.appointment ? (
+            //     <DateFormatter dateToParse={el.appointment} />
+            //   ) : (
+            //     'Pas de rdv'
+            //   )}
+            // </div>
+            // <div>
+            //   <span className="fw-bold">Départ :</span>
+            //   {el.departure}
+            // </div>
+            // <div>
+            //   <span className="fw-bold">Arrivée :</span>
+            //   {el.arrival}
+            // </div>
+            // <div>
+            //   <TransportType transportType={el.transportType} />
+            // </div>
+            //       </div>
+            //       <Button  className='h-25' onClick={onButtonClick} size="sm" variant="success">
+            //         <BsHandThumbsUp size={30} />
+            //       </Button>
+            //     </ListGroupItem>
+            //   ))}
+            // </ListGroup>
           )}
         </div>
       )}
