@@ -2,9 +2,11 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
+import { useEffect } from 'react'
 
 export default function BackButton() {
   const navigate = useNavigate()
+
   return (
     <span
       role="button"

@@ -36,18 +36,15 @@ export default function MissionList() {
           ) : (
             <div>
               {data.map((el) => (
-                <Card className="my-3">
-                  <Card.Body
-                    onClick={() => onMissionClick(el.index)}
-                    key={el.index}
-                  >
+                <Card key={el.index} className="my-3">
+                  <Card.Body onClick={() => onMissionClick(el.jobId)}>
                     <div className="d-flex fs-5">
                       <DateFormatter dateSpecial={el.schedule} />
                     </div>
                     <span>{transportModeEnum[el.transportMode]}</span>
                     <div className="fw-bold">{el.patient}</div>
                     <div>
-                      Rdv :{' '}
+                      Rdv :
                       {el.appointment ? (
                         <DateFormatter dateToParse={el.appointment} />
                       ) : (
@@ -55,11 +52,11 @@ export default function MissionList() {
                       )}
                     </div>
                     <div>
-                      <span className="fw-bold">Départ :</span>
+                      <span className="fw-bold">Départ : </span>
                       {el.departure}
                     </div>
                     <div>
-                      <span className="fw-bold">Arrivée :</span>
+                      <span className="fw-bold">Arrivée : </span>
                       {el.arrival}
                     </div>
                     <div>
