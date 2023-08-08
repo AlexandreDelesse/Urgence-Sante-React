@@ -13,14 +13,11 @@ export default function MissionDetail() {
     getMissionById(params.missionIndex),
   )
 
-  useEffect(() => {
-    console.log(asyncMissionDetail)
-  }, [asyncMissionDetail])
-
   return (
     <Container>
       <h2 className="text-center">Detail de la mission</h2>
       <AsyncDataComponent
+        withRefetchLoader
         data={asyncMissionDetail}
         onSuccess={({ data }) => (
           <div>

@@ -6,9 +6,10 @@ export default function AsyncDataComponent({
   onLoadingMessage,
   onErrorMessage,
   onSuccess,
+  withRefetchLoader,
 }) {
   //TODO: Add context error message
-  if (data.status === 'loading' || data.isRefetching)
+  if (data.status === 'loading' || (withRefetchLoader && data.isRefetching))
     return (
       <div className=" d-flex w-100 justify-content-center align-items-center">
         <Spinner animation="border" variant="warning" />
