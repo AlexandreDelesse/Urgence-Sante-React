@@ -9,7 +9,6 @@ import TransportType from '../shared/TransportType'
 import { BsHandThumbsUpFill } from 'react-icons/bs'
 import './mission.css'
 import { transportModeEnum } from '../../data/enum.data'
-// import missionGif from '../../assets/icons8-amnulance.gif'
 
 export default function MissionList() {
   const navigate = useNavigate()
@@ -17,7 +16,6 @@ export default function MissionList() {
   const asyncMissions = useQuery('missions', getMissions)
   const queryClient = useQueryClient()
 
-  // const missions = []
   const onMissionClick = (missionIndex) => {
     navigate(`/mission/${missionIndex}`)
   }
@@ -26,9 +24,15 @@ export default function MissionList() {
     e.stopPropagation()
     queryClient.invalidateQueries('missions')
   }
+
+  useEffect(() => {
+    console.log(asyncMissions)
+  }, [asyncMissions])
+
   return (
     <AsyncDataComponent
       data={asyncMissions}
+      onLoadingMessage="Chargement des missions..."
       onSuccess={({ data }) => (
         <div>
           {data.length === 0 ? (

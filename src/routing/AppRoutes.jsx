@@ -30,8 +30,8 @@ export default function AppRoutes() {
       {pathBackButtonExeptions.includes(pathname) || <BackButton />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
         <Route path="login/:crewid" element={<Login />} />
+        <Route path="login/*" element={<Home />} />
         <Route path="testApi" element={<TestApi />} />
         <Route path="user" element={<User />} />
 

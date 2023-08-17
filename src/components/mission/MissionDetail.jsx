@@ -15,7 +15,7 @@ export default function MissionDetail() {
 
   return (
     <Container>
-      <h2 className="text-center">Detail de la mission</h2>
+      <h3 className="text-center m-3">Detail de la mission</h3>
       <AsyncDataComponent
         withRefetchLoader
         data={asyncMissionDetail}

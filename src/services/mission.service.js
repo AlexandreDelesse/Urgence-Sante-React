@@ -1,12 +1,14 @@
 import { mission, missions } from '../data/mission.data'
 import { api } from './api.config'
+import { getToken } from './user.service'
 
 const getMissions = async () => {
   try {
+    const token = getToken()
+    if (!token) throw new Error('Pas de token. Veuillez vous authentifier')
     const { data: missions } = await api.get('/JobList', {
-      params: { gCrewToken: 'e0b21321-3990-4f69-8502-d2c4f494a882' },
+      params: { gCrewToken: token },
     })
-
     return missions
   } catch (error) {
     throw error
@@ -24,16 +26,12 @@ const getMissionById = async (jobId) => {
   }
 }
 
-const promiseMissions = new Promise((res, rej) => {
-  setTimeout(() => {
-    res(missions)
-  }, 500)
-})
+const acceptMission = async (missionId) => {
+  try {
+    return await api.patch(`/joblist?gJobId=`)
+  } catch (error) {
+    throw error
+  }
+}
 
-const promiseMissionDetail = new Promise((res, rej) => {
-  setTimeout(() => {
-    res(mission)
-  }, 500)
-})
-
-export { getMissions, getMissionById }
+export { getMissions, getMissionById, acceptMission }
