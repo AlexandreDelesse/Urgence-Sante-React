@@ -3,6 +3,7 @@ import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import UserContext from '../contexts/User.context'
 import { FiLogOut } from 'react-icons/fi'
+import packageJson from '../../package.json'
 
 export default function MainNavbar() {
   const navigate = useNavigate()
@@ -72,6 +73,7 @@ export default function MainNavbar() {
               </Nav>
             )}
           </Offcanvas.Body>
+          <p className="ms-3">version {packageJson.version}</p>
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
