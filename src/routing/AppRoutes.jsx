@@ -15,6 +15,7 @@ import EmployeeDetail from '../pages/employees/EmployeeDetail'
 import Employees from '../pages/employees/Employees'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import ManualLogin from '../pages/ManualLogin'
 import Mission from '../pages/missions/Mission'
 import TestApi from '../pages/TestApi'
 import User from '../pages/User'
@@ -31,7 +32,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login/:crewid" element={<Login />} />
-        <Route path="login/*" element={<Home />} />
+        <Route path="login/*" element={<ManualLogin />} />
         <Route path="testApi" element={<TestApi />} />
         <Route path="user" element={<User />} />
 

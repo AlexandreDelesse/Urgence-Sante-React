@@ -19,6 +19,9 @@ const getMissionById = async (jobId) => {
   try {
     const { data: jobDetail } = await api.get('/jobDetail', {
       params: { gJobId: jobId },
+      // headers: {
+      //   Authorization: getToken(),
+      // },
     })
     return jobDetail
   } catch (error) {
@@ -28,7 +31,7 @@ const getMissionById = async (jobId) => {
 
 const acceptMission = async (missionId) => {
   try {
-    return await api.patch(`/joblist?gJobId=`)
+    return await api.patch('/joblist', { jobId: missionId, acknowledged: false })
   } catch (error) {
     throw error
   }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useQuery, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { getMissions } from '../../services/mission.service'
+import { acceptMission, getMissions } from '../../services/mission.service'
 import AsyncDataComponent from '../shared/AsyncDataComponent'
 import DateFormatter from '../shared/DateFormatter'
 import TransportType from '../shared/TransportType'
@@ -20,8 +20,9 @@ export default function MissionList() {
     navigate(`/mission/${missionIndex}`)
   }
 
-  const onButtonClick = (e) => {
+  const onButtonClick = async (e, jobId) => {
     e.stopPropagation()
+    await acceptMission(jobId)
     queryClient.invalidateQueries('missions')
   }
 
@@ -41,6 +42,21 @@ export default function MissionList() {
             <div>
               {data.map((el) => (
                 <Card key={el.index} className="my-3">
+                  <Card.Header
+                    className={`d-flex justify-content-end ${
+                      el.isAck ? 'bg-success' : 'bg-light'
+                    }`}
+                  >
+                    {el.isAck || (
+                      <Button
+                        onClick={(e) => onButtonClick(e, el.jobId)}
+                        size="sm"
+                        variant="success"
+                      >
+                        Accepter <BsHandThumbsUpFill size={12} />
+                      </Button>
+                    )}
+                  </Card.Header>
                   <Card.Body onClick={() => onMissionClick(el.jobId)}>
                     <div className="d-flex fs-5">
                       <DateFormatter dateSpecial={el.schedule} />
@@ -67,7 +83,7 @@ export default function MissionList() {
                       <TransportType transportType={el.transportType} />
                     </div>
                   </Card.Body>
-                  <Card.Footer className="d-flex justify-content-end">
+                  {/* <Card.Footer className="d-flex justify-content-end">
                     {el.isAck ? (
                       <img
                         className="ms-3 align-middle"
@@ -77,14 +93,14 @@ export default function MissionList() {
                       />
                     ) : (
                       <Button
-                        onClick={onButtonClick}
+                        onClick={(e) => onButtonClick(e, el.jobId)}
                         size="sm"
                         variant="success"
                       >
                         Accepter <BsHandThumbsUpFill size={12} />
                       </Button>
                     )}
-                  </Card.Footer>
+                  </Card.Footer> */}
                 </Card>
               ))}
             </div>

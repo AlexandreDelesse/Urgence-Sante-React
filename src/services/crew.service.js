@@ -14,7 +14,7 @@ const getCrewByCrewId = async (crewId) => {
       id,
       employee,
     })
-    storeToken(resp)
+    storeToken(resp.token)
     return resp
   } catch (error) {
     throw error
