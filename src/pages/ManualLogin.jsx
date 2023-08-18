@@ -24,17 +24,20 @@ export default function ManualLogin() {
   }
 
   return (
-    <div>
+    <div className='mt-4'>
       {Object.keys(form).map((el) => (
-        <Form.Control
-          key={el}
-          onChange={onChangeForm}
-          name={el}
-          value={form[el]}
-          type="text"
-        />
+        <Form.Group className='mt-1'>
+          <Form.Label>{el}</Form.Label>
+          <Form.Control
+            key={el}
+            onChange={onChangeForm}
+            name={el}
+            value={form[el]}
+            type="text"
+          />
+        </Form.Group>
       ))}
-      <Button onClick={onButtonClick}>Login</Button>
+      <Button className='mt-3' onClick={onButtonClick}>Login</Button>
     </div>
   )
 }
