@@ -45,7 +45,7 @@ export default function MissionList() {
                   <ListGroupItem
                     key={el.index}
                     onClick={() => onMissionClick(el.jobId)}
-                    className="d-flex justify-content-between"
+                    className="d-flex justify-content-between px-0"
                   >
                     <div className="job-item w-100">
                       <span

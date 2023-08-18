@@ -27,7 +27,7 @@ export default function AppRoutes() {
   const { pathname } = useLocation()
 
   return (
-    <Container>
+    <Container fluid>
       {pathBackButtonExeptions.includes(pathname) || <BackButton />}
       <Routes>
         <Route path="/" element={<Mission />} />
