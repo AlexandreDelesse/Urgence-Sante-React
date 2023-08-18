@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCrewByCrewId } from '../services/crew.service'
 
 export default function ManualLogin() {
-  const [form, setForm] = useState({ code: '', nom: '' })
+  const [form, setForm] = useState({ nom: '', code: '' })
   const navigate = useNavigate()
 
   const onChangeForm = (e) => {
@@ -24,9 +24,9 @@ export default function ManualLogin() {
   }
 
   return (
-    <div className='mt-4'>
+    <div className="mt-4">
       {Object.keys(form).map((el) => (
-        <Form.Group className='mt-1'>
+        <Form.Group className="mt-1">
           <Form.Label>{el}</Form.Label>
           <Form.Control
             key={el}
@@ -37,7 +37,9 @@ export default function ManualLogin() {
           />
         </Form.Group>
       ))}
-      <Button className='mt-3' onClick={onButtonClick}>Login</Button>
+      <Button className="mt-3" onClick={onButtonClick}>
+        Login
+      </Button>
     </div>
   )
 }
