@@ -26,16 +26,9 @@ export default function Login() {
     queryFn: () => getCrewByCrewId(params.crewid),
   })
 
-  useEffect(() => {
-    // console.log(crewToken)
-  }, [crewToken])
+  if (crewToken.isLoading) return <Loader loadingMessage="Authentification.." />
 
-  if (crewToken.isLoading)
-    return (
-      <Loader loadingMessage="Authentification.." />
-    )
-
-  if (crewToken.isSuccess) return <Navigate to="/missions" />
+  if (crewToken.isSuccess) return <Navigate to="/" />
 
   if (crewToken.isError)
     return (
