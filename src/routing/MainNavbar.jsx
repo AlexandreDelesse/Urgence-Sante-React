@@ -47,7 +47,7 @@ export default function MainNavbar() {
               <Nav.Link onClick={() => handleOnNavLinkClick("employees")}>
                 Personel
               </Nav.Link> */}
-              <Nav.Link onClick={() => handleOnNavLinkClick('missions')}>
+              <Nav.Link onClick={() => handleOnNavLinkClick('/')}>
                 Missions
               </Nav.Link>
             </Nav>

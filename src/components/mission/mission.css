@@ -4,3 +4,8 @@
   text-overflow: ellipsis;
   width: 50%;
 }
+
+.job-item {
+  display: grid;
+  grid-template-columns: 4px 1fr;
+}

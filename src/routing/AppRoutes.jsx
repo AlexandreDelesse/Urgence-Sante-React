@@ -30,25 +30,17 @@ export default function AppRoutes() {
     <Container>
       {pathBackButtonExeptions.includes(pathname) || <BackButton />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Mission />} />
         <Route path="login/:crewid" element={<Login />} />
         <Route path="login/*" element={<ManualLogin />} />
-        <Route path="testApi" element={<TestApi />} />
-        <Route path="user" element={<User />} />
 
-        <Route path="missions" element={<Mission />} />
-        <Route path="mission/:missionIndex" element={<MissionDetail />} />
+        <Route path="jobdetail/:jobId" element={<MissionDetail />} />
 
-        <Route path="employees" element={<Outlet />}>
-          <Route index element={<Employees />} />
-          <Route path=":id/detail/*" element={<EmployeeDetail />} />
-        </Route>
-
-        <Route path="vehicules" element={<Outlet />}>
+        {/* <Route path="vehicules" element={<Outlet />}>
           <Route index element={<Vehicules />} />
           <Route path="nouveau-vehicule" element={<AddVehiculeForm />} />
           <Route path=":id/detail" element={<VehiculeDetail />} />
-        </Route>
+        </Route> */}
 
         <Route path="/*" element={<Page404 />} />
       </Routes>
@@ -62,7 +54,7 @@ const Page404 = () => {
     <Container>
       <h1 className="text-center mt-5">404 Not found</h1>
       <p onClick={() => navigate('/')} className="text-center">
-        Retour au menu principal
+        Retour a la page principale
       </p>
     </Container>
   )
