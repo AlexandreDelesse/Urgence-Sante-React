@@ -42,21 +42,13 @@ export default function MissionList() {
             <div>
               {data.map((el) => (
                 <Card key={el.index} className="my-3">
-                  <Card.Header
-                    className={`d-flex justify-content-end ${
-                      el.isAck ? 'bg-success' : 'bg-light'
-                    }`}
-                  >
-                    {el.isAck || (
-                      <Button
-                        onClick={(e) => onButtonClick(e, el.jobId)}
-                        size="sm"
-                        variant="success"
-                      >
-                        Accepter <BsHandThumbsUpFill size={12} />
-                      </Button>
-                    )}
-                  </Card.Header>
+                  {el.isAck && (
+                    <Card.Header
+                      className={`d-flex justify-content-end ${
+                        el.isAck ? 'bg-success' : 'bg-light'
+                      }`}
+                    ></Card.Header>
+                  )}
                   <Card.Body onClick={() => onMissionClick(el.jobId)}>
                     <div className="d-flex fs-5">
                       <DateFormatter dateSpecial={el.schedule} />
@@ -83,24 +75,17 @@ export default function MissionList() {
                       <TransportType transportType={el.transportType} />
                     </div>
                   </Card.Body>
-                  {/* <Card.Footer className="d-flex justify-content-end">
-                    {el.isAck ? (
-                      <img
-                        className="ms-3 align-middle"
-                        style={{ height: '32px' }}
-                        src={require('../../assets/ambulance.gif')}
-                        alt="loading..."
-                      />
-                    ) : (
+                  {el.isAck || (
+                    <Card.Footer className="d-flex justify-content-end">
                       <Button
                         onClick={(e) => onButtonClick(e, el.jobId)}
                         size="sm"
                         variant="success"
                       >
-                        Accepter <BsHandThumbsUpFill size={12} />
+                        Bien recu <BsHandThumbsUpFill size={12} />
                       </Button>
-                    )}
-                  </Card.Footer> */}
+                    </Card.Footer>
+                  )}
                 </Card>
               ))}
             </div>

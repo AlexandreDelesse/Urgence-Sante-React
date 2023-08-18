@@ -31,7 +31,7 @@ const getMissionById = async (jobId) => {
 
 const acceptMission = async (missionId) => {
   try {
-    return await api.patch('/joblist', { jobId: missionId, acknowledged: false })
+    return await api.patch('/joblist', { jobId: missionId, acknowledged: true })
   } catch (error) {
     throw error
   }
