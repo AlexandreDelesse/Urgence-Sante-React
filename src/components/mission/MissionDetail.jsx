@@ -1,10 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Badge, Card, Container } from 'react-bootstrap'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { getMissionById } from '../../services/mission.service'
 import AsyncDataComponent from '../shared/AsyncDataComponent'
+import { IoMdReturnLeft } from 'react-icons/io'
 
 export default function MissionDetail() {
   const params = useParams()
@@ -15,17 +16,58 @@ export default function MissionDetail() {
 
   return (
     <Container>
-      <h3 className="text-center m-3">Detail de la mission</h3>
       <AsyncDataComponent
         withRefetchLoader
         data={asyncMissionDetail}
         onSuccess={({ data }) => (
-          <div>
-            {Object.keys(data).map((el) => (
-              <div key={el}>
-                {el} : {data[el]}
-              </div>
-            ))}
+          <div className="mt-3">
+            <h2>
+              {data.patient}
+              {data.isSerial && (
+                <Badge className="ms-2">
+                  Serie {data.isLastDay && '- Dernier jour'}
+                </Badge>
+              )}
+            </h2>
+
+            <p className="mt-3">
+              Mode de transport : <br />
+              <span className="fw-bold">{data.transportMode}</span>
+            </p>
+            <p>
+              Prise en charge : <br />
+              <span className="fw-bold">{data.schedule}</span>
+            </p>
+
+            {data.appointment && (
+              <p>
+                Rdv à : <br />
+                <span className="fw-bold">{data.appointment}</span>
+              </p>
+            )}
+
+            <Card>
+              <Card.Header>Départ</Card.Header>
+              <Card.Body>{data.departure}</Card.Body>
+            </Card>
+
+            <Card className="mt-3">
+              <Card.Header>Arrivée</Card.Header>
+              <Card.Body>{data.arrival}</Card.Body>
+            </Card>
+
+            {data.comment && (
+              <p>
+                Commentaire : <br />
+                <span className="fw-bold">{data.comment}</span>
+              </p>
+            )}
+            {data.prescripteur && (
+              <p>
+                Prescripteur : <br />
+                <span className="fw-bold">{data.comment}</span>
+              </p>
+            )}
           </div>
         )}
       />
