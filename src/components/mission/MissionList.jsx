@@ -89,7 +89,6 @@ export default function MissionList() {
           )}
         </div>
       )}
-      onError={() => <Navigate to="login" />}
     ></AsyncDataComponent>
   )
 }
