@@ -81,7 +81,7 @@ export default function MissionList() {
                                   onClick={(e) => onButtonClick(e, el.jobId)}
                                   variant="success"
                                 >
-                                  Accepter <BsCheck2Square size={16} />
+                                  Bien recus <BsCheck2Square size={16} />
                                 </Button>
                               )}
                             </div>
