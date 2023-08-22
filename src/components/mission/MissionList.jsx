@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+  Badge,
   Button,
   Card,
   Form,
@@ -16,10 +17,12 @@ import TransportType from "../shared/TransportType";
 import { BsCheck2Square } from "react-icons/bs";
 import "./mission.css";
 import { transportModeEnum } from "../../data/enum.data";
+import UserContext from "../../contexts/User.context";
 
 export default function MissionList() {
   const navigate = useNavigate();
   const [showTerminated, setShowTerminated] = useState(false);
+  const { user } = useContext(UserContext);
 
   const asyncMissions = useQuery("missions", getMissions);
   const queryClient = useQueryClient();
@@ -55,56 +58,13 @@ export default function MissionList() {
             {data.length === 0 ? (
               <div>Pas de missions</div>
             ) : (
-              <div>
-                <ListGroup variant="flush">
-                  {data
-                    .filter((el) => showTerminated || !el.isTerminated)
-                    .sort((a, b) => b.index - a.index)
-                    .map((el, index) => (
-                      <ListGroupItem
-                        key={index}
-                        onClick={() => onMissionClick(el.jobId)}
-                        className="d-flex justify-content-between px-0"
-                      >
-                        <div className="job-item w-100">
-                          <span
-                            className={el.isAck ? "bg-success" : "bg-warning"}
-                          />
-                          <div className="d-flex flex-column ms-2">
-                            <div className="d-flex justify-content-between">
-                              <div>
-                                <div>{el.schedule}</div>
-                              </div>
-                              {el.isAck || (
-                                <Button
-                                  size="sm"
-                                  onClick={(e) => onButtonClick(e, el.jobId)}
-                                  variant="success"
-                                >
-                                  Bien recus <BsCheck2Square size={16} />
-                                </Button>
-                              )}
-                            </div>
-                            <span>{transportModeEnum[el.transportMode]}</span>
-                            <div className="fw-bold">{el.patient}</div>
-                            <div>Rdv : {el.appointment || "Pas de rdv"}</div>
-                            <div>
-                              <span className="fw-bold">Départ :</span>
-                              {el.departure}
-                            </div>
-                            <div>
-                              <span className="fw-bold">Arrivée :</span>
-                              {el.arrival}
-                            </div>
-                            <div>
-                              <TransportType transportType={el.transportType} />
-                            </div>
-                          </div>
-                        </div>
-                      </ListGroupItem>
-                    ))}
-                </ListGroup>
-              </div>
+              <ListeMission
+                onMissionClick={onMissionClick}
+                onButtonClick={onButtonClick}
+                data={data
+                  .filter((el) => showTerminated || !el.isTerminated)
+                  .sort((a, b) => b.index - a.index)}
+              />
             )}
           </div>
         )}
@@ -112,3 +72,53 @@ export default function MissionList() {
     </>
   );
 }
+
+const ListeMission = ({ data, onMissionClick, onButtonClick }) => {
+  if (data.length === 0)
+    return <div className="text-center mt-3">Pas de missions en cours</div>;
+  return (
+    <ListGroup variant="flush">
+      {data.map((el, index) => (
+        <ListGroupItem
+          key={index}
+          onClick={() => onMissionClick(el.jobId)}
+          className="d-flex justify-content-between px-0"
+        >
+          <div className="job-item w-100">
+            <span className={el.isAck ? "bg-success" : "bg-warning"} />
+            <div className="d-flex flex-column ms-2">
+              <div className="d-flex justify-content-between">
+                <div>
+                  <div>{el.schedule}</div>
+                </div>
+                {el.isAck || (
+                  <Button
+                    size="sm"
+                    onClick={(e) => onButtonClick(e, el.jobId)}
+                    variant="success"
+                  >
+                    Bien recus <BsCheck2Square size={16} />
+                  </Button>
+                )}
+              </div>
+              <span>{transportModeEnum[el.transportMode]}</span>
+              <div className="fw-bold">{el.patient}</div>
+              <div>Rdv : {el.appointment || "Pas de rdv"}</div>
+              <div>
+                <span className="fw-bold">Départ :</span>
+                {el.departure}
+              </div>
+              <div>
+                <span className="fw-bold">Arrivée :</span>
+                {el.arrival}
+              </div>
+              <div>
+                <TransportType transportType={el.transportType} />
+              </div>
+            </div>
+          </div>
+        </ListGroupItem>
+      ))}
+    </ListGroup>
+  );
+};

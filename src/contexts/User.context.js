@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const defaultValue = {
-  user: null,
+  user: {},
   setUser: () => {},
 };
 
