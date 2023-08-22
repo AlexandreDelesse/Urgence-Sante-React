@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
 import { getCrewByCrewId } from "../services/crew.service";
@@ -9,8 +9,8 @@ import UserContext from "../contexts/User.context";
 export default function ManualLogin() {
   const [form, setForm] = useState({ nom: "", code: "" });
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
 
   const onChangeForm = (e) => {
     const { name, value } = e.target;
@@ -20,13 +20,15 @@ export default function ManualLogin() {
 
   const onButtonClick = async () => {
     try {
+      setErrorMsg("");
       setLoading(true);
-      const crewInfos = await getCrewByCrewId(`${form.code}&${form.nom}`);
-      setUser(crewInfos);
+      await getCrewByCrewId(`${form.code}&${form.nom}`);
       setLoading(false);
       navigate("/");
     } catch (error) {
+      console.log(error);
       setLoading(false);
+      setErrorMsg(error.message);
     }
   };
 
@@ -44,9 +46,26 @@ export default function ManualLogin() {
           />
         </Form.Group>
       ))}
-      <Button className="mt-3" onClick={onButtonClick}>
-        {loading ? <Loader /> : "Login"}
-      </Button>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Button className="mt-3" onClick={onButtonClick}>
+          Login
+        </Button>
+      )}
+      {errorMsg && (
+        <Alert
+          className="mt-3"
+          variant="warning"
+          dismissible
+          onClose={() => setErrorMsg("")}
+        >
+          <Alert.Heading>
+            Il y a eu une erreur, veuillez réessayer
+          </Alert.Heading>
+          <p>{errorMsg}</p>
+        </Alert>
+      )}
     </div>
   );
 }
