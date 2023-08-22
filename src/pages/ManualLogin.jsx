@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
 import { getCrewByCrewId } from "../services/crew.service";
-import UserContext from "../contexts/User.context";
 
 export default function ManualLogin() {
   const [form, setForm] = useState({ nom: "", code: "" });

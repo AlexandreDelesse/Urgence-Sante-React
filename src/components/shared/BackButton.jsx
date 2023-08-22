@@ -1,11 +1,9 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import { IoIosArrowBack } from 'react-icons/io'
-import { useEffect } from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function BackButton() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <span
@@ -15,5 +13,5 @@ export default function BackButton() {
     >
       <IoIosArrowBack /> Retour
     </span>
-  )
+  );
 }

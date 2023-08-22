@@ -1,28 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Badge,
-  Button,
-  Card,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  ToggleButton,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { acceptMission, getMissions } from "../../services/mission.service";
 import AsyncDataComponent from "../shared/AsyncDataComponent";
-import DateFormatter from "../shared/DateFormatter";
 import TransportType from "../shared/TransportType";
 import { BsCheck2Square } from "react-icons/bs";
 import "./mission.css";
 import { transportModeEnum } from "../../data/enum.data";
-import UserContext from "../../contexts/User.context";
 
 export default function MissionList() {
   const navigate = useNavigate();
   const [showTerminated, setShowTerminated] = useState(false);
-  const { user } = useContext(UserContext);
 
   const asyncMissions = useQuery("missions", getMissions);
   const queryClient = useQueryClient();

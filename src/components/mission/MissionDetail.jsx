@@ -1,18 +1,16 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
-import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
-import { getMissionById } from '../../services/mission.service'
-import AsyncDataComponent from '../shared/AsyncDataComponent'
-import { IoMdReturnLeft } from 'react-icons/io'
+import React from "react";
+import { Badge, Card, Col, Container, Row } from "react-bootstrap";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { getMissionById } from "../../services/mission.service";
+import AsyncDataComponent from "../shared/AsyncDataComponent";
 
 export default function MissionDetail() {
-  const params = useParams()
+  const params = useParams();
 
-  const asyncMissionDetail = useQuery('missionDetail', () =>
-    getMissionById(params.jobId),
-  )
+  const asyncMissionDetail = useQuery("missionDetail", () =>
+    getMissionById(params.jobId)
+  );
 
   return (
     <Container>
@@ -26,7 +24,7 @@ export default function MissionDetail() {
               {data.patient}
               {data.isSerial && (
                 <Badge className="ms-2">
-                  Serie {data.isLastDay && '- Dernier jour'}
+                  Serie {data.isLastDay && "- Dernier jour"}
                 </Badge>
               )}
             </h2>
@@ -78,5 +76,5 @@ export default function MissionDetail() {
         )}
       />
     </Container>
-  )
+  );
 }
