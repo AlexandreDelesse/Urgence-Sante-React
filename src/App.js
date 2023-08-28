@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import MainNavbar from './routing/MainNavbar'
-import { HashRouter } from 'react-router-dom'
-import AppRoutes from './routing/AppRoutes'
-import UserContext from './contexts/User.context'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MainNavbar from "./routing/MainNavbar";
+import { HashRouter } from "react-router-dom";
+import AppRoutes from "./routing/AppRoutes";
+import UserContext from "./contexts/User.context";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
-  const [user, setUser] = useState(null)
-  const queryClient = new QueryClient()
+  const [user, setUser] = useState(null);
+  const queryClient = new QueryClient();
   //TODO: ADD NOTIFICATION SYSTEM
 
   return (
@@ -21,7 +21,7 @@ function App() {
         </UserContext.Provider>
       </QueryClientProvider>
     </HashRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -8,10 +8,12 @@ import TransportType from "../shared/TransportType";
 import { BsCheck2Square } from "react-icons/bs";
 import "./mission.css";
 import { transportModeEnum } from "../../data/enum.data";
+import IconButton from "../shared/IconButton";
 
 export default function MissionList() {
   const navigate = useNavigate();
   const [showTerminated, setShowTerminated] = useState(false);
+  const [loadingButton, setLoadingButton] = useState("");
 
   const asyncMissions = useQuery("missions", getMissions);
   const queryClient = useQueryClient();
@@ -22,7 +24,9 @@ export default function MissionList() {
 
   const onButtonClick = async (e, jobId) => {
     e.stopPropagation();
+    setLoadingButton(jobId);
     await acceptMission(jobId);
+    setLoadingButton("");
     queryClient.invalidateQueries("missions");
   };
 
@@ -53,6 +57,7 @@ export default function MissionList() {
                 data={data
                   .filter((el) => showTerminated || !el.isTerminated)
                   .sort((a, b) => b.index - a.index)}
+                loadingButton={loadingButton}
               />
             )}
           </div>
@@ -62,7 +67,12 @@ export default function MissionList() {
   );
 }
 
-const ListeMission = ({ data, onMissionClick, onButtonClick }) => {
+const ListeMission = ({
+  data,
+  onMissionClick,
+  onButtonClick,
+  loadingButton,
+}) => {
   if (data.length === 0)
     return <div className="text-center mt-3">Pas de missions en cours</div>;
   return (
@@ -81,13 +91,15 @@ const ListeMission = ({ data, onMissionClick, onButtonClick }) => {
                   <div>{el.schedule}</div>
                 </div>
                 {el.isAck || (
-                  <Button
+                  <IconButton
                     size="sm"
                     onClick={(e) => onButtonClick(e, el.jobId)}
                     variant="success"
-                  >
-                    Bien recus <BsCheck2Square size={16} />
-                  </Button>
+                    icon={<BsCheck2Square size={16} />}
+                    isLoading={loadingButton === el.jobId}
+                    spinnerVariant="light"
+                    label="Bien recus"
+                  />
                 )}
               </div>
               <span>{transportModeEnum[el.transportMode]}</span>
