@@ -1,28 +1,28 @@
-import React, { useContext, useState } from 'react'
-import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import UserContext from '../contexts/User.context'
-import { FiLogOut } from 'react-icons/fi'
-import packageJson from '../../package.json'
+import React, { useContext, useState } from "react";
+import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/User.context";
+import { FiLogOut } from "react-icons/fi";
+import packageJson from "../../package.json";
 
 export default function MainNavbar() {
-  const navigate = useNavigate()
-  const { user, setUser } = useContext(UserContext)
-  const [showOffcanvas, setShowOffcanvas] = useState(false)
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleOnNavLinkClick = (link) => {
-    navigate(link)
-    setShowOffcanvas(false)
-  }
+    navigate(link);
+    setShowOffcanvas(false);
+  };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
-        <Navbar.Brand onClick={() => handleOnNavLinkClick('/')}>
+        <Navbar.Brand onClick={() => handleOnNavLinkClick("/")}>
           <img
             className="me-3"
-            style={{ height: '32px' }}
-            src={require('../assets/logo-us.png')}
+            style={{ height: "32px" }}
+            src={require("../assets/logo-us.png")}
             alt="Logo urgence sante"
           />
           Urgence Sante
@@ -48,14 +48,14 @@ export default function MainNavbar() {
               <Nav.Link onClick={() => handleOnNavLinkClick("employees")}>
                 Personel
               </Nav.Link> */}
-              <Nav.Link onClick={() => handleOnNavLinkClick('/')}>
+              <Nav.Link onClick={() => handleOnNavLinkClick("/")}>
                 Missions
               </Nav.Link>
             </Nav>
             {user ? (
               <Nav>
                 <Navbar.Brand>
-                  <span onClick={() => handleOnNavLinkClick('user')}>
+                  <span onClick={() => handleOnNavLinkClick("user")}>
                     {user.name}
                   </span>
                   <FiLogOut
@@ -67,15 +67,15 @@ export default function MainNavbar() {
               </Nav>
             ) : (
               <Nav>
-                <Nav.Link onClick={() => handleOnNavLinkClick('login/')}>
+                <Nav.Link onClick={() => handleOnNavLinkClick("login/")}>
                   Login
                 </Nav.Link>
               </Nav>
             )}
+            <p className="ms-3">version {packageJson.version}</p>
           </Offcanvas.Body>
-          <p className="ms-3">version {packageJson.version}</p>
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
-  )
+  );
 }

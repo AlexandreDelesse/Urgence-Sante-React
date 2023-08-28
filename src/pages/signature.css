@@ -1,0 +1,13 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sigContainer {
+  width: fit-content;
+}
+
+.sigPad {
+  border: 3px solid orange;
+}
