@@ -7,7 +7,6 @@ import BackButton from "../components/shared/BackButton";
 import Login from "../pages/Login";
 import ManualLogin from "../pages/ManualLogin";
 import Mission from "../pages/missions/Mission";
-import Signature from "../pages/Signature";
 
 export default function AppRoutes() {
   const pathBackButtonExeptions = ["/", "/login"];
@@ -20,10 +19,8 @@ export default function AppRoutes() {
         <Route path="/" element={<Mission />} />
         <Route path="login/:crewid" element={<Login />} />
         <Route path="login/*" element={<ManualLogin />} />
-        <Route path="signature" element={<Signature />} />
-        
-        <Route path="jobdetail/:jobId" element={<MissionDetail />} />
 
+        <Route path="jobdetail/:jobId" element={<MissionDetail />} />
 
         {/* <Route path="vehicules" element={<Outlet />}>
           <Route index element={<Vehicules />} />
