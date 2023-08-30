@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Button, Col, Form, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { acceptMission, getMissions } from "../../services/mission.service";
 import AsyncDataComponent from "../shared/AsyncDataComponent";
 import TransportType from "../shared/TransportType";
 import { BsCheck2Square } from "react-icons/bs";
-import { transportModeEnum } from "../../data/enum.data";
 import "./mission.css";
+import { transportModeEnum } from "../../data/enum.data";
 
 export default function MissionList() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function MissionList() {
   };
 
   return (
-    <Col md={{ span: 6, offset: 3 }}>
+    <>
       <Form.Check
         className="my-2"
         type="switch"
@@ -58,23 +58,22 @@ export default function MissionList() {
           </div>
         )}
       ></AsyncDataComponent>
-    </Col>
+    </>
   );
 }
 
 const ListeMission = ({ data, onMissionClick, onButtonClick }) => {
   if (data.length === 0)
     return <div className="text-center mt-3">Pas de missions en cours</div>;
-
   return (
-    <ListGroup variant="flush" className="scroll-component mission-list">
+    <ListGroup variant="flush">
       {data.map((el, index) => (
         <ListGroupItem
           key={index}
           onClick={() => onMissionClick(el.jobId)}
           className="d-flex justify-content-between px-0"
         >
-          <div className="job-item w-100 ">
+          <div className="job-item w-100">
             <span className={el.isAck ? "bg-success" : "bg-warning"} />
             <div className="d-flex flex-column ms-2">
               <div className="d-flex justify-content-between">
