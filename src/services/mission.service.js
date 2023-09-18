@@ -1,3 +1,4 @@
+import { INFOS_CLIENTS } from "../data/clientInfos.data";
 import { api } from "./api.config";
 import { getToken } from "./user.service";
 
@@ -22,6 +23,7 @@ const getMissionById = async (jobId) => {
       //   Authorization: getToken(),
       // },
     });
+    jobDetail.infosClient = INFOS_CLIENTS;
     return jobDetail;
   } catch (error) {
     throw error;
