@@ -7,7 +7,6 @@ import { storeToken } from "./user.service";
  * @returns CrewToken as String
  */
 const getCrewByCrewId = async (crewId) => {
-  console.log(crewId);
   try {
     const [id, employee] = crewId.split("&");
     const { data: resp } = await api.post("/login", {

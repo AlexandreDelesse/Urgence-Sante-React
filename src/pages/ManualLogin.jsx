@@ -12,7 +12,6 @@ export default function ManualLogin() {
 
   const onChangeForm = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm((old) => ({ ...old, [name]: value }));
   };
 

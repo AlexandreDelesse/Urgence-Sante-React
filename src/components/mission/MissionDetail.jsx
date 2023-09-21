@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Container, Nav } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-import { getMissionById } from "../../services/mission.service";
+import {
+  getJobDetailEditableFromJobId,
+  getMissionById,
+} from "../../services/mission.service";
 import AsyncDataComponent from "../shared/AsyncDataComponent";
 import MissionInformations from "../../pages/missions/missionInformations/MissionInformations";
 import MissionOtherInformations from "../../pages/missions/missionOtherInformations/MissionOtherInformations";
@@ -15,6 +18,10 @@ export default function MissionDetail() {
 
   const asyncMissionDetail = useQuery("missionDetail", () =>
     getMissionById(params.jobId)
+  );
+
+  const asyncJobDetailEditable = useQuery("jobDetailEdiable", () =>
+    getJobDetailEditableFromJobId(params.jobId)
   );
 
   const onLinkClick = (link) => {
@@ -53,9 +60,9 @@ export default function MissionDetail() {
             <AsyncDataComponent
               withRefetchLoader
               onLoadingMessage="Chargement du détail.."
-              data={asyncMissionDetail}
+              data={asyncJobDetailEditable}
               onSuccess={({ data }) => (
-                <MissionOtherInformations infosClient={data.infosClient} />
+                <MissionOtherInformations infosClient={data} />
               )}
             />
           }

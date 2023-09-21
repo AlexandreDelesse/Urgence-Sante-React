@@ -35,7 +35,7 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
   else
     return (
       <div onClick={() => setIsEditing(true)}>
-        {inputValue || placeholder}
+        {inputValue || <span className="fw-light">{placeholder}</span>}
       </div>
     );
 }

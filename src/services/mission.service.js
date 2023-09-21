@@ -17,14 +17,20 @@ const getMissions = async () => {
 
 const getMissionById = async (jobId) => {
   try {
-    const { data: jobDetail } = await api.get("/jobDetail", {
-      params: { gJobId: jobId },
-      // headers: {
-      //   Authorization: getToken(),
-      // },
-    });
+    const { data: jobDetail } = await api.get(`/JobDetail/${jobId}`);
     jobDetail.infosClient = INFOS_CLIENTS;
     return jobDetail;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getJobDetailEditableFromJobId = async (jobId) => {
+  try {
+    const { data: jobDetailEditable } = await api.get(`JobDetailEditable`, {
+      params: { gJobId: jobId },
+    });
+    return jobDetailEditable;
   } catch (error) {
     throw error;
   }
@@ -41,4 +47,9 @@ const acceptMission = async (missionId) => {
   }
 };
 
-export { getMissions, getMissionById, acceptMission };
+export {
+  getMissions,
+  getMissionById,
+  acceptMission,
+  getJobDetailEditableFromJobId,
+};
