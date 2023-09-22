@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 export default function EditableLabel({ initialValue, onChange, placeholder }) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(initialValue || "");
+
+  const inputRef = useRef(null);
 
   const onCancelChanges = () => {
     setInputValue(initialValue);
@@ -15,10 +17,15 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
     setIsEditing(false);
   };
 
+  const onEdit = () => {
+    setIsEditing(true);
+  };
+
   if (isEditing)
     return (
       <Form.Group className="d-flex gap-2">
         <Form.Control
+          autoFocus
           onChange={(e) => setInputValue(e.target.value)}
           size="sm"
           value={inputValue}
@@ -34,7 +41,7 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
     );
   else
     return (
-      <div onClick={() => setIsEditing(true)}>
+      <div onClick={onEdit}>
         {inputValue || <span className="fw-light">{placeholder}</span>}
       </div>
     );

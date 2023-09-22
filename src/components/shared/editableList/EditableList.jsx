@@ -19,6 +19,10 @@ export default function EditableList({
     setList((old) => [...old, ""]);
   };
 
+  useEffect(() => {
+    onChange(list);
+  }, [list]);
+
   return (
     <ListGroup variant="flush">
       {list.map((el, index) => (
