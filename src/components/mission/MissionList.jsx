@@ -19,7 +19,7 @@ export default function MissionList() {
   const queryClient = useQueryClient();
 
   const onMissionClick = (missionIndex) => {
-    navigate(`/jobdetail/${missionIndex}`);
+    navigate(`/jobdetail/${missionIndex}/details`);
   };
 
   const onButtonClick = async (e, jobId) => {

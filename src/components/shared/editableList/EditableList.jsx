@@ -32,7 +32,7 @@ export default function EditableList({
           {index === 0 && list[0] ? (
             <>
               <BsDashCircle color="red" />
-              {el}
+              <a href={`tel://0601021617`}>{el}</a>
             </>
           ) : (
             <>

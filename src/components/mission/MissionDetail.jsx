@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Nav } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import {
   getJobDetailEditableFromJobId,
   getMissionById,
@@ -13,8 +20,9 @@ import MissionOtherInformations from "../../pages/missions/missionOtherInformati
 export default function MissionDetail() {
   const params = useParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const [pathSelected, setPathSelected] = useState("");
+  const [pathSelected, setPathSelected] = useState("details");
 
   const asyncMissionDetail = useQuery("missionDetail", () =>
     getMissionById(params.jobId)
@@ -29,13 +37,15 @@ export default function MissionDetail() {
     navigate(link, { replace: true });
   };
 
+  useEffect(() => console.log(pathname), [pathname]);
+
   return (
     <Container>
       <Nav fill variant="pills">
         <Nav.Item>
           <Nav.Link
-            active={pathSelected === ""}
-            onClick={() => onLinkClick("")}
+            active={pathSelected === "details"}
+            onClick={() => onLinkClick("details")}
           >
             Détails
           </Nav.Link>
@@ -59,8 +69,9 @@ export default function MissionDetail() {
         </Nav.Item>
       </Nav>
       <Routes>
+        <Route index element={<Navigate to="details" />} />
         <Route
-          index
+          path="details"
           element={<MissionInformations asyncData={asyncMissionDetail} />}
         />
         <Route
