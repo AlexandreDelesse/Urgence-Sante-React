@@ -1,11 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { BsCheck2 } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 
-export default function EditableLabel({ initialValue, onChange, placeholder }) {
+export default function EditableLabel({
+  initialValue,
+  onChange,
+  placeholder,
+  validator,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(initialValue || "");
-
-  const inputRef = useRef(null);
 
   const onCancelChanges = () => {
     setInputValue(initialValue);
@@ -13,6 +18,7 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
   };
 
   const onAcceptChanges = () => {
+    if (validator && !validator(inputValue)) return;
     onChange(inputValue);
     setIsEditing(false);
   };
@@ -25,6 +31,8 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
     return (
       <Form.Group className="d-flex gap-2">
         <Form.Control
+          isInvalid={validator ? !validator(inputValue) : false}
+          isValid={validator ? validator(inputValue) : false}
           autoFocus
           onChange={(e) => setInputValue(e.target.value)}
           size="sm"
@@ -32,11 +40,13 @@ export default function EditableLabel({ initialValue, onChange, placeholder }) {
           placeholder={placeholder}
         />
         <Button onClick={onCancelChanges} size="sm" variant="outline-danger">
-          Nok
+          <AiOutlineClose />
         </Button>
-        <Button onClick={onAcceptChanges} size="sm" variant="primary">
-          Ok
-        </Button>
+        {(validator && !validator(inputValue)) || (
+          <Button onClick={onAcceptChanges} size="sm" variant="primary">
+            <BsCheck2 />
+          </Button>
+        )}
       </Form.Group>
     );
   else

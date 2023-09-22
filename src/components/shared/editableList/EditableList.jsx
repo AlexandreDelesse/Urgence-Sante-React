@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import EditableLabel from "../editableLabel/EditableLabel";
-import { BsPlusCircle } from "react-icons/bs";
+import { BsPlusCircle, BsDashCircle } from "react-icons/bs";
 
 export default function EditableList({
   initialList,
@@ -16,21 +16,27 @@ export default function EditableList({
   };
 
   const onAddElement = () => {
+    if (list.some((value) => value === "")) return;
     setList((old) => [...old, ""]);
   };
 
   useEffect(() => {
-    onChange(list);
+    const listVerified = list.filter((el) => el != "");
+    onChange(listVerified);
   }, [list]);
 
   return (
     <ListGroup variant="flush">
       {list.map((el, index) => (
-        <ListGroup.Item key={el}>
+        <ListGroup.Item className="d-flex align-items-center gap-2" key={el}>
           {index === 0 && list[0] ? (
-            el
+            <>
+              <BsDashCircle color="red" />
+              {el}
+            </>
           ) : (
             <>
+              <BsDashCircle color="red" />
               <EditableLabel
                 onChange={(element) => onElementChanges(index, element)}
                 initialValue={el}

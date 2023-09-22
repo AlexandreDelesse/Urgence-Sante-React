@@ -31,13 +31,13 @@ export default function MissionDetail() {
 
   return (
     <Container>
-      <Nav fill variant="tabs">
+      <Nav fill variant="pills">
         <Nav.Item>
           <Nav.Link
             active={pathSelected === ""}
             onClick={() => onLinkClick("")}
           >
-            Détails de la mission
+            Détails
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -45,7 +45,16 @@ export default function MissionDetail() {
             active={pathSelected === "other"}
             onClick={() => onLinkClick("other")}
           >
-            Autres informations
+            Autres
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            disabled
+            active={pathSelected === "signature"}
+            onClick={() => onLinkClick("signature")}
+          >
+            Signature
           </Nav.Link>
         </Nav.Item>
       </Nav>

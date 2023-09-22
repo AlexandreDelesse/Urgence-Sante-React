@@ -45,17 +45,15 @@ export default function MissionOtherInformations({ infosClient }) {
         />
       </Form.Group>
 
-      <Form.Group className="mt-3 mb-1">
+      <div className="my-2">
         <Form.Label>n° sécurité sociale</Form.Label>
-        <Form.Control
-          value={formValues.nir}
-          type="text"
-          label="nir"
-          onChange={onNirChanges}
-          isInvalid={!nirValidator(formValues.nir)}
-          isValid={nirValidator(formValues.nir)}
+        <EditableLabel
+          validator={nirValidator}
+          onChange={(element) => onFormChanges("nir", element)}
+          initialValue={formValues.nir}
+          placeholder={"Ajouter un numéro de sécurité sociale"}
         />
-      </Form.Group>
+      </div>
 
       <Form.Label>Emails</Form.Label>
       <EditableList
