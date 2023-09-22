@@ -30,11 +30,13 @@ export default function EditableList({
           {index === 0 && list[0] ? (
             el
           ) : (
-            <EditableLabel
-              onChange={(element) => onElementChanges(index, element)}
-              initialValue={el}
-              placeholder={placeholder || "Cliquez pour renseigner l'element"}
-            />
+            <>
+              <EditableLabel
+                onChange={(element) => onElementChanges(index, element)}
+                initialValue={el}
+                placeholder={placeholder || "Cliquez pour renseigner l'element"}
+              />
+            </>
           )}
         </ListGroup.Item>
       ))}

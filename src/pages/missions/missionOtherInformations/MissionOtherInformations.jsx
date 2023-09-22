@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import EditableLabel from "../../../components/shared/editableLabel/EditableLabel";
 import EditableList from "../../../components/shared/editableList/EditableList";
+import { nirValidator } from "../../../services/validator";
 
 export default function MissionOtherInformations({ infosClient }) {
   const [formValues, setFormValues] = useState(infosClient);
-  console.log(infosClient);
 
   const onFormChanges = (name, value) => {
-    console.log(name, value);
     if (name && value) setFormValues((old) => ({ ...old, [name]: value }));
   };
 
   const onSaveClick = () => {
-    console.log(formValues);
+    const values = formValues;
+    if (!nirValidator(values.nir)) values.nir = "";
+
+    console.log(values);
   };
 
   const onCheckBoxClick = (name) => {
@@ -23,6 +25,10 @@ export default function MissionOtherInformations({ infosClient }) {
   const onBirthDateChanges = (e) => {
     const formatted = new Date(e.target.value).toISOString();
     onFormChanges("ddn", formatted);
+  };
+
+  const onNirChanges = (e) => {
+    onFormChanges("nir", e.target.value);
   };
 
   return (
@@ -36,6 +42,18 @@ export default function MissionOtherInformations({ infosClient }) {
           type="date"
           label="ddn"
           onChange={onBirthDateChanges}
+        />
+      </Form.Group>
+
+      <Form.Group className="mt-3 mb-1">
+        <Form.Label>n° sécurité sociale</Form.Label>
+        <Form.Control
+          value={formValues.nir}
+          type="text"
+          label="nir"
+          onChange={onNirChanges}
+          isInvalid={!nirValidator(formValues.nir)}
+          isValid={nirValidator(formValues.nir)}
         />
       </Form.Group>
 
