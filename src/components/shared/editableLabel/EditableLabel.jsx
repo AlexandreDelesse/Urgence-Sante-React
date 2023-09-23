@@ -39,7 +39,6 @@ export default function EditableLabel({
           isValid={validator ? validator(inputValue) : false}
           autoFocus
           onChange={(e) => setInputValue(e.target.value)}
-          size="sm"
           value={inputValue}
           placeholder={placeholder}
         />
