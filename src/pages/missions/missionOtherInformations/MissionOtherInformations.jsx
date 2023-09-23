@@ -169,7 +169,7 @@ export default function MissionOtherInformations({ infosClient }) {
       </div>
 
       {/* Bottom page */}
-      <div className="d-flex gap-2 mt-3">
+      <div className="d-flex gap-2 my-3">
         <IconButton
           onClick={onSaveClick}
           variant="success"
