@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsCheck2 } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
@@ -27,6 +27,10 @@ export default function EditableLabel({
     setIsEditing(true);
   };
 
+  useEffect(() => {
+    setInputValue(initialValue);
+  }, [initialValue]);
+
   if (isEditing)
     return (
       <Form.Group className="d-flex gap-2">
@@ -39,11 +43,11 @@ export default function EditableLabel({
           value={inputValue}
           placeholder={placeholder}
         />
-        <Button onClick={onCancelChanges} size="sm" variant="outline-danger">
+        <Button onClick={onCancelChanges} variant="outline-danger">
           <AiOutlineClose />
         </Button>
         {(validator && !validator(inputValue)) || (
-          <Button onClick={onAcceptChanges} size="sm" variant="primary">
+          <Button onClick={onAcceptChanges} variant="primary">
             <BsCheck2 />
           </Button>
         )}

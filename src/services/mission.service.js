@@ -36,6 +36,14 @@ const getJobDetailEditableFromJobId = async (jobId) => {
   }
 };
 
+const patchJobDetailEditable = async (jobDetailEditable) => {
+  try {
+    await api.patch("JobDetailEditable", jobDetailEditable);
+  } catch (error) {
+    throw error;
+  }
+};
+
 const acceptMission = async (missionId) => {
   try {
     return await api.patch("/joblist", {
@@ -52,4 +60,5 @@ export {
   getMissionById,
   acceptMission,
   getJobDetailEditableFromJobId,
+  patchJobDetailEditable,
 };

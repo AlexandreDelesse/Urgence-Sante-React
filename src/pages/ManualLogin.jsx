@@ -23,7 +23,6 @@ export default function ManualLogin() {
       setLoading(false);
       navigate("/");
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setErrorMsg(error.message);
     }

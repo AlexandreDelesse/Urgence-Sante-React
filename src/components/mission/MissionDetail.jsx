@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Nav } from "react-bootstrap";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import {
   Navigate,
   Route,
@@ -37,11 +37,9 @@ export default function MissionDetail() {
     navigate(link, { replace: true });
   };
 
-  useEffect(() => console.log(pathname), [pathname]);
-
   return (
     <Container>
-      <Nav fill variant="pills">
+      <Nav fill variant="pills" className="my-2">
         <Nav.Item>
           <Nav.Link
             active={pathSelected === "details"}

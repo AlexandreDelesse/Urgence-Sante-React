@@ -12,7 +12,9 @@ export default function EditableList({
   const [list, setList] = useState(initialList || []);
 
   const onElementChanges = (index, value) => {
-    setList((old) => old.map((el, i) => (index === i ? value : el)));
+    const newList = list.map((el, i) => (index === i ? value : el));
+    setList(newList);
+    onChange(newList.filter((el) => el != ""));
   };
 
   const onAddElement = () => {
@@ -21,34 +23,30 @@ export default function EditableList({
   };
 
   useEffect(() => {
-    const listVerified = list.filter((el) => el != "");
-    onChange(listVerified);
-  }, [list]);
+    setList(initialList || []);
+  }, [initialList]);
 
   return (
     <ListGroup variant="flush">
       {list.map((el, index) => (
-        <ListGroup.Item className="d-flex align-items-center gap-2" key={el}>
+        <ListGroup.Item
+          className="d-flex align-items-center gap-2 bg-light"
+          key={el}
+        >
           {index === 0 && list[0] ? (
-            <>
-              <BsDashCircle color="red" />
-              <a href={`tel://0601021617`}>{el}</a>
-            </>
+            el
           ) : (
-            <>
-              <BsDashCircle color="red" />
-              <EditableLabel
-                onChange={(element) => onElementChanges(index, element)}
-                initialValue={el}
-                placeholder={placeholder || "Cliquez pour renseigner l'element"}
-              />
-            </>
+            <EditableLabel
+              onChange={(element) => onElementChanges(index, element)}
+              initialValue={el}
+              placeholder={placeholder || "Cliquez pour renseigner l'element"}
+            />
           )}
         </ListGroup.Item>
       ))}
       <ListGroup.Item
         onClick={onAddElement}
-        className="d-flex align-items-center gap-2"
+        className="d-flex align-items-center gap-2 bg-light"
       >
         <BsPlusCircle color="orange" /> {buttonLabel || "Ajouter un element"}
       </ListGroup.Item>

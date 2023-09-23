@@ -10,6 +10,7 @@ export default function IconButton({
   onClick,
   variant,
   spinnerVariant,
+  disabled,
 }) {
   return (
     <Button
@@ -17,6 +18,7 @@ export default function IconButton({
       variant={variant}
       className="d-flex align-items-center gap-2"
       onClick={onClick}
+      disabled={disabled || false}
     >
       {isLoading ? (
         <Spinner
