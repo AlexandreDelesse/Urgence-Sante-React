@@ -4,7 +4,8 @@ const defaultValue = {
   user: {},
   hasAccess: false,
   setUser: () => {},
-  setHasAccess: () => {},
+  hasLogged: false,
+  setHasLogged: () => {},
 };
 
 const UserContext = createContext(defaultValue);

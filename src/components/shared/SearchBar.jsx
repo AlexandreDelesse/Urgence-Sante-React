@@ -37,7 +37,8 @@ export default function SearchBar({ onFilterChange }) {
             />
           </Form.Group>
         </Col>
-
+      </Row>
+      <Row className="mt-2">
         <Col>
           <ButtonGroup aria-label="Basic example">
             <Button
