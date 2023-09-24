@@ -9,13 +9,14 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [hasLogged, setHasLogged] = useState(false);
   const queryClient = new QueryClient();
   //TODO: ADD NOTIFICATION SYSTEM
 
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ hasLogged, setHasLogged }}>
           <MainNavbar />
           <AppRoutes />
         </UserContext.Provider>

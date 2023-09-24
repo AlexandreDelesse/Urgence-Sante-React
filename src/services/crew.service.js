@@ -21,4 +21,13 @@ const getCrewByCrewId = async (crewId) => {
   }
 };
 
-export { getCrewByCrewId };
+const getAllCrews = async () => {
+  try {
+    const { data: crews } = await api.get("Login");
+    return crews;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { getCrewByCrewId, getAllCrews };
