@@ -4,15 +4,18 @@ import { Button, Form } from "react-bootstrap";
 
 export default function CrewListLogin() {
   const [value, setValue] = useState("");
+  const [errormsg, setErrorMsg] = useState("");
   const userContext = useContext(UserContext);
-  
+
   const password = `regul-${Math.trunc(
     new Date().getFullYear() / (new Date().getMonth() + 1)
   ).toString()}`;
 
   const onLogin = () => {
-    if (value != password) return;
-    else userContext.setHasLogged(true);
+    if (value != password) {
+      setErrorMsg("Mot de passe incorrect");
+      return;
+    } else userContext.setHasLogged(true);
   };
 
   return (
@@ -23,6 +26,7 @@ export default function CrewListLogin() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
+        {errormsg && <Form.Text>{errormsg}</Form.Text>}
       </Form.Group>
       <Button onClick={onLogin} variant="success" className="mt-2">
         Valider
