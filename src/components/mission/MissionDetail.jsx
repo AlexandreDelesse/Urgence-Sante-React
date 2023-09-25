@@ -16,6 +16,7 @@ import {
 import AsyncDataComponent from "../shared/AsyncDataComponent";
 import MissionInformations from "../../pages/missions/missionInformations/MissionInformations";
 import MissionOtherInformations from "../../pages/missions/missionOtherInformations/MissionOtherInformations";
+import BottomNav from "../../pages/missions/bottomNav/BottomNav";
 
 export default function MissionDetail() {
   const params = useParams();
@@ -33,39 +34,15 @@ export default function MissionDetail() {
   );
 
   const onLinkClick = (link) => {
+    console.log(link);
     setPathSelected(link);
     navigate(link, { replace: true });
   };
 
   return (
-    <Container>
-      <Nav fill variant="pills" className="my-2">
-        <Nav.Item>
-          <Nav.Link
-            active={pathSelected === "details"}
-            onClick={() => onLinkClick("details")}
-          >
-            Détails
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            active={pathSelected === "other"}
-            onClick={() => onLinkClick("other")}
-          >
-            Autres
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            disabled
-            active={pathSelected === "signature"}
-            onClick={() => onLinkClick("signature")}
-          >
-            Signature
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <>
+      <BottomNav activelink={pathSelected} onLinkClick={onLinkClick} />
+
       <Routes>
         <Route index element={<Navigate to="details" />} />
         <Route
@@ -86,6 +63,6 @@ export default function MissionDetail() {
           }
         />
       </Routes>
-    </Container>
+    </>
   );
 }

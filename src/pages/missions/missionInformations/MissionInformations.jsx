@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
+import StepProgress from "../stepProgress/StepProgress";
 
 export default function MissionInformations({ asyncData }) {
   return (
@@ -10,7 +11,8 @@ export default function MissionInformations({ asyncData }) {
       data={asyncData}
       onSuccess={({ data }) => (
         <div className="mt-3">
-          <h2 className="mb-3">
+          <StepProgress />
+          <h2 className="my-3">
             {data.patient}
             {data.isSerial && (
               <Badge className="ms-2">
