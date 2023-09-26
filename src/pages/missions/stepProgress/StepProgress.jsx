@@ -9,6 +9,7 @@ import {
   StepButton,
   Modal,
   Box,
+  Input,
 } from "@mui/material";
 import { FormControl } from "react-bootstrap";
 
@@ -107,7 +108,7 @@ export default function StepProgress() {
         <Modal open={modalOpen} onClose={toggleModalopen}>
           <Box sx={style}>
             <Typography variant="h5">Mettre à jour l'heure</Typography>
-            <FormControl
+            <Input
               onChange={updateEditingStep}
               value={editingStepValue}
               type="time"
