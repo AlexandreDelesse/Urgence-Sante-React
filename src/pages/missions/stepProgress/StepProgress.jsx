@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./stepProgress.css";
-import { Step, StepLabel, Button, Stepper } from "@mui/material";
+import { Step, StepLabel, Button, Stepper, Typography } from "@mui/material";
 
 export default function StepProgress() {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
-
-  const steps = ["En route", "En charge", "Dispo"];
+  const [steps, setSteps] = useState([
+    { label: "En route", time: null },
+    { label: "En charge", time: null },
+    { label: "Dispo", time: null },
+  ]);
 
   const goNextStep = () => {
     handleComplete();
@@ -14,6 +17,18 @@ export default function StepProgress() {
   };
 
   const handleComplete = () => {
+    const newSteps = steps.map((step, index) =>
+      index === activeStep
+        ? {
+            ...step,
+            time: new Date().toLocaleTimeString("fr-FR", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          }
+        : step
+    );
+    setSteps(newSteps);
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
@@ -21,11 +36,17 @@ export default function StepProgress() {
 
   return (
     <div>
-      <Button onClick={goNextStep}>{steps[activeStep]}</Button>
+      <Button onClick={goNextStep}>
+        {steps[activeStep] ? steps[activeStep].label : ""}
+      </Button>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((stepLabel, index) => (
-          <Step key={stepLabel} completed={completed[index]}>
-            <StepLabel>{stepLabel}</StepLabel>
+        {steps.map((step, index) => (
+          <Step key={step.label} completed={completed[index]}>
+            <StepLabel>
+              {step.label}
+              <br />
+              <Typography variant="caption">{step.time}</Typography>
+            </StepLabel>
           </Step>
         ))}
       </Stepper>

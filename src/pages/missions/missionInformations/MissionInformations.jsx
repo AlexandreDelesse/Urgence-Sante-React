@@ -12,7 +12,6 @@ export default function MissionInformations({ asyncData }) {
       data={asyncData}
       onSuccess={({ data }) => (
         <div className="mt-3">
-          <StepProgress />
           <Typography className="my-3" variant="h5">
             {data.patient}
           </Typography>
@@ -90,6 +89,7 @@ export default function MissionInformations({ asyncData }) {
               </Typography>
             </>
           )}
+          <StepProgress />
         </div>
       )}
     />
