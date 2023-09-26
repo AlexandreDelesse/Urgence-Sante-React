@@ -2,6 +2,7 @@ import React from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 import StepProgress from "../stepProgress/StepProgress";
+import { Box, Typography, Card as MuiCard, CardContent } from "@mui/material";
 
 export default function MissionInformations({ asyncData }) {
   return (
@@ -12,57 +13,82 @@ export default function MissionInformations({ asyncData }) {
       onSuccess={({ data }) => (
         <div className="mt-3">
           <StepProgress />
-          <h2 className="my-3">
+          <Typography className="my-3" variant="h5">
+            {data.patient}
+          </Typography>
+
+          {/* <h2 className="my-3">
             {data.patient}
             {data.isSerial && (
               <Badge className="ms-2">
                 Serie {data.isLastDay && "- Dernier jour"}
               </Badge>
             )}
-          </h2>
-          <Row>
-            <Col>
-              <p>
-                Prise en charge : <br />
-                <span className="fw-bold">{data.schedule}</span>
-              </p>
+          </h2> */}
+          <Row className="my-3">
+            <Col xs={8}>
+              <Typography variant="caption">Prise en charge</Typography>
+              <Typography className="fw-bold" variant="body1" color="primary">
+                {data.schedule}
+              </Typography>
+              {data.appointment && (
+                <>
+                  <Typography variant="caption">Rdv à :</Typography>
+                  <Typography
+                    className="fw-bold"
+                    variant="body1"
+                    color="primary"
+                  >
+                    {data.appointment}
+                  </Typography>
+                </>
+              )}
             </Col>
             <Col>
-              <p>
-                Transport : <br />
-                <span className="fw-bold">{data.transportMode}</span>
-              </p>
-
-              {data.appointment && (
-                <p>
-                  Rdv à : <br />
-                  <span className="fw-bold">{data.appointment}</span>
-                </p>
-              )}
+              <Typography variant="caption">Transport</Typography>
+              <Typography className="fw-bold" variant="body1" color="primary">
+                {data.transportMode}
+              </Typography>
             </Col>
           </Row>
 
-          <Card>
-            <Card.Header>Départ</Card.Header>
-            <Card.Body>{data.departure}</Card.Body>
-          </Card>
+          <MuiCard className="my-3">
+            <CardContent>
+              <Typography variant="caption" color="text.secondary" gutterBottom>
+                Départ
+              </Typography>
+              <Typography variant="body2" component="div">
+                {data.departure}
+              </Typography>
+            </CardContent>
+          </MuiCard>
 
-          <Card className="mt-3">
-            <Card.Header>Arrivée</Card.Header>
-            <Card.Body>{data.arrival}</Card.Body>
-          </Card>
+          <MuiCard className="my-3">
+            <CardContent>
+              <Typography variant="caption" color="text.secondary" gutterBottom>
+                Arrivée
+              </Typography>
+              <Typography variant="body2" component="div">
+                {data.arrival}
+              </Typography>
+            </CardContent>
+          </MuiCard>
 
           {data.comment && (
-            <p>
-              Commentaire : <br />
-              <span className="fw-bold">{data.comment}</span>
-            </p>
+            <>
+              <Typography variant="caption">Commentaire :</Typography>
+              <Typography className="fw-bold" variant="body1" color="primary">
+                {data.comment}
+              </Typography>
+            </>
           )}
           {data.prescripteur && (
-            <p>
-              Prescripteur : <br />
-              <span className="fw-bold">{data.comment}</span>
-            </p>
+            <>
+              <Typography variant="caption">Prescripteur :</Typography>
+              <Typography className="fw-bold" variant="body1" color="primary">
+                {data.prescripteur}
+              </Typography>
+            </>
           )}
         </div>
       )}

@@ -6,7 +6,7 @@ export default function StepProgress() {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
 
-  const steps = ["En cours", "Début", "Dispo"];
+  const steps = ["En route", "En charge", "Dispo"];
 
   const goNextStep = () => {
     handleComplete();
