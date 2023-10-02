@@ -1,0 +1,33 @@
+.truncateText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.job-item {
+  display: grid;
+  grid-template-columns: 4px 1fr;
+}
+
+.scroll-component {
+  overflow-y: scroll;
+}
+
+.mission-list {
+  height: 85vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scrollbar-width: 0;
+}
+
+.mission-list::-webkit-scrollbar {
+  display: none;
+}
+
+.span-success {
+  background-color: #479F76;
+}
+.span-warning {
+  background-color: #FFCD39;
+}

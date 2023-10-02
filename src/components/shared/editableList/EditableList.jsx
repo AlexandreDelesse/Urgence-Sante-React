@@ -30,7 +30,7 @@ export default function EditableList({
     <ListGroup variant="flush">
       {list.map((el, index) => (
         <ListGroup.Item
-          className="d-flex align-items-center gap-2 bg-light"
+          className="d-flex align-items-center gap-2"
           key={el}
         >
           {index === 0 && list[0] ? (
@@ -46,7 +46,7 @@ export default function EditableList({
       ))}
       <ListGroup.Item
         onClick={onAddElement}
-        className="d-flex align-items-center gap-2 bg-light"
+        className="d-flex align-items-center gap-2"
       >
         <BsPlusCircle color="orange" /> {buttonLabel || "Ajouter un element"}
       </ListGroup.Item>

@@ -10,6 +10,8 @@ import {
   Modal,
   Box,
   Input,
+  Card,
+  CardContent,
 } from "@mui/material";
 import { FormControl } from "react-bootstrap";
 
@@ -87,22 +89,26 @@ export default function StepProgress() {
 
   return (
     <div>
+      <Card>
+        <CardContent>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((step, index) => (
+              <Step key={step.label} completed={completed[index]}>
+                <StepButton onClick={() => handleOnEditTime(index)}>
+                  {step.label}
+                  <br />
+                  <Typography variant="caption">{step.time}</Typography>
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+        </CardContent>
+      </Card>
       <div className="d-flex justify-content-end">
-        <Button className="my-2" onClick={goNextStep}>
+        <Button className="my-1" onClick={goNextStep}>
           {steps[activeStep + 1] ? steps[activeStep + 1].label : ""}
         </Button>
       </div>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((step, index) => (
-          <Step key={step.label} completed={completed[index]}>
-            <StepButton onClick={() => handleOnEditTime(index)}>
-              {step.label}
-              <br />
-              <Typography variant="caption">{step.time}</Typography>
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
 
       {editingStep >= 0 && (
         <Modal open={modalOpen} onClose={toggleModalopen}>
