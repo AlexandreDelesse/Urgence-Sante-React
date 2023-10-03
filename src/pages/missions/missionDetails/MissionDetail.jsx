@@ -3,6 +3,7 @@ import { Container, Nav } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
 import {
   Navigate,
+  Outlet,
   Route,
   Routes,
   useLocation,
@@ -12,18 +13,19 @@ import {
 import {
   getJobDetailEditableFromJobId,
   getMissionById,
-} from "../../services/mission.service";
-import AsyncDataComponent from "../shared/AsyncDataComponent";
-import MissionInformations from "../../pages/missions/missionInformations/MissionInformations";
-import MissionOtherInformations from "../../pages/missions/missionOtherInformations/MissionOtherInformations";
-import BottomNav from "../../pages/missions/bottomNav/BottomNav";
+  getMissionStatus,
+} from "../../../services/mission.service";
+import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
+import MissionInformations from "./missionInformations/MissionInformations";
+import MissionOtherInformations from "./missionOtherInformations/MissionOtherInformations";
+import BottomNav from "./bottomNav/BottomNav";
 
 export default function MissionDetail() {
   const params = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [pathSelected, setPathSelected] = useState("details");
+  const [pathSelected, setPathSelected] = useState("");
 
   const asyncMissionDetail = useQuery("missionDetail", () =>
     getMissionById(params.jobId)
@@ -33,22 +35,33 @@ export default function MissionDetail() {
     getJobDetailEditableFromJobId(params.jobId)
   );
 
+  const missionStatusQuery = useQuery("missionStatus", () =>
+    getMissionStatus(params.jobId)
+  );
+
   const onLinkClick = (link) => {
-    console.log(link);
     setPathSelected(link);
     navigate(link, { replace: true });
   };
+
+  if (!params.jobId) return <div>Il y a une erreur dans l'url</div>;
 
   return (
     <>
       <BottomNav activelink={pathSelected} onLinkClick={onLinkClick} />
 
       <Routes>
-        <Route index element={<Navigate to="details" />} />
         <Route
-          path="details"
-          element={<MissionInformations asyncData={asyncMissionDetail} />}
+          index
+          element={
+            <MissionInformations
+              asyncData={asyncMissionDetail}
+              jobId={params.jobId}
+              asyncMissionStatus={missionStatusQuery}
+            />
+          }
         />
+
         <Route
           path="other"
           element={
@@ -62,6 +75,7 @@ export default function MissionDetail() {
             />
           }
         />
+        <Route path="*" element={<Navigate to="" />} />
       </Routes>
     </>
   );

@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Card, Paper } from "@mui/material";
 import React from "react";
 
 import "./missionListItem.css";
@@ -14,9 +14,9 @@ export default function MissionListItem({
   onClick,
 }) {
   return (
-    <Paper
+    <Card
       onClick={() => onClick(shortJob.jobId)}
-      className="d-flex justify-content-between px-0"
+      className="d-flex justify-content-between px-0 my-1"
       elevation={2}
     >
       <div className="job-item w-100 ">
@@ -55,6 +55,6 @@ export default function MissionListItem({
           </div>
         </div>
       </div>
-    </Paper>
+    </Card>
   );
 }

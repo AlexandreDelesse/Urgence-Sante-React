@@ -55,10 +55,51 @@ const acceptMission = async (missionId) => {
   }
 };
 
+const getMissionStatus = async (jobId) => {
+  try {
+    const { data: missionStatus } = await api.get(`Time/${jobId}`);
+    if (
+      missionStatus.go &&
+      missionStatus.go.charAt(missionStatus.go.length - 1) !== "Z"
+    )
+      missionStatus.go = missionStatus.go + "Z";
+    if (
+      missionStatus.onSite &&
+      missionStatus.go.charAt(missionStatus.onSite.length - 1) !== "Z"
+    )
+      missionStatus.onSite = missionStatus.onSite + "Z";
+    if (
+      missionStatus.available &&
+      missionStatus.available.charAt(missionStatus.available.length - 1) !== "Z"
+    )
+      missionStatus.available = missionStatus.available + "Z";
+    return missionStatus;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateMissionStatus = async (status) => {
+  const statusToSend = { jobId: status.jobId };
+  Object.keys(status.step).forEach((key) => {
+    statusToSend[key] = status.step[key]
+      ? status.step[key].toISOString()
+      : null;
+  });
+
+  try {
+    return await api.patch("/Time", statusToSend);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getMissions,
   getMissionById,
   acceptMission,
   getJobDetailEditableFromJobId,
   patchJobDetailEditable,
+  updateMissionStatus,
+  getMissionStatus,
 };

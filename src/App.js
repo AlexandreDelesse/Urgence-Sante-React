@@ -6,11 +6,10 @@ import { HashRouter } from "react-router-dom";
 import AppRoutes from "./routing/AppRoutes";
 import UserContext from "./contexts/User.context";
 import { QueryClient, QueryClientProvider } from "react-query";
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 function App() {
   const [user, setUser] = useState(null);

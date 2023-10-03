@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
-import EditableLabel from "../../../components/shared/editableLabel/EditableLabel";
-import EditableList from "../../../components/shared/editableList/EditableList";
-import { nirValidator } from "../../../services/validator";
+import EditableLabel from "../../../../components/shared/editableLabel/EditableLabel";
+import EditableList from "../../../../components/shared/editableList/EditableList";
+import { nirValidator } from "../../../../services/validator";
 import { useQueryClient } from "react-query";
 import { RiSendPlaneFill } from "react-icons/ri";
-import IconButton from "../../../components/shared/IconButton";
-import { patchJobDetailEditable } from "../../../services/mission.service";
+import IconButton from "../../../../components/shared/IconButton";
+import { patchJobDetailEditable } from "../../../../services/mission.service";
 import { Card, CardContent } from "@mui/material";
 
 export default function MissionOtherInformations({ infosClient }) {

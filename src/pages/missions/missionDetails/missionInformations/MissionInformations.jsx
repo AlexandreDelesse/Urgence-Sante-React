@@ -1,10 +1,15 @@
 import React from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
-import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
-import StepProgress from "../stepProgress/StepProgress";
+import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
+import StepProgress from "./stepProgress/StepProgress";
 import { Box, Typography, Card as MuiCard, CardContent } from "@mui/material";
+import { formattedSteps } from "../../../../services/tools.service";
 
-export default function MissionInformations({ asyncData }) {
+export default function MissionInformations({
+  asyncData,
+  jobId,
+  asyncMissionStatus,
+}) {
   return (
     <AsyncDataComponent
       withRefetchLoader
@@ -101,8 +106,20 @@ export default function MissionInformations({ asyncData }) {
               </Typography>
             </>
           )}
-
-          <StepProgress />
+          <AsyncDataComponent
+            withRefetchLoader
+            data={asyncMissionStatus}
+            onSuccess={({ data }) => (
+              <StepProgress
+                jobId={jobId}
+                initialStep={{
+                  go: data.go ? new Date(data.go) : null,
+                  onSite: data.onSite ? new Date(data.onSite) : null,
+                  available: data.available ? new Date(data.available) : null,
+                }}
+              />
+            )}
+          />
         </div>
       )}
     />

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Button, Col, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { acceptMission, getMissions } from "../../services/mission.service";
-import AsyncDataComponent from "../shared/AsyncDataComponent";
-import TransportType from "../shared/TransportType";
+import { acceptMission, getMissions } from "../../../services/mission.service";
+import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
+import TransportType from "../../../components/shared/TransportType";
 import { BsCheck2Square } from "react-icons/bs";
-import { transportModeEnum } from "../../data/enum.data";
-import IconButton from "../shared/IconButton";
-import "./mission.css";
-import MissionListItem from "../../pages/missions/missionList/missionListItem/MissionListItem";
+import { transportModeEnum } from "../../../data/enum.data";
+import IconButton from "../../../components/shared/IconButton";
+import "../mission.css";
+import MissionListItem from "./missionListItem/MissionListItem";
 
 export default function MissionList() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function MissionList() {
   const queryClient = useQueryClient();
 
   const onMissionClick = (missionIndex) => {
-    navigate(`/jobdetail/${missionIndex}/details`);
+    navigate(`jobdetail/${missionIndex}`);
   };
 
   const onButtonClick = async (e, jobId) => {
@@ -48,20 +48,14 @@ export default function MissionList() {
         data={asyncMissions}
         onLoadingMessage="Chargement des missions.."
         onSuccess={({ data }) => (
-          <div>
-            {data.length === 0 ? (
-              <div>Pas de missions</div>
-            ) : (
-              <ListeMission
-                onMissionClick={onMissionClick}
-                onButtonClick={onButtonClick}
-                data={data
-                  .filter((el) => showTerminated || !el.isTerminated)
-                  .sort((a, b) => b.index - a.index)}
-                loadingButton={loadingButton}
-              />
-            )}
-          </div>
+          <ListeMission
+            onMissionClick={onMissionClick}
+            onButtonClick={onButtonClick}
+            data={data
+              .filter((el) => showTerminated || !el.isTerminated)
+              .sort((a, b) => b.index - a.index)}
+            loadingButton={loadingButton}
+          />
         )}
       ></AsyncDataComponent>
     </Col>
@@ -125,7 +119,7 @@ const ListeMission = ({
   //   </ListGroup>
   // );
   return (
-    <div className="scroll-component mission-list d-grid gap-2">
+    <div className="scroll-component mission-list">
       {data.map((shortJob, index) => (
         <MissionListItem
           key={index}

@@ -12,17 +12,19 @@ export default function BottomNav({ activelink, onLinkClick }) {
     >
       <BottomNavigation showLabels value="Detail">
         <BottomNavigationAction
-          className={activelink === "details" ? "Mui-selected" : ""}
-          onClick={() => onLinkClick("details")}
+          className={activelink === "" ? "Mui-selected" : ""}
+          onClick={() => onLinkClick("")}
           label="Detail"
           icon={<InfoIcon />}
         />
+
         <BottomNavigationAction
           className={activelink === "other" ? "Mui-selected" : ""}
           onClick={() => onLinkClick("other")}
           label="Autre"
           icon={<RestoreIcon />}
         />
+
         <BottomNavigationAction
           className={activelink === "signature" ? "Mui-selected" : ""}
           disabled={true}
