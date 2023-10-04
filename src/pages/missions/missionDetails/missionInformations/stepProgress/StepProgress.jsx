@@ -84,6 +84,8 @@ export default function StepProgress({ jobId, initialStep }) {
 
   const handleResetStep = () => {
     setStep((old) => ({ ...old, [editingStep]: null }));
+    updateStatus(editingStep, null);
+
     toggleModalopen();
     setActiveStep((old) => old - 1);
   };
@@ -92,7 +94,6 @@ export default function StepProgress({ jobId, initialStep }) {
     const keyList = Object.keys(step);
     const keyIndex = keyList.indexOf(editingStep);
     if (keyIndex === activeStep - 1) return true;
-    console.log(keyIndex);
     return false;
   };
 
@@ -115,12 +116,6 @@ export default function StepProgress({ jobId, initialStep }) {
     setActiveStep((old) => old + 1);
   };
 
-  const getStepColor = (index) => {
-    if (index > activeStep) return "";
-    if (index < activeStep) return "green";
-    return "";
-  };
-
   return (
     <div>
       <Card>
@@ -128,10 +123,7 @@ export default function StepProgress({ jobId, initialStep }) {
           <Stepper activeStep={activeStep} alternativeLabel>
             {Object.keys(step).map((key, index) => (
               <Step key={key}>
-                <StepButton
-                  sx={{ "& .MuiSvgIcon-root": { color: getStepColor(index) } }}
-                  onClick={() => onStepClick(key)}
-                >
+                <StepButton onClick={() => onStepClick(key)}>
                   {stepLabelEnum[key] || `Etape ${index}`}
                   <br />
                   <Typography variant="caption">

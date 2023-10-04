@@ -20,7 +20,6 @@ export default function MissionOtherInformations({ infosClient }) {
 
   const onFormChanges = (name, value) => {
     if (name) {
-      console.log("chech");
       setFormValues((old) => ({ ...old, [name]: value }));
       setFormHasChanged(true);
     }
@@ -42,7 +41,6 @@ export default function MissionOtherInformations({ infosClient }) {
         }
       : null;
     values.contractTypes = undefined;
-    console.log(values);
     setIsLoading(true);
     try {
       await patchJobDetailEditable(values);
