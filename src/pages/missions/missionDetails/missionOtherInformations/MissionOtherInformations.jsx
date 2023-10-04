@@ -91,6 +91,17 @@ export default function MissionOtherInformations({ infosClient }) {
 
       <Card>
         <CardContent>
+          <ContractTypeSelector
+            formValues={formValues}
+            contractTypeList={infosClient.contractTypes}
+            onFormChanges={onFormChanges}
+            initialValue={infosClient.selectedContractType}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent>
           <div>
             <Form.Label>n° sécurité sociale</Form.Label>
             <EditableLabel
@@ -123,17 +134,6 @@ export default function MissionOtherInformations({ infosClient }) {
             initialList={formValues.phones}
             placeholder="Cliquez pour renseigner le téléphone"
             onChange={(value) => onFormChanges("phones", value)}
-          />
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent>
-          <ContractTypeSelector
-            formValues={formValues}
-            contractTypeList={infosClient.contractTypes}
-            onFormChanges={onFormChanges}
-            initialValue={infosClient.selectedContractType}
           />
         </CardContent>
       </Card>
