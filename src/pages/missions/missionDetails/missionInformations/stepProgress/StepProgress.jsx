@@ -17,6 +17,11 @@ import { updateMissionStatus } from "../../../../../services/mission.service";
 import { useQueryClient } from "react-query";
 
 export default function StepProgress({ jobId, initialStep }) {
+  const stepLabelEnum = {
+    go: "En route",
+    onSite: "Sur place",
+    available: "Dispo",
+  };
   const getInitialStep = () => {
     const initialStep = Object.keys(step).findIndex(
       (key) => step[key] === null
@@ -61,7 +66,10 @@ export default function StepProgress({ jobId, initialStep }) {
   };
 
   const onStepClick = (key) => {
-    if (!step[key]) return;
+    if (!step[key]) {
+      completeStep();
+      return;
+    }
     setEditingStep(key);
     setEditingStepValue(step[key].toLocaleTimeString());
     toggleModalopen();
@@ -72,6 +80,20 @@ export default function StepProgress({ jobId, initialStep }) {
   const onValidateUpdateStep = () => {
     updateStep(editingStep, editingStepValue);
     toggleModalopen();
+  };
+
+  const handleResetStep = () => {
+    setStep((old) => ({ ...old, [editingStep]: null }));
+    toggleModalopen();
+    setActiveStep((old) => old - 1);
+  };
+
+  const canReset = () => {
+    const keyList = Object.keys(step);
+    const keyIndex = keyList.indexOf(editingStep);
+    if (keyIndex === activeStep - 1) return true;
+    console.log(keyIndex);
+    return false;
   };
 
   const updateStatus = async (stepKey, value) => {
@@ -93,15 +115,24 @@ export default function StepProgress({ jobId, initialStep }) {
     setActiveStep((old) => old + 1);
   };
 
+  const getStepColor = (index) => {
+    if (index > activeStep) return "";
+    if (index < activeStep) return "green";
+    return "";
+  };
+
   return (
     <div>
       <Card>
         <CardContent>
           <Stepper activeStep={activeStep} alternativeLabel>
-            {Object.keys(step).map((key) => (
+            {Object.keys(step).map((key, index) => (
               <Step key={key}>
-                <StepButton onClick={() => onStepClick(key)}>
-                  {key}
+                <StepButton
+                  sx={{ "& .MuiSvgIcon-root": { color: getStepColor(index) } }}
+                  onClick={() => onStepClick(key)}
+                >
+                  {stepLabelEnum[key] || `Etape ${index}`}
                   <br />
                   <Typography variant="caption">
                     {step[key] ? step[key].toLocaleTimeString() : null}
@@ -112,13 +143,6 @@ export default function StepProgress({ jobId, initialStep }) {
           </Stepper>
         </CardContent>
       </Card>
-      {activeStep < 3 && (
-        <div className="d-flex justify-content-end">
-          <Button variant="contained" color="warning" className="my-1" onClick={completeStep}>
-            {Object.keys(step)[activeStep]}
-          </Button>
-        </div>
-      )}
 
       <Modal open={modalOpen} onClose={toggleModalopen}>
         <Box sx={style}>
@@ -143,6 +167,11 @@ export default function StepProgress({ jobId, initialStep }) {
             >
               Annuler
             </Button>
+            {canReset() && (
+              <Button onClick={handleResetStep} color="warning">
+                Reset
+              </Button>
+            )}
           </div>
         </Box>
       </Modal>
