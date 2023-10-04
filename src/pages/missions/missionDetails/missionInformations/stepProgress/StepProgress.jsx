@@ -114,7 +114,7 @@ export default function StepProgress({ jobId, initialStep }) {
       </Card>
       {activeStep < 3 && (
         <div className="d-flex justify-content-end">
-          <Button className="my-1" onClick={completeStep}>
+          <Button variant="contained" color="warning" className="my-1" onClick={completeStep}>
             {Object.keys(step)[activeStep]}
           </Button>
         </div>

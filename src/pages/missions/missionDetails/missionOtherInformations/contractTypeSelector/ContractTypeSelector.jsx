@@ -101,7 +101,6 @@ const ContractTypeForm = ({
 
       {contractType.hasReference && (
         <div className="ps-1 mt-2">
-          <Form.Label>{contractType.referenceLabel}</Form.Label>
           <EditableLabel
             onChange={(element) => onFormChanges("reference", element)}
             initialValue={formValues.reference || ""}
