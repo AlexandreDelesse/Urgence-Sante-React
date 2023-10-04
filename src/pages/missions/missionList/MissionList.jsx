@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,11 @@ import { transportModeEnum } from "../../../data/enum.data";
 import IconButton from "../../../components/shared/IconButton";
 import "../mission.css";
 import MissionListItem from "./missionListItem/MissionListItem";
+import FilterContext from "../../../contexts/Filter.context";
 
 export default function MissionList() {
   const navigate = useNavigate();
-  const [showTerminated, setShowTerminated] = useState(false);
+  const { showPastMission, setShowPastMission } = useContext(FilterContext);
   const [loadingButton, setLoadingButton] = useState("");
 
   const asyncMissions = useQuery("missions", getMissions);
@@ -31,8 +32,8 @@ export default function MissionList() {
     queryClient.invalidateQueries("missions");
   };
 
-  const toggleShowTerminated = () => {
-    setShowTerminated((old) => !old);
+  const toggleShowPastMission = () => {
+    setShowPastMission((old) => !old);
   };
 
   return (
@@ -41,8 +42,8 @@ export default function MissionList() {
         className="my-2"
         type="switch"
         label="Afficher les missions terminées"
-        checked={showTerminated}
-        onChange={toggleShowTerminated}
+        checked={showPastMission}
+        onChange={toggleShowPastMission}
       />
       <AsyncDataComponent
         data={asyncMissions}
@@ -52,7 +53,7 @@ export default function MissionList() {
             onMissionClick={onMissionClick}
             onButtonClick={onButtonClick}
             data={data
-              .filter((el) => showTerminated || !el.isTerminated)
+              .filter((el) => showPastMission || !el.isTerminated)
               .sort((a, b) => b.index - a.index)}
             loadingButton={loadingButton}
           />

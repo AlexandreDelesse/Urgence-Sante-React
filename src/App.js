@@ -10,9 +10,11 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import FilterContext from "./contexts/Filter.context";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [showPastMission, setShowPastMission] = useState(false);
   const [hasLogged, setHasLogged] = useState(false);
   const queryClient = new QueryClient();
   //TODO: ADD NOTIFICATION SYSTEM
@@ -21,8 +23,12 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <UserContext.Provider value={{ hasLogged, setHasLogged }}>
-          <MainNavbar />
-          <AppRoutes />
+          <FilterContext.Provider
+            value={{ showPastMission, setShowPastMission }}
+          >
+            <MainNavbar />
+            <AppRoutes />
+          </FilterContext.Provider>
         </UserContext.Provider>
       </QueryClientProvider>
     </HashRouter>

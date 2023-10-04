@@ -7,10 +7,10 @@ import {
 import ReactSignatureCanvas from "react-signature-canvas";
 import { Button, Card } from "@mui/material";
 import "./signature.css";
+import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
 
 export default function Signature({ jobId }) {
   const signatureQuery = useQuery("signature", () => getSignature(jobId));
-  const canvasRef = useRef();
   const [sign, setSign] = useState();
   const [img, setImg] = useState("");
 
@@ -30,21 +30,38 @@ export default function Signature({ jobId }) {
 
   return (
     <>
-      <Card className="cardCanvas">
-        <ReactSignatureCanvas
-          penColor="blue"
-          canvasProps={{ className: "sigCanvas" }}
-          ref={(data) => setSign(data)}
-        />
-      </Card>
-      <div className="mt-3">
-        <Button variant="contained" color="success" onClick={encodeSignature}>
-          Envoyer
-        </Button>
-        <Button color="secondary" onClick={handleClear}>
-          Effacer
-        </Button>
-      </div>
+      <AsyncDataComponent
+        data={signatureQuery}
+        onSuccess={({ data }) => (
+          <Card
+            sx={{ backgroundImage: `url(${data.data})` }}
+            className="mt-3 imgContainer"
+          />
+        )}
+        onError={() => (
+          <>
+            <Card className="cardCanvas">
+              <ReactSignatureCanvas
+                penColor="blue"
+                canvasProps={{ className: "sigCanvas" }}
+                ref={(data) => setSign(data)}
+              />
+            </Card>
+            <div className="mt-3">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={encodeSignature}
+              >
+                Envoyer
+              </Button>
+              <Button color="secondary" onClick={handleClear}>
+                Effacer
+              </Button>
+            </div>
+          </>
+        )}
+      />
     </>
   );
 }

@@ -96,7 +96,7 @@ const updateMissionStatus = async (status) => {
 
 const getSignature = async (gJobId) => {
   try {
-    const { date: signature } = await api.get("Signature", {
+    const { data: signature } = await api.get("Signature", {
       params: { gJobId },
     });
     return signature;
