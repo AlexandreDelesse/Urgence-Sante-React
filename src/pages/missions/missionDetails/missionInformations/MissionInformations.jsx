@@ -41,7 +41,7 @@ export default function MissionInformations({
                   >
                     {data.schedule}
                   </Typography>
-                  {data.appointment && (
+                  {/* {data.appointment && (
                     <>
                       <Typography variant="caption">Rdv à :</Typography>
                       <Typography
@@ -52,7 +52,7 @@ export default function MissionInformations({
                         {data.appointment}
                       </Typography>
                     </>
-                  )}
+                  )} */}
                 </Col>
                 <Col>
                   <Typography variant="caption">Transport</Typography>
