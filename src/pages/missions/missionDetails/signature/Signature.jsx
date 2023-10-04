@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import {
   getSignature,
   putSignature,
@@ -11,8 +11,9 @@ import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent
 
 export default function Signature({ jobId }) {
   const signatureQuery = useQuery("signature", () => getSignature(jobId));
+  const queryClient = useQueryClient();
+
   const [sign, setSign] = useState();
-  const [img, setImg] = useState("");
 
   const handleClear = () => {
     sign.clear();
@@ -25,7 +26,7 @@ export default function Signature({ jobId }) {
       data: imgGenerated,
       dateTime: new Date().toISOString(),
     });
-    setImg(imgGenerated);
+    queryClient.invalidateQueries("signature");
   };
 
   return (
