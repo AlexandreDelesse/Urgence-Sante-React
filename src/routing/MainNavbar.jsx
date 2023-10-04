@@ -16,7 +16,13 @@ export default function MainNavbar() {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar
+      style={{ position: "sticky", top: 0 }}
+      fixed="top"
+      bg="dark"
+      variant="dark"
+      expand="lg"
+    >
       <Container fluid>
         <Navbar.Brand onClick={() => handleOnNavLinkClick("/")}>
           <img

@@ -94,6 +94,25 @@ const updateMissionStatus = async (status) => {
   }
 };
 
+const getSignature = async (gJobId) => {
+  try {
+    const { date: signature } = await api.get("Signature", {
+      params: { gJobId },
+    });
+    return signature;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const putSignature = async (signature) => {
+  try {
+    await api.put("Signature", signature);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getMissions,
   getMissionById,
@@ -102,4 +121,6 @@ export {
   patchJobDetailEditable,
   updateMissionStatus,
   getMissionStatus,
+  getSignature,
+  putSignature,
 };

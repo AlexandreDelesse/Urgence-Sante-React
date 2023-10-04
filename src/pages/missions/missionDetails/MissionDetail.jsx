@@ -19,6 +19,8 @@ import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 import MissionInformations from "./missionInformations/MissionInformations";
 import MissionOtherInformations from "./missionOtherInformations/MissionOtherInformations";
 import BottomNav from "./bottomNav/BottomNav";
+import Signature from "./signature/Signature";
+import { Box } from "@mui/material";
 
 export default function MissionDetail() {
   const params = useParams();
@@ -48,35 +50,41 @@ export default function MissionDetail() {
 
   return (
     <>
+      <Box paddingBottom="32px ">
+        <Routes>
+          <Route
+            index
+            element={
+              <MissionInformations
+                asyncData={asyncMissionDetail}
+                jobId={params.jobId}
+                asyncMissionStatus={missionStatusQuery}
+              />
+            }
+          />
+
+          <Route
+            path="other"
+            element={
+              <AsyncDataComponent
+                withRefetchLoader
+                onLoadingMessage="Chargement du détail.."
+                data={asyncJobDetailEditable}
+                onSuccess={({ data }) => (
+                  <MissionOtherInformations infosClient={data} />
+                )}
+              />
+            }
+          />
+
+          <Route
+            path="signature"
+            element={<Signature jobId={params.jobId} />}
+          />
+          <Route path="*" element={<Navigate to="" />} />
+        </Routes>
+      </Box>
       <BottomNav activelink={pathSelected} onLinkClick={onLinkClick} />
-
-      <Routes>
-        <Route
-          index
-          element={
-            <MissionInformations
-              asyncData={asyncMissionDetail}
-              jobId={params.jobId}
-              asyncMissionStatus={missionStatusQuery}
-            />
-          }
-        />
-
-        <Route
-          path="other"
-          element={
-            <AsyncDataComponent
-              withRefetchLoader
-              onLoadingMessage="Chargement du détail.."
-              data={asyncJobDetailEditable}
-              onSuccess={({ data }) => (
-                <MissionOtherInformations infosClient={data} />
-              )}
-            />
-          }
-        />
-        <Route path="*" element={<Navigate to="" />} />
-      </Routes>
     </>
   );
 }

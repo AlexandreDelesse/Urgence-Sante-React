@@ -1,0 +1,9 @@
+.cardCanvas {
+  position: relative;
+  height: 300px;
+}
+
+.sigCanvas {
+  width: 100%;
+  height: 100%;
+}

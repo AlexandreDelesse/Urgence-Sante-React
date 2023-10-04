@@ -21,7 +21,10 @@ import { createHashRouter } from "react-router-dom";
 export default function AppRoutes() {
   const pathBackButtonExeptions = ["/", "/login"];
   const { pathname } = useLocation();
-
+  // linear-gradient(
+  //   rgba(197, 217, 255, 1) 34%,
+  //   rgba(94, 151, 170, 1) 100%
+  // )
 
   return (
     <Container fluid>

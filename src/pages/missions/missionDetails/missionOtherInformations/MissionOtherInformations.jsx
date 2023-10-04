@@ -8,6 +8,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import IconButton from "../../../../components/shared/IconButton";
 import { patchJobDetailEditable } from "../../../../services/mission.service";
 import { Card, CardContent } from "@mui/material";
+import ContractTypeSelector from "./contractTypeSelector/ContractTypeSelector";
 
 export default function MissionOtherInformations({ infosClient }) {
   const [formValues, setFormValues] = useState(infosClient);
@@ -19,6 +20,7 @@ export default function MissionOtherInformations({ infosClient }) {
 
   const onFormChanges = (name, value) => {
     if (name) {
+      console.log("chech");
       setFormValues((old) => ({ ...old, [name]: value }));
       setFormHasChanged(true);
     }
@@ -30,9 +32,17 @@ export default function MissionOtherInformations({ infosClient }) {
 
   const onSaveClick = async () => {
     const values = formValues;
-    if (typeof formValues.contractType != "string")
-      values.contractType = formValues.contractType[0];
     if (!nirValidator(values.nir)) values.nir = "";
+    const { id, selectedValue } = values.selectedContractType || {};
+    values.selectedContractType = id
+      ? {
+          id,
+          selectedValue,
+          hasSelectedValue: !!selectedValue,
+        }
+      : null;
+    values.contractTypes = undefined;
+    console.log(values);
     setIsLoading(true);
     try {
       await patchJobDetailEditable(values);
@@ -119,53 +129,12 @@ export default function MissionOtherInformations({ infosClient }) {
 
       <Card>
         <CardContent>
-          <Form.Group className="mt-3 mb-1">
-            <Form.Label>Type de contrat</Form.Label>
-            <Form.Select
-              onChange={(e) => onFormChanges("contractType", e.target.value)}
-            >
-              {infosClient.contractType.map((contrat) => (
-                <option key={contrat.id} value={contrat.id}>
-                  {contrat.name}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-
-          {formValues.isSMUR || (
-            <Form.Group className="mt-3 mb-1">
-              <Form.Check
-                checked={formValues.isPmtPresent}
-                type="checkbox"
-                label="J'ai une préscription médicale"
-                onChange={() =>
-                  onFormChanges("isPmtPresent", !formValues.isPmtPresent)
-                }
-              />
-            </Form.Group>
-          )}
-
-          <Form.Group className="mt-3 mb-1">
-            <Form.Check
-              checked={formValues.isSMUR}
-              type="checkbox"
-              label="Smur"
-              onChange={() => onFormChanges("isSMUR", !formValues.isSMUR)}
-            />
-          </Form.Group>
-
-          {formValues.isSMUR && (
-            <div className="d-flex gap-2">
-              Pour la ville de
-              <span className="text-uppercase fw-bold">
-                <EditableLabel
-                  onChange={(element) => onFormChanges("smurCity", element)}
-                  initialValue={formValues.smurCity}
-                  placeholder={"Renseigner la ville"}
-                />
-              </span>
-            </div>
-          )}
+          <ContractTypeSelector
+            formValues={formValues}
+            contractTypeList={infosClient.contractTypes}
+            onFormChanges={onFormChanges}
+            initialValue={infosClient.selectedContractType}
+          />
         </CardContent>
       </Card>
 

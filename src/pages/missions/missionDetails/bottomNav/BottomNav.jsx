@@ -7,7 +7,12 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 export default function BottomNav({ activelink, onLinkClick }) {
   return (
     <Paper
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
       elevation={3}
     >
       <BottomNavigation showLabels value="Detail">
@@ -27,7 +32,6 @@ export default function BottomNav({ activelink, onLinkClick }) {
 
         <BottomNavigationAction
           className={activelink === "signature" ? "Mui-selected" : ""}
-          disabled={true}
           onClick={() => onLinkClick("signature")}
           label="Signature"
           icon={<DriveFileRenameOutlineIcon />}
