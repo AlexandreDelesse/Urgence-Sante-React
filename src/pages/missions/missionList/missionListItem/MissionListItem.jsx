@@ -6,6 +6,7 @@ import IconButton from "../../../../components/shared/IconButton";
 import { BsCheck2Square } from "react-icons/bs";
 import TransportType from "../../../../components/shared/TransportType";
 import { transportModeEnum } from "../../../../data/enum.data";
+import SyncIcon from "@mui/icons-material/Sync";
 
 export default function MissionListItem({
   shortJob,
@@ -13,6 +14,7 @@ export default function MissionListItem({
   isAckLoading,
   onClick,
 }) {
+  const transportSensEnum = { 1: "Aller", 2: "Retour" };
   return (
     <Card
       onClick={() => onClick(shortJob.jobId)}
@@ -24,9 +26,10 @@ export default function MissionListItem({
 
         <div className="d-flex flex-column ms-2">
           <div className="d-flex justify-content-between">
-            <div>
-              <div>{shortJob.schedule}</div>
+            <div className="fw-bold">
+              {shortJob.patient} <SyncIcon color="warning" fontSize="small" />
             </div>
+
             {shortJob.isAck || (
               <IconButton
                 size="sm"
@@ -35,13 +38,20 @@ export default function MissionListItem({
                 icon={<BsCheck2Square size={16} />}
                 isLoading={isAckLoading}
                 spinnerVariant="light"
-                label="Bien recus"
+                label="Ok"
               />
             )}
           </div>
-          <span>{transportModeEnum[shortJob.transportMode]}</span>
-          <div className="fw-bold">{shortJob.patient}</div>
-          <div>Rdv : {shortJob.appointment || "Pas de rdv"}</div>
+          <span>
+            {transportModeEnum[shortJob.transportMode]} -{" "}
+            {transportSensEnum[shortJob.transportSens]}
+          </span>
+
+          <div>
+            <div>{shortJob.schedule}</div>
+          </div>
+
+          {/* <div>Rdv : {shortJob.appointment || "Pas de rdv"}</div> */}
           <div>
             <span className="fw-bold">Départ :</span>
             {shortJob.departure}

@@ -15,18 +15,18 @@ export default function BottomNav({ activelink, onLinkClick }) {
       }}
       elevation={3}
     >
-      <BottomNavigation showLabels value="Detail">
+      <BottomNavigation showLabels value="Mission">
         <BottomNavigationAction
           className={activelink === "" ? "Mui-selected" : ""}
           onClick={() => onLinkClick("")}
-          label="Detail"
+          label="Mission"
           icon={<InfoIcon />}
         />
 
         <BottomNavigationAction
           className={activelink === "other" ? "Mui-selected" : ""}
           onClick={() => onLinkClick("other")}
-          label="Autre"
+          label="Detail"
           icon={<RestoreIcon />}
         />
 

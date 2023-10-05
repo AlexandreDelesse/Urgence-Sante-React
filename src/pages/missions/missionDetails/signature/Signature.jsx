@@ -10,7 +10,9 @@ import "./signature.css";
 import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
 
 export default function Signature({ jobId }) {
-  const signatureQuery = useQuery("signature", () => getSignature(jobId));
+  const signatureQuery = useQuery("signature", () => getSignature(jobId), {
+    retry: false,
+  });
   const queryClient = useQueryClient();
 
   const [sign, setSign] = useState();
@@ -32,6 +34,7 @@ export default function Signature({ jobId }) {
   return (
     <>
       <AsyncDataComponent
+        withRefetchLoader
         data={signatureQuery}
         onSuccess={({ data }) => (
           <Card
