@@ -1,6 +1,6 @@
 {
   "name": "urgence-sante-client",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "homepage": "http://alex.delesse.net/usdev",
   "private": true,
   "dependencies": {
