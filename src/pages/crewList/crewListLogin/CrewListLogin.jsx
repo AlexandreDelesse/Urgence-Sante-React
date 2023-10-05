@@ -12,7 +12,7 @@ export default function CrewListLogin() {
   ).toString()}`;
 
   const onLogin = () => {
-    if (value != password) {
+    if (value !== password) {
       setErrorMsg("Mot de passe incorrect");
       return;
     } else userContext.setHasLogged(true);

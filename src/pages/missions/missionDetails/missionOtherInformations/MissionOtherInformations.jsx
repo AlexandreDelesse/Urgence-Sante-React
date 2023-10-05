@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Button, Col, Form, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Alert, Button, Col, Form } from "react-bootstrap";
 import EditableLabel from "../../../../components/shared/editableLabel/EditableLabel";
 import EditableList from "../../../../components/shared/editableList/EditableList";
 import { nirValidator } from "../../../../services/validator";
@@ -57,10 +57,6 @@ export default function MissionOtherInformations({ infosClient }) {
   const onAbortClick = () => {
     setFormValues({ ...infosClient });
     setFormHasChanged(false);
-  };
-
-  const onCheckBoxClick = (name, value) => {
-    onFormChanges(name, !formValues[name]);
   };
 
   const onBirthDateChanges = (e) => {

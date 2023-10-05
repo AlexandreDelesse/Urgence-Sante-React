@@ -13,7 +13,6 @@ import "@fontsource/roboto/700.css";
 import FilterContext from "./contexts/Filter.context";
 
 function App() {
-  const [user, setUser] = useState(null);
   const [showPastMission, setShowPastMission] = useState(false);
   const [hasLogged, setHasLogged] = useState(false);
   const queryClient = new QueryClient();

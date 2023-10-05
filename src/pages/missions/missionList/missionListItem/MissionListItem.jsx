@@ -1,10 +1,9 @@
-import { Card, Paper } from "@mui/material";
+import { Card } from "@mui/material";
 import React from "react";
 
 import "./missionListItem.css";
 import IconButton from "../../../../components/shared/IconButton";
 import { BsCheck2Square } from "react-icons/bs";
-import TransportType from "../../../../components/shared/TransportType";
 import { transportModeEnum } from "../../../../data/enum.data";
 import SyncIcon from "@mui/icons-material/Sync";
 

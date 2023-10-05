@@ -1,5 +1,4 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 

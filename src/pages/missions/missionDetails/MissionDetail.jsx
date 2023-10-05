@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Container, Nav } from "react-bootstrap";
-import { useQuery, useQueryClient } from "react-query";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import {
   Navigate,
-  Outlet,
   Route,
   Routes,
-  useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
@@ -25,7 +22,6 @@ import { Box } from "@mui/material";
 export default function MissionDetail() {
   const params = useParams();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const [pathSelected, setPathSelected] = useState("");
 

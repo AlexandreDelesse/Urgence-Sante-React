@@ -1,9 +1,8 @@
 import React from "react";
-import { Badge, Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
 import StepProgress from "./stepProgress/StepProgress";
-import { Box, Typography, Card as MuiCard, CardContent } from "@mui/material";
-import { formattedSteps } from "../../../../services/tools.service";
+import { Typography, Card as MuiCard, CardContent } from "@mui/material";
 
 export default function MissionInformations({
   asyncData,

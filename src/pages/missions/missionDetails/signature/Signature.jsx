@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import {
   getSignature,
