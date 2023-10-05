@@ -27,7 +27,10 @@ export default function MissionListItem({
         <div className="d-flex flex-column ms-2">
           <div className="d-flex justify-content-between">
             <div className="fw-bold">
-              {shortJob.patient} <SyncIcon color="warning" fontSize="small" />
+              {shortJob.patient}{" "}
+              {shortJob.isSerial && (
+                <SyncIcon color="warning" fontSize="small" />
+              )}
             </div>
 
             {shortJob.isAck || (
@@ -60,9 +63,9 @@ export default function MissionListItem({
             <span className="fw-bold">Arrivée :</span>
             {shortJob.arrival}
           </div>
-          <div>
+          {/* <div>
             <TransportType transportType={shortJob.transportType} />
-          </div>
+          </div> */}
         </div>
       </div>
     </Card>
