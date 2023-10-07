@@ -18,7 +18,7 @@ export default function CrewList() {
 
   return (
     <>
-      <CrewListFilters filters={filters} setFilters={setFilters} />
+      {/* <CrewListFilters filters={filters} setFilters={setFilters} /> */}
 
       <AsyncDataComponent
         data={crewsQuery}
