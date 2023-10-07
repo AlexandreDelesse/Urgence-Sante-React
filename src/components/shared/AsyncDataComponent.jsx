@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
+import { Alert } from "@mui/material";
 
 export default function AsyncDataComponent({
   data,
@@ -16,14 +17,19 @@ export default function AsyncDataComponent({
 
   if (data.status === "error") {
     if (onError) return onError();
+    if (data.error.request.status < 500)
+      return (
+        <Alert severity="warning">
+          {data.error.request.responseText ||
+            `Une erreur est survenue : ${data.error.message}`}
+        </Alert>
+      );
     return (
-      <div className=" d-flex w-100 flex-column align-items-center">
-        <p>{onErrorMessage || data.error.message || "An error occured"}</p>
-        <p>Une erreur est survenue</p>
-        <p>
-          Rechargez la page ou Authentifiez vous : <Link to="login">Login</Link>
-        </p>
-      </div>
+      <Alert severity="error">
+        {onErrorMessage() ||
+          data.error.request.responseText ||
+          `Une erreur est survenue : ${data.error.message}`}
+      </Alert>
     );
   }
 

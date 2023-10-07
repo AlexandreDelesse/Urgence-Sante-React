@@ -15,12 +15,8 @@ import Mission from "../pages/missions/Mission";
 import CrewList from "../pages/crewList/CrewList";
 
 export default function AppRoutes() {
-  const pathBackButtonExeptions = ["/", "/login"];
+  const pathBackButtonExeptions = ["/", "/login", "/regul", "/jobs"];
   const { pathname } = useLocation();
-  // linear-gradient(
-  //   rgba(197, 217, 255, 1) 34%,
-  //   rgba(94, 151, 170, 1) 100%
-  // )
 
   return (
     <Container fluid>

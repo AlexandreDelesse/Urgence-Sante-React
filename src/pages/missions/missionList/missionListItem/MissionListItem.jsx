@@ -17,7 +17,7 @@ export default function MissionListItem({
   return (
     <Card
       onClick={() => onClick(shortJob.jobId)}
-      className="d-flex justify-content-between px-0 my-1"
+      className="d-flex justify-content-between px-0 my-2"
       elevation={2}
     >
       <div className="job-item w-100 ">
