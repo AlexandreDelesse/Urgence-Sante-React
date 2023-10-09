@@ -34,7 +34,7 @@ export default function MissionList() {
   };
 
   return (
-    <Col md={{ span: 6, offset: 3 }}>
+    <>
       <Form.Check
         className="my-2"
         type="switch"
@@ -56,7 +56,7 @@ export default function MissionList() {
           />
         )}
       ></AsyncDataComponent>
-    </Col>
+    </>
   );
 }
 

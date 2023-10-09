@@ -46,7 +46,7 @@ export default function MissionDetail() {
 
   return (
     <>
-      <Box paddingBottom="32px ">
+      <Box paddingBottom="32px">
         <Routes>
           <Route
             index

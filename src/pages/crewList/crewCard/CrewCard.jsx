@@ -39,6 +39,16 @@ export default function CrewCard({ crew }) {
             <Card.Subtitle>Code</Card.Subtitle>
             <Card.Text>{crew.eQ_ID}</Card.Text>
           </Row>
+          <Row className="mt-2">
+            <Col>
+              <Card.Subtitle>Debut</Card.Subtitle>
+              <Card.Text>{new Date(crew.eQ_DEBUT).toLocaleString()}</Card.Text>
+            </Col>
+            <Col>
+              <Card.Subtitle>Fin</Card.Subtitle>
+              <Card.Text>{new Date(crew.eQ_FIN).toLocaleString()}</Card.Text>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </div>

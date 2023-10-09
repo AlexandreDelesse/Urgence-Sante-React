@@ -7,6 +7,7 @@ import "./crewList.css";
 import UserContext from "../../contexts/User.context";
 import CrewListLogin from "./crewListLogin/CrewListLogin";
 import CrewListFilters from "./crewListFilters/CrewListFilters";
+import { Container } from "react-bootstrap";
 
 export default function CrewList() {
   const crewsQuery = useQuery("crews", getAllCrews);
@@ -14,28 +15,51 @@ export default function CrewList() {
 
   const [filters, setFilters] = useState({});
 
+  const dataFilter = (data) => {
+    if (!data) return [];
+    return data.filter(
+      (crew) =>
+        !filters.searchValue ||
+        (crew.peR_MEMBRE_1
+          ? crew.peR_MEMBRE_1
+              .toLowerCase()
+              .includes(filters.searchValue.toLowerCase())
+          : false) ||
+        (crew.peR_MEMBRE_2
+          ? crew.peR_MEMBRE_2
+              .toLowerCase()
+              .includes(filters.searchValue.toLowerCase())
+          : false) ||
+        (crew.veH_IMMATRICULATION
+          ? crew.veH_IMMATRICULATION
+              .toLowerCase()
+              .includes(filters.searchValue.toLowerCase())
+          : false) ||
+        (crew.eQ_LIBELLE
+          ? crew.eQ_LIBELLE
+              .toLowerCase()
+              .includes(filters.searchValue.toLowerCase())
+          : false)
+    );
+  };
+
   if (!userContext.hasLogged) return <CrewListLogin />;
 
   return (
-    <>
-      {/* <CrewListFilters filters={filters} setFilters={setFilters} /> */}
+    <Container>
+      <CrewListFilters filters={filters} setFilters={setFilters} />
 
       <AsyncDataComponent
         data={crewsQuery}
         onSuccess={({ data }) => (
-          <div>
-            <div className="crewList p-5">
-              {data
-                .filter(
-                  (crew) => filters || crew.eQ_LIBELLE === filters.searchValue
-                )
-                .map((crew, index) => (
-                  <CrewCard key={index} crew={crew} />
-                ))}
-            </div>
+          <div className="crewList">
+            {console.log(filters)}
+            {dataFilter(data).map((crew, index) => (
+              <CrewCard key={index} crew={crew} />
+            ))}
           </div>
         )}
       />
-    </>
+    </Container>
   );
 }

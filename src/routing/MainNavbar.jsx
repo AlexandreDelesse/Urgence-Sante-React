@@ -7,11 +7,11 @@ import packageJson from "../../package.json";
 
 export default function MainNavbar() {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, hasLogged } = useContext(UserContext);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-  const handleOnNavLinkClick = (link) => {
-    navigate(link);
+  const handleOnNavLinkClick = (link, replace = false) => {
+    navigate(link, { replace: replace });
     setShowOffcanvas(false);
   };
 
@@ -57,6 +57,11 @@ export default function MainNavbar() {
               <Nav.Link onClick={() => handleOnNavLinkClick("/")}>
                 Missions
               </Nav.Link>
+              {hasLogged ? (
+                <Nav.Link onClick={() => handleOnNavLinkClick("/regul", true)}>
+                  Régulation
+                </Nav.Link>
+              ) : null}
             </Nav>
             {user ? (
               <Nav>
