@@ -53,7 +53,6 @@ export default function CrewList() {
         data={crewsQuery}
         onSuccess={({ data }) => (
           <div className="crewList">
-            {console.log(filters)}
             {dataFilter(data).map((crew, index) => (
               <CrewCard key={index} crew={crew} />
             ))}

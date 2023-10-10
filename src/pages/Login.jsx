@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Navigate, useParams } from "react-router-dom";
-import Loader from "../components/shared/Loader";
 import { getCrewByCrewId } from "../services/crew.service";
 import AsyncDataComponent from "../components/shared/AsyncDataComponent";
 

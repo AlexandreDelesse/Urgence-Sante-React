@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Col, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { acceptMission, getMissions } from "../../../services/mission.service";
