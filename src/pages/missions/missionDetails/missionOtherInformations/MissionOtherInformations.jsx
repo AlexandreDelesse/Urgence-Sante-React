@@ -91,7 +91,6 @@ export default function MissionOtherInformations({ infosClient }) {
             formValues={formValues}
             contractTypeList={infosClient.contractTypes}
             onFormChanges={onFormChanges}
-            initialValue={infosClient.selectedContractType}
           />
         </CardContent>
       </Card>
