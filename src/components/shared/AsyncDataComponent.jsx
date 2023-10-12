@@ -17,6 +17,12 @@ export default function AsyncDataComponent({
 
   if (data.status === "error") {
     if (onError) return onError();
+    if (!data.error.request)
+      return (
+        <Alert severity="warning">
+          {data.error.message || "Une erreur est survenue"}
+        </Alert>
+      );
     if (data.error.request.status < 500)
       return (
         <Alert severity="warning">

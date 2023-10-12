@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
 import EditableLabel from "../../../../../components/shared/editableLabel/EditableLabel";
 
@@ -11,7 +11,8 @@ export default function ContractTypeSelector({
 }) {
   const onContractTypeChanges = (e) => {
     const { name, value: contractId } = e.target;
-    onChange(name, { id: contractId });
+    const contractType = contractId === "-1" ? {} : { id: contractId };
+    onChange(name, contractType);
   };
 
   const onSelectedValueChanges = (valueSelected) => {

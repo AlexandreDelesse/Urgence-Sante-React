@@ -39,7 +39,7 @@ export default function MissionOtherInformations({ infosClient }) {
           selectedValue,
           hasSelectedValue: !!selectedValue,
         }
-      : null;
+      : {};
     values.contractTypes = undefined;
     setIsLoading(true);
     try {
@@ -86,7 +86,7 @@ export default function MissionOtherInformations({ infosClient }) {
       <Card>
         <CardContent>
           <ContractTypeSelector
-            value={formValues.selectedContractType}
+            value={formValues.selectedContractType || {}}
             onChange={onFormChanges}
             formValues={formValues}
             contractTypeList={infosClient.contractTypes}
@@ -102,7 +102,7 @@ export default function MissionOtherInformations({ infosClient }) {
             <EditableLabel
               validator={nirValidator}
               onChange={(element) => onFormChanges("nir", element)}
-              initialValue={formValues.nir}
+              initialValue={formValues.nir || ""}
               placeholder={"Entrez NIR"}
             />
           </div>
