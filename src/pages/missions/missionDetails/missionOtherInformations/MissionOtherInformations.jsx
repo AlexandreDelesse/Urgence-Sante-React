@@ -86,6 +86,8 @@ export default function MissionOtherInformations({ infosClient }) {
       <Card>
         <CardContent>
           <ContractTypeSelector
+            value={formValues.selectedContractType}
+            onChange={onFormChanges}
             formValues={formValues}
             contractTypeList={infosClient.contractTypes}
             onFormChanges={onFormChanges}

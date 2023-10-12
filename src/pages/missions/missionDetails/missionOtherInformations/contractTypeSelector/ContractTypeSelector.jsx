@@ -1,41 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import EditableLabel from "../../../../../components/shared/editableLabel/EditableLabel";
 
 export default function ContractTypeSelector({
+  value,
+  onChange,
   contractTypeList,
   formValues,
   onFormChanges,
-  initialValue,
 }) {
-  const [selectedContractType, setSelectedContractType] = useState(
-    initialValue
-      ? contractTypeList.find((contract) => contract.id === initialValue.id)
-      : null
-  );
-
-  const onSelectChanges = (value) => {
-    const contractType = contractTypeList.find(
-      (contract) => contract.id === parseInt(value)
-    );
-    contractType.selectedValue = null;
-    setSelectedContractType(contractType || null);
-    onFormChanges("selectedContractType", contractType || null);
+  const onContractTypeChanges = (e) => {
+    const { name, value: contractId } = e.target;
+    onChange(name, { id: contractId });
   };
 
-  const onSelectValue = (value) => {
-    const newContractType = selectedContractType;
-    newContractType.selectedValue = value === "-1" ? null : value;
-    setSelectedContractType(newContractType);
-    onFormChanges("selectedContractType", newContractType);
+  const onSelectedValueChanges = (valueSelected) => {
+    onFormChanges("selectedContractType", {
+      ...value,
+      selectedValue: valueSelected === "-1" ? null : valueSelected,
+    });
   };
 
   return (
     <Form.Group>
       <Form.Label>Type de contrat</Form.Label>
       <Form.Select
-        value={selectedContractType ? selectedContractType.id : -1}
-        onChange={(e) => onSelectChanges(e.target.value)}
+        name="selectedContractType"
+        value={value.id || -1}
+        onChange={onContractTypeChanges}
       >
         <option value={-1}>Choisissez un type de contrat</option>
         {contractTypeList.map((contractType) => (
@@ -46,28 +38,28 @@ export default function ContractTypeSelector({
       </Form.Select>
 
       <ContractTypeForm
-        contractType={selectedContractType}
+        value={value.selectedValue}
+        contractType={contractTypeList.find(
+          (contractType) => contractType.id === parseInt(value.id)
+        )}
         formValues={formValues}
         onFormChanges={onFormChanges}
-        onSelectValue={onSelectValue}
-        initialValue={initialValue ? initialValue.selectedValue : null}
+        onSelectValue={onSelectedValueChanges}
       />
     </Form.Group>
   );
 }
 
 const ContractTypeForm = ({
+  value,
   contractType,
   formValues,
   onFormChanges,
   onSelectValue,
-  initialValue,
 }) => {
-  const [selectedValue, setSelectedValue] = useState(initialValue || -1);
-
   const handleSelectedValue = (e) => {
-    setSelectedValue(e.target.value);
-    onSelectValue(e.target.value);
+    const { value } = e.target;
+    onSelectValue(value);
   };
 
   if (!contractType) return <></>;
@@ -88,7 +80,7 @@ const ContractTypeForm = ({
 
       {contractType.values.length > 0 && (
         <Form.Group className="my-2">
-          <Form.Select value={selectedValue} onChange={handleSelectedValue}>
+          <Form.Select value={value} onChange={handleSelectedValue}>
             <option value={-1}>Selectionnez une valeur</option>
             {contractType.values.map((value) => (
               <option key={value} value={value}>
