@@ -1,5 +1,5 @@
 import { api } from "./api.config";
-import { storeToken } from "./user.service";
+import { storeDrivers, storeToken } from "./user.service";
 
 /**
  * Retourne un token pour l'équipage identifié avec un id et un nom d'employée
@@ -13,7 +13,9 @@ const getCrewByCrewId = async (crewId) => {
       id,
       employee,
     });
+    const drivers = [resp.employee1, resp.employee2];
     storeToken(resp.token);
+    storeDrivers(drivers);
     return resp;
   } catch (error) {
     throw error;

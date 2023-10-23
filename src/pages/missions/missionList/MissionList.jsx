@@ -8,6 +8,7 @@ import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 import "../mission.css";
 import MissionListItem from "./missionListItem/MissionListItem";
 import FilterContext from "../../../contexts/Filter.context";
+import DriverSwap from "../../../components/shared/driverSwap/DriverSwap";
 
 export default function MissionList() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export default function MissionList() {
         checked={showPastMission}
         onChange={toggleShowPastMission}
       />
+      <DriverSwap />
       <AsyncDataComponent
         data={asyncMissions}
         onLoadingMessage="Chargement des missions.."

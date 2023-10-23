@@ -1,0 +1,9 @@
+.dsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dsLabel {
+    margin-right: 8px;
+}
