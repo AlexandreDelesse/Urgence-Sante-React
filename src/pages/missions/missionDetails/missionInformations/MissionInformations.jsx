@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
 import StepProgress from "./stepProgress/StepProgress";
-import { Typography, Card as MuiCard, CardContent } from "@mui/material";
+import {
+  Typography,
+  Card as MuiCard,
+  CardContent,
+  Button,
+} from "@mui/material";
+import CreateClientForm from "./createClientForm/CreateClientForm";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function MissionInformations({
   asyncData,
   jobId,
   asyncMissionStatus,
 }) {
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const toggleOffcanvas = () => {
+    setShowOffcanvas(!showOffcanvas);
+  };
+
   return (
     <AsyncDataComponent
       withRefetchLoader
@@ -17,7 +30,10 @@ export default function MissionInformations({
       onSuccess={({ data }) => (
         <div className="mt-3 mb-5">
           <Typography className="my-3" variant="h5">
-            {data.patient}
+            {/* {data.patient} */}
+            <Button onClick={toggleOffcanvas} startIcon={<AddIcon />}>
+              Nouveau client
+            </Button>
           </Typography>
 
           {/* <h2 className="my-3">
@@ -119,6 +135,8 @@ export default function MissionInformations({
               />
             )}
           />
+
+          <CreateClientForm show={showOffcanvas} toggle={toggleOffcanvas} />
         </div>
       )}
     />
