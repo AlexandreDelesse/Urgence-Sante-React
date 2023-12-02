@@ -17,8 +17,28 @@ const getMissions = async () => {
 
 const getMissionById = async (jobId) => {
   try {
-    const { data: jobDetail } = await api.get(`/JobDetail/${jobId}`);
-    jobDetail.infosClient = INFOS_CLIENTS;
+    // const { data: jobDetail } = await api.get(`/JobDetail/${jobId}`);
+    const jobDetail = {
+      phones: ["string"],
+      transportMode: "string",
+      isSerial: true,
+      transportSens: 0,
+      schedule: "string",
+      appointment: "string",
+      departure: "string",
+      arrival: "string",
+      comments: "string",
+      isLastDay: true,
+      contactId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      patient: {
+        contactId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        lastName: "string",
+        firstName: "string",
+        completeName: "x",
+        ddn: "2023-11-30T12:22:19.162Z",
+        age: "string",
+      },
+    };
     return jobDetail;
   } catch (error) {
     throw error;

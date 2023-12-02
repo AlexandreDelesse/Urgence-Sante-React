@@ -6,6 +6,8 @@ import IconButton from "../../../../components/shared/IconButton";
 import { BsCheck2Square } from "react-icons/bs";
 import { transportModeEnum } from "../../../../data/enum.data";
 import SyncIcon from "@mui/icons-material/Sync";
+import TransportSens from "./transportSens/TransportSens";
+import TransportMode from "./transportMode/TransportMode";
 
 export default function MissionListItem({
   shortJob,
@@ -45,8 +47,8 @@ export default function MissionListItem({
             )}
           </div>
           <span>
-            {transportModeEnum[shortJob.transportMode]} -{" "}
-            {transportSensEnum[shortJob.transportSens]}
+            <TransportMode mode={shortJob.TransportMode} /> - {" "}
+            <TransportSens sens={shortJob.TransportSens} />
           </span>
 
           <div>

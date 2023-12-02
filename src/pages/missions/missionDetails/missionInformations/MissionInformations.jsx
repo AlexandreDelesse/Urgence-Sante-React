@@ -7,9 +7,11 @@ import {
   Card as MuiCard,
   CardContent,
   Button,
+  IconButton,
 } from "@mui/material";
 import CreateClientForm from "./createClientForm/CreateClientForm";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function MissionInformations({
   asyncData,
@@ -30,10 +32,17 @@ export default function MissionInformations({
       onSuccess={({ data }) => (
         <div className="mt-3 mb-5">
           <Typography className="my-3" variant="h5">
-            {/* {data.patient} */}
-            <Button onClick={toggleOffcanvas} startIcon={<AddIcon />}>
+            {data.patient.completeName === "x"
+              ? "Patient inconnu"
+              : data.patient.completeName}
+            {/* <Button onClick={toggleOffcanvas} startIcon={<AddIcon />}>
               Nouveau client
-            </Button>
+            </Button> */}
+            {data.patient.completeName === "x" && (
+              <IconButton onClick={toggleOffcanvas} color="primary">
+                <EditIcon />
+              </IconButton>
+            )}
           </Typography>
 
           {/* <h2 className="my-3">
