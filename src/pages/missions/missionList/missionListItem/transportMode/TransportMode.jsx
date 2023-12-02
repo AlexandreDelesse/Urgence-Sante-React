@@ -7,5 +7,5 @@ export default function TransportMode({ mode }) {
     3: "Taxi",
     4: "SNG",
   };
-  return <div>{transportModeEnum[mode]}</div>;
+  return <>{transportModeEnum[mode]}</>;
 }
