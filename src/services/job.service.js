@@ -71,10 +71,19 @@ const getJobDetailEditableById = async (jobId) => {
   }
 };
 
+const patchJobDetailEditable = async (jobDetailEditable) => {
+  try {
+    await api.patch("JobDetailEditable", jobDetailEditable);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getJobList,
   ackJobById,
   getJobDetailById,
   getJobStatusById,
   getJobDetailEditableById,
+  patchJobDetailEditable,
 };

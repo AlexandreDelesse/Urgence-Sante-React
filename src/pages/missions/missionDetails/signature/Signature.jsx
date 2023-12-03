@@ -8,8 +8,11 @@ import ReactSignatureCanvas from "react-signature-canvas";
 import { Button, Card } from "@mui/material";
 import "./signature.css";
 import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
+import { useParams } from "react-router";
 
-export default function Signature({ jobId }) {
+export default function Signature() {
+  const params = useParams();
+  const jobId = params.jobId;
   const signatureQuery = useQuery("signature", () => getSignature(jobId), {
     retry: false,
   });

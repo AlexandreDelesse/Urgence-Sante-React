@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import {
   getJobDetailById,
@@ -13,6 +13,7 @@ import CreateClientForm from "../../missions/missionDetails/missionInformations/
 
 export default function JobDetail() {
   const params = useParams();
+  const queryClient = useQueryClient();
   const [showPatientForm, setShowPatientForm] = useState(false);
 
   const jobDetailQuery = useQuery(["jobDetail", params.jobId], () =>
@@ -23,7 +24,12 @@ export default function JobDetail() {
     getJobStatusById(params.jobId)
   );
 
-  const newPatientMutation = useMutation(createNewPatient);
+  const newPatientMutation = useMutation(createNewPatient, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("jobDetail");
+      toggleShowPatientForm();
+    },
+  });
 
   const toggleShowPatientForm = () => setShowPatientForm(!showPatientForm);
 
@@ -32,7 +38,10 @@ export default function JobDetail() {
       <AsyncDataComponent
         data={jobDetailQuery}
         onSuccess={({ data: jobDetail }) => (
-          <JobDetailContent jobDetail={jobDetail} />
+          <JobDetailContent
+            jobDetail={jobDetail}
+            toggleForm={toggleShowPatientForm}
+          />
         )}
       />
 
@@ -51,12 +60,19 @@ export default function JobDetail() {
           />
         )}
       />
-
-      <CreateClientForm
-        title="Nouveau client"
-        show={showPatientForm}
-        toggle={toggleShowPatientForm}
-        onSubmit={newPatientMutation.mutate}
+      <AsyncDataComponent
+        data={jobDetailQuery}
+        withoutLoader
+        onSuccess={({ data: jobDetail }) => (
+          <CreateClientForm
+            jobId={params.jobId}
+            contactId={jobDetail.contactId}
+            title="Nouveau client"
+            show={showPatientForm}
+            toggle={toggleShowPatientForm}
+            onSubmit={newPatientMutation.mutate}
+          />
+        )}
       />
     </>
   );

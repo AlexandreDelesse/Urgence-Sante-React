@@ -10,10 +10,13 @@ export default function AsyncDataComponent({
   onSuccess,
   withRefetchLoader,
   onError,
+  withoutLoader,
 }) {
   //TODO: Add context error message
   if (data.status === "loading" || (withRefetchLoader && data.isRefetching))
-    return <Loader loadingMessage={onLoadingMessage || null} />;
+    return withoutLoader ? null : (
+      <Loader loadingMessage={onLoadingMessage || null} />
+    );
 
   if (data.status === "error") {
     if (onError) return onError();

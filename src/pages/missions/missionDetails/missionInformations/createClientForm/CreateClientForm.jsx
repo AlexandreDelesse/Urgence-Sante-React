@@ -2,7 +2,14 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { Form, Offcanvas } from "react-bootstrap";
 
-export default function CreateClientForm({ title, show, toggle, onSubmit }) {
+export default function CreateClientForm({
+  title,
+  show,
+  toggle,
+  onSubmit,
+  jobId,
+  contactId
+}) {
   const formFields = [
     {
       label: "Nom",
@@ -21,7 +28,7 @@ export default function CreateClientForm({ title, show, toggle, onSubmit }) {
     },
   ];
 
-  const defaultFields = {};
+  const defaultFields = { jobId, contactId };
   formFields.forEach((field) => (defaultFields[field.name] = ""));
   const [patient, setPatient] = useState(defaultFields);
 

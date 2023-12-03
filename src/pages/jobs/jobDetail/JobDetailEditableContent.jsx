@@ -8,13 +8,20 @@ import { nirValidator } from "../../../services/validator";
 import EditableList from "../../../components/shared/editableList/EditableList";
 import { Card, CardContent } from "@mui/material";
 
-export default function JobDetailEditableContent({ jobDetailEditable }) {
+export default function JobDetailEditableContent({
+  jobDetailEditable,
+  onSubmit,
+}) {
   const [formValue, setFormValue] = useState({
+    jobId: jobDetailEditable.jobID,
     isPmtPresent: jobDetailEditable.isPmtPresent,
     selectedContractType: jobDetailEditable.selectedContractype,
     reference: jobDetailEditable.reference,
     nir: jobDetailEditable.nir,
     emails: jobDetailEditable.emails,
+    ddn: jobDetailEditable.ddn,
+    phones: jobDetailEditable.phones,
+    comments: jobDetailEditable.comments,
   });
 
   const contractType =
@@ -25,7 +32,13 @@ export default function JobDetailEditableContent({ jobDetailEditable }) {
     );
 
   const handleOnChange = (name, value) => {
+    console.log("name : ", name, "value : ", value);
     setFormValue((old) => ({ ...old, [name]: value }));
+  };
+
+  const submit = () => {
+    console.log(formValue);
+    onSubmit(formValue);
   };
 
   const fields = [
@@ -39,7 +52,9 @@ export default function JobDetailEditableContent({ jobDetailEditable }) {
           name={field.name}
           value={formValue[field.name]}
           type={field.type}
-          onChange={onChange}
+          onChange={(e) =>
+            onChange(field.name, new Date(e.target.value).toISOString())
+          }
           format={field.format}
         />
       ),
@@ -120,6 +135,7 @@ export default function JobDetailEditableContent({ jobDetailEditable }) {
         jobDetailEditableValues={formValue}
         fields={fields}
         onChange={handleOnChange}
+        onSubmit={submit}
       />
     </div>
   );

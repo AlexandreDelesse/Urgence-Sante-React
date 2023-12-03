@@ -94,7 +94,7 @@ export default function MissionOtherInformations({ infosClient }) {
           />
         </CardContent>
       </Card> */}
-
+{/* 
       <Card>
         <CardContent>
           <div>
@@ -107,9 +107,9 @@ export default function MissionOtherInformations({ infosClient }) {
             />
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
-      <Card>
+      {/* <Card>
         <CardContent>
           <Form.Label>Emails</Form.Label>
           <EditableList
@@ -119,9 +119,9 @@ export default function MissionOtherInformations({ infosClient }) {
             onChange={(value) => onFormChanges("emails", value)}
           />
         </CardContent>
-      </Card>
+      </Card> */}
 
-      <Card>
+      {/* <Card>
         <CardContent>
           <Form.Label>Téléphones</Form.Label>
           <EditableList
@@ -131,7 +131,7 @@ export default function MissionOtherInformations({ infosClient }) {
             onChange={(value) => onFormChanges("phones", value)}
           />
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Card>
         <CardContent>

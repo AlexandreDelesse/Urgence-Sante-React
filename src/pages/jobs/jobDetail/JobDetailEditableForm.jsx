@@ -1,8 +1,16 @@
 import { Card, CardContent } from "@mui/material";
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { RiSendPlaneFill } from "react-icons/ri";
+import IconButton from "../../../components/shared/IconButton";
 
-export default function JobDetailEditableForm({ fields, onChange }) {
+export default function JobDetailEditableForm({
+  fields,
+  onChange,
+  onSubmit,
+  onCancel,
+  isLoading,
+}) {
   return (
     <Form className="d-grid gap-2 mt-2 mb-5">
       {fields.map((field) => (
@@ -12,6 +20,20 @@ export default function JobDetailEditableForm({ fields, onChange }) {
           content={field.render(field, onChange)}
         />
       ))}
+
+      <div className="d-flex gap-2 mb-4">
+        <IconButton
+          onClick={onSubmit}
+          variant="success"
+          icon={<RiSendPlaneFill size={16} />}
+          isLoading={isLoading}
+          spinnerVariant="light"
+          label="Sauvegarder"
+        />
+        <Button onClick={onCancel} variant="outline-danger">
+          Annuler
+        </Button>
+      </div>
     </Form>
   );
 }

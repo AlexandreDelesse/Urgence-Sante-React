@@ -1,16 +1,25 @@
 import {
   CardContent,
+  IconButton,
   Card as MuiCard,
   Typography,
 } from "@mui/material";
 import React from "react";
+import EditIcon from "@mui/icons-material/Edit";
 import { Col, Row } from "react-bootstrap";
 
-export default function JobDetailContent({ jobDetail }) {
+export default function JobDetailContent({ jobDetail, toggleForm }) {
   return (
     <div>
       <Typography className="my-3" variant="h5">
-        {jobDetail.patient === "x" ? "Patient inconnu" : jobDetail.patient}
+        {jobDetail.patient.completeName.trim() === "x"
+          ? "Patient inconnu"
+          : jobDetail.patient.completeName}
+        {jobDetail.patient.completeName.trim() === "x" && (
+          <IconButton onClick={toggleForm}>
+            <EditIcon />
+          </IconButton>
+        )}
       </Typography>
       <MuiCard>
         <CardContent>
