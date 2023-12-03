@@ -1,7 +1,10 @@
-import React from 'react'
-import { TbTruckReturn } from 'react-icons/tb'
+import React from "react";
+import { TbTruckReturn } from "react-icons/tb";
 
-export default function TransportType({ transportType }) {
-  if (transportType === 1) return <TbTruckReturn size={30} />
-  return <></>
+export default function TransportType({ type }) {
+  const transportTypeEnum = {
+    1: <TbTruckReturn size={30} />,
+  };
+  
+  return transportTypeEnum[type] || <></>;
 }

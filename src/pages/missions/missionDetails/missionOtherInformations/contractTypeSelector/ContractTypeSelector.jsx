@@ -3,31 +3,30 @@ import { Form } from "react-bootstrap";
 import EditableLabel from "../../../../../components/shared/editableLabel/EditableLabel";
 
 export default function ContractTypeSelector({
+  name,
   value,
   onChange,
   contractTypeList,
-  formValues,
-  onFormChanges,
 }) {
+
   const onContractTypeChanges = (e) => {
     const { name, value: contractId } = e.target;
     const contractType = contractId === "-1" ? {} : { id: contractId };
     onChange(name, contractType);
   };
 
-  const onSelectedValueChanges = (valueSelected) => {
-    onFormChanges("selectedContractType", {
-      ...value,
-      selectedValue: valueSelected === "-1" ? null : valueSelected,
-    });
-  };
+  // const onSelectedValueChanges = (valueSelected) => {
+  //   onChange(name, {
+  //     ...value,
+  //     selectedValue: valueSelected === "-1" ? null : valueSelected,
+  //   });
+  // };
 
   return (
     <Form.Group>
-      <Form.Label>Type de contrat</Form.Label>
       <Form.Select
-        name="selectedContractType"
-        value={value.id || -1}
+        name={name}
+        value={value?.id || -1}
         onChange={onContractTypeChanges}
       >
         <option value={-1}>Choisissez un type de contrat</option>
@@ -38,15 +37,15 @@ export default function ContractTypeSelector({
         ))}
       </Form.Select>
 
-      <ContractTypeForm
+      {/* <ContractTypeForm
         value={value.selectedValue}
         contractType={contractTypeList.find(
           (contractType) => contractType.id === parseInt(value.id)
         )}
         formValues={formValues}
-        onFormChanges={onFormChanges}
+        onFormChanges={onChange}
         onSelectValue={onSelectedValueChanges}
-      />
+      /> */}
     </Form.Group>
   );
 }

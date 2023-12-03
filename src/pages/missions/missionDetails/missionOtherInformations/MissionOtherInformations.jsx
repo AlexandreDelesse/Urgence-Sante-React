@@ -67,7 +67,7 @@ export default function MissionOtherInformations({ infosClient }) {
   return (
     <Form className="d-grid gap-2 mt-2 mb-5">
       {/* Form body */}
-      <Card>
+      {/* <Card>
         <CardContent>
           <Col>
             <Form.Group>
@@ -81,9 +81,9 @@ export default function MissionOtherInformations({ infosClient }) {
             </Form.Group>
           </Col>
         </CardContent>
-      </Card>
+      </Card> */}
 
-      <Card>
+      {/* <Card>
         <CardContent>
           <ContractTypeSelector
             value={formValues.selectedContractType || {}}
@@ -93,8 +93,8 @@ export default function MissionOtherInformations({ infosClient }) {
             onFormChanges={onFormChanges}
           />
         </CardContent>
-      </Card>
-
+      </Card> */}
+{/* 
       <Card>
         <CardContent>
           <div>
@@ -107,9 +107,9 @@ export default function MissionOtherInformations({ infosClient }) {
             />
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
-      <Card>
+      {/* <Card>
         <CardContent>
           <Form.Label>Emails</Form.Label>
           <EditableList
@@ -119,9 +119,9 @@ export default function MissionOtherInformations({ infosClient }) {
             onChange={(value) => onFormChanges("emails", value)}
           />
         </CardContent>
-      </Card>
+      </Card> */}
 
-      <Card>
+      {/* <Card>
         <CardContent>
           <Form.Label>Téléphones</Form.Label>
           <EditableList
@@ -131,7 +131,7 @@ export default function MissionOtherInformations({ infosClient }) {
             onChange={(value) => onFormChanges("phones", value)}
           />
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Card>
         <CardContent>

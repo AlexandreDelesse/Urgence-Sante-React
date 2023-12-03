@@ -18,7 +18,7 @@ const getMissions = async () => {
 const getMissionById = async (jobId) => {
   try {
     const { data: jobDetail } = await api.get(`/JobDetail/${jobId}`);
-    jobDetail.infosClient = INFOS_CLIENTS;
+
     return jobDetail;
   } catch (error) {
     throw error;
