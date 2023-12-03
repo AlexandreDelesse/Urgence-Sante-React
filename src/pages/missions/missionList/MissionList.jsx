@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { acceptMission, getMissions } from "../../../services/mission.service";
 import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 
-import "../mission.css";
 import MissionListItem from "./missionListItem/MissionListItem";
 import FilterContext from "../../../contexts/Filter.context";
 

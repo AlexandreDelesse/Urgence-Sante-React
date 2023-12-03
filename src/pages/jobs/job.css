@@ -24,3 +24,10 @@
 .mission-list::-webkit-scrollbar {
   display: none;
 }
+
+.span-success {
+  background-color: #479f76;
+}
+.span-warning {
+  background-color: #ffcd39;
+}

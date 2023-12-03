@@ -44,6 +44,7 @@ export default function MissionListItem({
               />
             )}
           </div>
+          
           <span>
             <TransportMode mode={shortJob.transportMode} /> - {" "}
             <TransportSens sens={shortJob.transportSens} />

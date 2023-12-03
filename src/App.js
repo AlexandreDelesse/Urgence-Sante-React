@@ -11,11 +11,16 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import FilterContext from "./contexts/Filter.context";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 function App() {
   const [showPastMission, setShowPastMission] = useState(false);
   const [hasLogged, setHasLogged] = useState(false);
   const queryClient = new QueryClient();
+
+  const theme = createTheme({
+    palette: {}
+  });
   //TODO: ADD NOTIFICATION SYSTEM
 
   return (
@@ -25,8 +30,10 @@ function App() {
           <FilterContext.Provider
             value={{ showPastMission, setShowPastMission }}
           >
-            <MainNavbar />
-            <AppRoutes />
+            <ThemeProvider theme={theme}>
+              <MainNavbar />
+              <AppRoutes />
+            </ThemeProvider>
           </FilterContext.Provider>
         </UserContext.Provider>
       </QueryClientProvider>

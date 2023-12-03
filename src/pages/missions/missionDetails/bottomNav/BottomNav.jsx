@@ -1,10 +1,7 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import React from "react";
-import RestoreIcon from "@mui/icons-material/Restore";
-import InfoIcon from "@mui/icons-material/Info";
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 
-export default function BottomNav({ activelink, onLinkClick }) {
+export default function BottomNav({ tabs, activelink, onLinkClick }) {
   return (
     <Paper
       sx={{
@@ -16,26 +13,15 @@ export default function BottomNav({ activelink, onLinkClick }) {
       elevation={3}
     >
       <BottomNavigation showLabels value="Mission">
-        <BottomNavigationAction
-          className={activelink === "" ? "Mui-selected" : ""}
-          onClick={() => onLinkClick("")}
-          label="Mission"
-          icon={<InfoIcon />}
-        />
-
-        <BottomNavigationAction
-          className={activelink === "other" ? "Mui-selected" : ""}
-          onClick={() => onLinkClick("other")}
-          label="Detail"
-          icon={<RestoreIcon />}
-        />
-
-        <BottomNavigationAction
-          className={activelink === "signature" ? "Mui-selected" : ""}
-          onClick={() => onLinkClick("signature")}
-          label="Signature"
-          icon={<DriveFileRenameOutlineIcon />}
-        />
+        {tabs.map((tab) => (
+          <BottomNavigationAction
+            key={tab.link}
+            className={activelink === tab.link ? "Mui-selected" : ""}
+            onClick={() => onLinkClick(tab.link)}
+            label={tab.label}
+            icon={tab.icon}
+          />
+        ))}
       </BottomNavigation>
     </Paper>
   );

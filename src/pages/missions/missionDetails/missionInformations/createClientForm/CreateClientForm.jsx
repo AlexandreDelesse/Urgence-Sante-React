@@ -1,8 +1,35 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Form, Offcanvas } from "react-bootstrap";
 
-export default function CreateClientForm({ show, toggle }) {
+export default function CreateClientForm({ show, toggle, onSubmit }) {
+  const formFields = [
+    {
+      label: "Nom",
+      name: "firstname",
+      type: "text",
+    },
+    {
+      label: "Prenom",
+      name: "lastname",
+      type: "text",
+    },
+    {
+      label: "Date de naissance",
+      name: "ddn",
+      type: "date",
+    },
+  ];
+
+  const defaultFields = {};
+  formFields.forEach((field) => (defaultFields[field.name] = ""));
+  const [patient, setPatient] = useState(defaultFields);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setPatient((old) => ({ ...old, [name]: value }));
+  };
+
   return (
     <Offcanvas
       className="h-auto"
@@ -16,21 +43,21 @@ export default function CreateClientForm({ show, toggle }) {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Nom</Form.Label>
-            <Form.Control type="text" placeholder="Dupont" />
-          </Form.Group>
+          {formFields.map((field) => (
+            <Form.Group key={field.name} className="mb-3">
+              <Form.Label>{field.label}</Form.Label>
+              <Form.Control
+                name={field.name}
+                onChange={handleOnChange}
+                value={patient[field.name]}
+                type={field.type}
+              />
+            </Form.Group>
+          ))}
 
-          <Form.Group className="mb-3">
-            <Form.Label>Prenom</Form.Label>
-            <Form.Control type="text" placeholder="Jean" />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Date de naissance</Form.Label>
-            <Form.Control type="date" />
-          </Form.Group>
-          <Button onClick={toggle} >Créer</Button>
+          <Button color="primary" onClick={() => onSubmit(patient)}>
+            Créer
+          </Button>
         </Form>
       </Offcanvas.Body>
     </Offcanvas>

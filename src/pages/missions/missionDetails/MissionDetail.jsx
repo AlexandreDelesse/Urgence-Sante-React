@@ -80,7 +80,7 @@ export default function MissionDetail() {
           <Route path="*" element={<Navigate to="" />} />
         </Routes>
       </Box>
-      <BottomNav activelink={pathSelected} onLinkClick={onLinkClick} />
+      {/* <BottomNav activelink={pathSelected} onLinkClick={onLinkClick} /> */}
     </>
   );
 }
