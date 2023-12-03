@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { Form, Offcanvas } from "react-bootstrap";
 
-export default function CreateClientForm({ show, toggle, onSubmit }) {
+export default function CreateClientForm({ title, show, toggle, onSubmit }) {
   const formFields = [
     {
       label: "Nom",
@@ -39,7 +39,7 @@ export default function CreateClientForm({ show, toggle, onSubmit }) {
       placement="bottom"
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Nouveau client</Offcanvas.Title>
+        <Offcanvas.Title>{title}</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Form>

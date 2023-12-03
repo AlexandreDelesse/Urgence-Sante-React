@@ -60,4 +60,21 @@ const getJobStatusById = async (jobId) => {
   }
 };
 
-export { getJobList, ackJobById, getJobDetailById, getJobStatusById };
+const getJobDetailEditableById = async (jobId) => {
+  try {
+    const { data: jobDetailEditable } = await api.get(`JobDetailEditable`, {
+      params: { gJobId: jobId },
+    });
+    return jobDetailEditable;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  getJobList,
+  ackJobById,
+  getJobDetailById,
+  getJobStatusById,
+  getJobDetailEditableById,
+};

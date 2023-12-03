@@ -20,6 +20,7 @@ import JobDetailNavigation from "../pages/jobs/jobDetail/JobDetailNavigation";
 import MissionOtherInformations from "../pages/missions/missionDetails/missionOtherInformations/MissionOtherInformations";
 import Signature from "../pages/missions/missionDetails/signature/Signature";
 import JobDetail from "../pages/jobs/jobDetail/JobDetail";
+import JobDetailEditable from "../pages/jobs/jobDetail/JobDetailEditable";
 
 export default function AppRoutes() {
   const pathBackButtonExeptions = ["/", "/login", "/regul", "/jobs"];
@@ -36,10 +37,7 @@ export default function AppRoutes() {
           <Route path=":jobId/*" element={<JobDetailNavigation />}>
             <Route index element={<Navigate to="detail" />} />
             <Route path="detail" element={<JobDetail />} />
-            <Route
-              path="detailEditable"
-              element={<MissionOtherInformations />}
-            />
+            <Route path="detailEditable" element={<JobDetailEditable />} />
             <Route path="signature" element={<Signature />} />
           </Route>
         </Route>

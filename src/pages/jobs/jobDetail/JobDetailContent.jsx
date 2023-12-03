@@ -1,11 +1,9 @@
 import {
   CardContent,
-  IconButton,
   Card as MuiCard,
   Typography,
 } from "@mui/material";
 import React from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { Col, Row } from "react-bootstrap";
 
 export default function JobDetailContent({ jobDetail }) {
@@ -14,15 +12,6 @@ export default function JobDetailContent({ jobDetail }) {
       <Typography className="my-3" variant="h5">
         {jobDetail.patient === "x" ? "Patient inconnu" : jobDetail.patient}
       </Typography>
-
-      {/* <h2 className="my-3">
-    {data.patient}
-    {data.isSerial && (
-      <Badge className="ms-2">
-        Serie {data.isLastDay && "- Dernier jour"}
-      </Badge>
-    )}
-  </h2> */}
       <MuiCard>
         <CardContent>
           <Row>
@@ -31,18 +20,6 @@ export default function JobDetailContent({ jobDetail }) {
                 title="Prise en charge"
                 content={jobDetail.schedule}
               />
-              {/* {data.appointment && (
-            <>
-              <Typography variant="caption">Rdv à :</Typography>
-              <Typography
-                className="fw-bold"
-                variant="body1"
-                color="primary"
-              >
-                {data.appointment}
-              </Typography>
-            </>
-          )} */}
             </Col>
             <Col>
               <CustomTypography

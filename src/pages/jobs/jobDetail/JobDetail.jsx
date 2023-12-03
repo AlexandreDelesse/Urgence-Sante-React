@@ -13,7 +13,7 @@ import CreateClientForm from "../../missions/missionDetails/missionInformations/
 
 export default function JobDetail() {
   const params = useParams();
-  const [showPatientForm, setShowPatientForm] = useState(true);
+  const [showPatientForm, setShowPatientForm] = useState(false);
 
   const jobDetailQuery = useQuery(["jobDetail", params.jobId], () =>
     getJobDetailById(params.jobId)
@@ -53,6 +53,7 @@ export default function JobDetail() {
       />
 
       <CreateClientForm
+        title="Nouveau client"
         show={showPatientForm}
         toggle={toggleShowPatientForm}
         onSubmit={newPatientMutation.mutate}
