@@ -7,12 +7,13 @@ import { ackJobById, getJobList } from "../../services/job.service";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "./job.css";
+import DriverSwap from "../../components/shared/driverSwap/DriverSwap";
 
 export default function Jobs() {
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  
+
   const jobQuery = useQuery("jobList", getJobList);
   const ackMutation = useMutation((jobId) => ackJobById(jobId), {
     onSuccess: () => queryClient.invalidateQueries("jobList"),
@@ -42,6 +43,8 @@ export default function Jobs() {
         checked={showTerminatedJobs}
         onChange={toggleShowTerminatedJobs}
       />
+
+      <DriverSwap />
 
       <AsyncDataComponent
         data={jobQuery}
