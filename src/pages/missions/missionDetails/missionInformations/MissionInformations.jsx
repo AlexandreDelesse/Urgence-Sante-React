@@ -6,11 +6,9 @@ import {
   Typography,
   Card as MuiCard,
   CardContent,
-  Button,
   IconButton,
 } from "@mui/material";
 import CreateClientForm from "./createClientForm/CreateClientForm";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "react-query";
 import { createNewPatient } from "../../../../services/patient.service";

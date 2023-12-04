@@ -1,10 +1,8 @@
-import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { TbSteeringWheel } from "react-icons/tb";
 import { VscArrowSwap } from "react-icons/vsc";
 import "./driverSwap.css";
 import { getDrivers } from "../../../services/user.service";
-import Loader from "../Loader";
 import { Spinner } from "react-bootstrap";
 
 export default function DriverSwap() {

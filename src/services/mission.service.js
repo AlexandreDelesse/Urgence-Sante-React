@@ -1,4 +1,3 @@
-import { INFOS_CLIENTS } from "../data/clientInfos.data";
 import { api } from "./api.config";
 import { getToken } from "./user.service";
 

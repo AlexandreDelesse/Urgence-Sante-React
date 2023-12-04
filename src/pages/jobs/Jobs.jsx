@@ -31,7 +31,7 @@ export default function Jobs() {
   };
 
   const isAckLoading = (jobId) => {
-    return ackMutation.isLoading && ackMutation.variables == jobId;
+    return ackMutation.isLoading && ackMutation.variables === jobId;
   };
 
   return (

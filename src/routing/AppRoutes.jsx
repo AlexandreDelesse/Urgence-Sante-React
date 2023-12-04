@@ -12,12 +12,9 @@ import {
 import BackButton from "../components/shared/BackButton";
 import Login from "../pages/Login";
 import ManualLogin from "../pages/ManualLogin";
-import Mission from "../pages/missions/Mission";
 import CrewList from "../pages/crewList/CrewList";
 import Jobs from "../pages/jobs/Jobs";
-import MissionDetail from "../pages/missions/missionDetails/MissionDetail";
 import JobDetailNavigation from "../pages/jobs/jobDetail/JobDetailNavigation";
-import MissionOtherInformations from "../pages/missions/missionDetails/missionOtherInformations/MissionOtherInformations";
 import Signature from "../pages/missions/missionDetails/signature/Signature";
 import JobDetail from "../pages/jobs/jobDetail/JobDetail";
 import JobDetailEditable from "../pages/jobs/jobDetail/JobDetailEditable";

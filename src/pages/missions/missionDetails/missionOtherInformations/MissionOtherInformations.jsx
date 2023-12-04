@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { Alert, Button, Col, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Alert, Button, Form } from "react-bootstrap";
 import EditableLabel from "../../../../components/shared/editableLabel/EditableLabel";
-import EditableList from "../../../../components/shared/editableList/EditableList";
 import { nirValidator } from "../../../../services/validator";
 import { useQueryClient } from "react-query";
 import { RiSendPlaneFill } from "react-icons/ri";
 import IconButton from "../../../../components/shared/IconButton";
 import { patchJobDetailEditable } from "../../../../services/mission.service";
 import { Card, CardContent } from "@mui/material";
-import ContractTypeSelector from "./contractTypeSelector/ContractTypeSelector";
 
 export default function MissionOtherInformations({ infosClient }) {
   const [formValues, setFormValues] = useState(infosClient);
@@ -94,7 +92,7 @@ export default function MissionOtherInformations({ infosClient }) {
           />
         </CardContent>
       </Card> */}
-{/* 
+      {/* 
       <Card>
         <CardContent>
           <div>

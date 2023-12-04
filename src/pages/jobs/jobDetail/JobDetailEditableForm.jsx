@@ -38,17 +38,17 @@ export default function JobDetailEditableForm({
   );
 }
 
-const CustomFormControl = ({ name, value, type, onChange, format }) => {
-  const formattedValue = format ? format(value) : value;
-  return (
-    <Form.Control
-      value={formattedValue}
-      type={type}
-      name={name}
-      onChange={onChange}
-    />
-  );
-};
+// const CustomFormControl = ({ name, value, type, onChange, format }) => {
+//   const formattedValue = format ? format(value) : value;
+//   return (
+//     <Form.Control
+//       value={formattedValue}
+//       type={type}
+//       name={name}
+//       onChange={onChange}
+//     />
+//   );
+// };
 // value.split("T")[0] || ""
 
 const CustomCard = ({ title, content }) => {

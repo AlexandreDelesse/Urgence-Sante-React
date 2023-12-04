@@ -15,15 +15,11 @@ import {
 import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 import MissionInformations from "./missionInformations/MissionInformations";
 import MissionOtherInformations from "./missionOtherInformations/MissionOtherInformations";
-import BottomNav from "./bottomNav/BottomNav";
 import Signature from "./signature/Signature";
 import { Box } from "@mui/material";
 
 export default function MissionDetail() {
   const params = useParams();
-  const navigate = useNavigate();
-
-  const [pathSelected, setPathSelected] = useState("");
 
   const asyncMissionDetail = useQuery("missionDetail", () =>
     getMissionById(params.jobId)
@@ -36,11 +32,6 @@ export default function MissionDetail() {
   const missionStatusQuery = useQuery("missionStatus", () =>
     getMissionStatus(params.jobId)
   );
-
-  const onLinkClick = (link) => {
-    setPathSelected(link);
-    navigate(link, { replace: true });
-  };
 
   if (!params.jobId) return <div>Il y a une erreur dans l'url</div>;
 

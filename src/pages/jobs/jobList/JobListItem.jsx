@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import SyncIcon from "@mui/icons-material/Sync";
 import { BsCheck2Square } from "react-icons/bs";

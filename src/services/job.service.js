@@ -1,6 +1,5 @@
 import { api } from "./api.config";
 import { getToken } from "./user.service";
-import { testJobList } from "../data/joblist.data";
 
 const getJobList = async () => {
   try {

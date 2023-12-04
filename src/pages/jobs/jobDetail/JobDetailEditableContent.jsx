@@ -6,7 +6,6 @@ import { Form } from "react-bootstrap";
 import ContractTypeValueSelector from "../../../components/forms/Contract/ContractTypeValueSelector";
 import { nirValidator } from "../../../services/validator";
 import EditableList from "../../../components/shared/editableList/EditableList";
-import { Card, CardContent } from "@mui/material";
 
 export default function JobDetailEditableContent({
   jobDetailEditable,
@@ -154,13 +153,13 @@ const CustomFormControl = ({ name, value, type, onChange, format }) => {
 };
 // value.split("T")[0] || ""
 
-const CustomCard = ({ title, content }) => {
-  return (
-    <Card>
-      <CardContent>
-        {title && <Form.Label>{title}</Form.Label>}
-        {content}
-      </CardContent>
-    </Card>
-  );
-};
+// const CustomCard = ({ title, content }) => {
+//   return (
+//     <Card>
+//       <CardContent>
+//         {title && <Form.Label>{title}</Form.Label>}
+//         {content}
+//       </CardContent>
+//     </Card>
+//   );
+// };
