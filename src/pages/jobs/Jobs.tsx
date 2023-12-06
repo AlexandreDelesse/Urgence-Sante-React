@@ -6,26 +6,33 @@ import JobListItem from "./jobList/JobListItem";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "./job.css";
-import DriverSwap from "../../components/shared/driverSwap/DriverSwap";
 import packagejson from "../../../package.json";
 import { ShortJobService } from "../../services/shortJobService";
 import { IShortJob } from "../../interfaces/shortJob/IShortJob";
+import DriverSwapFacade from "../../components/shared/driverSwap/DriverSwapFacade";
+import { WebDriverGetService } from "../../services/WebDriverService";
+import { IDriverGet } from "../../interfaces/IDriverGet";
 
 export default function Jobs() {
+  const crewId = 200400;
+
   const service = new ShortJobService();
+  const driverService = new WebDriverGetService();
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const jobQuery = useQuery("jobList", service.getAll);
+  const driverQuery = useQuery(["driver", crewId], () =>
+    driverService.getAll(crewId)
+  );
+
   const ackMutation = useMutation(
     ({ jobId }: { jobId: string }) => service.aknowledge(jobId),
     {
       onSuccess: () => queryClient.invalidateQueries("jobList"),
     }
   );
-
-  console.log(ackMutation);
 
   const onJobClick = (jobId: string) => {
     navigate(`${jobId}/detail`);
@@ -58,7 +65,12 @@ export default function Jobs() {
         onChange={toggleShowTerminatedJobs}
       />
 
-      <DriverSwap />
+      <AsyncDataComponent
+        data={driverQuery}
+        onSuccess={({ data: driverModel }: { data: IDriverGet }) => (
+          <DriverSwapFacade drivers={driverModel.drivers} />
+        )}
+      />
 
       <AsyncDataComponent
         data={jobQuery}
