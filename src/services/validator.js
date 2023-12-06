@@ -1,5 +1,5 @@
 const nirValidator = (fullNir) => {
-  if (!fullNir) return false;
+  if (!fullNir) return true;
   if (fullNir.length !== 15) return false;
 
   const nir = fullNir.slice(0, 13);

@@ -3,18 +3,21 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import AsyncDataComponent from "../../components/shared/AsyncDataComponent";
 import JobList from "./jobList/JobList";
 import JobListItem from "./jobList/JobListItem";
-import { ackJobById, getJobList } from "../../services/job.service";
+import { ackJobById } from "../../services/job.service";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "./job.css";
 import DriverSwap from "../../components/shared/driverSwap/DriverSwap";
+import packagejson from "../../../package.json";
+import { ShortJobService } from "../../services/shortJobService";
 
 export default function Jobs() {
+  const service = new ShortJobService();
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const jobQuery = useQuery("jobList", getJobList);
+  const jobQuery = useQuery("jobList", service.getAll);
   const ackMutation = useMutation((jobId) => ackJobById(jobId), {
     onSuccess: () => queryClient.invalidateQueries("jobList"),
   });
@@ -64,6 +67,8 @@ export default function Jobs() {
           />
         )}
       />
+
+      <div>version {packagejson.version}</div>
     </>
   );
 }

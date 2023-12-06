@@ -6,7 +6,7 @@ import { storeDrivers, storeToken } from "./user.service";
  * @param {String} crewId
  * @returns CrewToken as String
  */
-const getCrewByCrewId = async (crewId) => {
+const getCrewByCrewId = async (crewId: string) => {
   try {
     const [id, employee] = crewId.split("&");
     const { data: resp } = await api.post("/login", {

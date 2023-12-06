@@ -31,6 +31,7 @@ export default function JobDetailEditable() {
           <JobDetailEditableContent
             jobDetailEditable={jobDetailEditable}
             onSubmit={jobDetailEditableMutation.mutate}
+            isMutating={jobDetailEditableMutation.isLoading}
           />
         )}
       />

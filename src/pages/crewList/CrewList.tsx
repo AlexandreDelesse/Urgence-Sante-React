@@ -8,39 +8,48 @@ import UserContext from "../../contexts/User.context";
 import CrewListLogin from "./crewListLogin/CrewListLogin";
 import CrewListFilters from "./crewListFilters/CrewListFilters";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { ICrew } from "../../interfaces/ICrew";
 
 export default function CrewList() {
   const crewsQuery = useQuery("crews", getAllCrews);
   const userContext = useContext(UserContext);
 
-  const [filters, setFilters] = useState({});
+  interface IFilter {
+    searchValue: string;
+  }
 
-  const dataFilter = (data) => {
-    if (!data) return [];
-    return data.filter(
+  const [filters, setFilters] = useState<IFilter>({ searchValue: "" });
+
+  const dataFilter = (crews: ICrew[], filters: IFilter) => {
+    if (!crews) return [];
+    return crews.filter(
       (crew) =>
         !filters.searchValue ||
-        (crew.peR_MEMBRE_1
-          ? crew.peR_MEMBRE_1
+        (crew.member1
+          ? crew.member1
               .toLowerCase()
               .includes(filters.searchValue.toLowerCase())
           : false) ||
-        (crew.peR_MEMBRE_2
-          ? crew.peR_MEMBRE_2
+        (crew.member2
+          ? crew.member2
               .toLowerCase()
               .includes(filters.searchValue.toLowerCase())
           : false) ||
-        (crew.veH_IMMATRICULATION
-          ? crew.veH_IMMATRICULATION
-              .toLowerCase()
-              .includes(filters.searchValue.toLowerCase())
+        (crew.immat
+          ? crew.immat.toLowerCase().includes(filters.searchValue.toLowerCase())
           : false) ||
-        (crew.eQ_LIBELLE
-          ? crew.eQ_LIBELLE
-              .toLowerCase()
-              .includes(filters.searchValue.toLowerCase())
+        (crew.label
+          ? crew.label.toLowerCase().includes(filters.searchValue.toLowerCase())
           : false)
     );
+  };
+
+  const navigate = useNavigate();
+
+  const navigateTologin = (crewId: string, code: number) => {
+    if (!crewId || !code) return;
+    navigate(`/login/${code}&${crewId}`);
   };
 
   if (!userContext.hasLogged) return <CrewListLogin />;
@@ -51,10 +60,10 @@ export default function CrewList() {
 
       <AsyncDataComponent
         data={crewsQuery}
-        onSuccess={({ data }) => (
+        onSuccess={({ data }: any) => (
           <div className="crewList">
-            {dataFilter(data).map((crew, index) => (
-              <CrewCard key={index} crew={crew} />
+            {dataFilter(data, filters).map((crew, index) => (
+              <CrewCard key={index} crew={crew} onClick={navigateTologin} />
             ))}
           </div>
         )}

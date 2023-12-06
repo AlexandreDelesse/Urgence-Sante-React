@@ -1,5 +1,4 @@
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
-import packageJson from "../../../../package.json";
 import { ILink } from "../../../interfaces/link/ILink";
 
 export default function MainNavbar({
@@ -45,14 +44,13 @@ export default function MainNavbar({
             <Offcanvas.Title>Menu</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Nav className="me-auto">
+            <Nav className="me-auto align-items-center">
               {navLinks.map((link) => (
-                <Nav.Link onClick={() => onNavLinkClick(link.path)}>
+                <Nav.Link key={link.name} onClick={() => onNavLinkClick(link.path)}>
                   {link.name}
                 </Nav.Link>
               ))}
             </Nav>
-            <div className="my-5">version {packageJson.version}</div>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

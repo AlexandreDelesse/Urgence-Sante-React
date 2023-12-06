@@ -10,6 +10,7 @@ export default function JobDetailEditableForm({
   onSubmit,
   onCancel,
   isLoading,
+  hasChanged,
 }) {
   return (
     <Form className="d-grid gap-2 mt-2 mb-5">
@@ -29,8 +30,13 @@ export default function JobDetailEditableForm({
           isLoading={isLoading}
           spinnerVariant="light"
           label="Sauvegarder"
+          disabled={!hasChanged}
         />
-        <Button onClick={onCancel} variant="outline-danger">
+        <Button
+          disabled={!hasChanged}
+          onClick={onCancel}
+          variant="outline-danger"
+        >
           Annuler
         </Button>
       </div>

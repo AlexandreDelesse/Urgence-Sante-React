@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import JobDetailEditableForm from "./JobDetailEditableForm";
 import ContractTypeSelector from "../../missions/missionDetails/missionOtherInformations/contractTypeSelector/ContractTypeSelector";
 import EditableLabel from "../../../components/shared/editableLabel/EditableLabel";
@@ -10,6 +10,7 @@ import EditableList from "../../../components/shared/editableList/EditableList";
 export default function JobDetailEditableContent({
   jobDetailEditable,
   onSubmit,
+  isMutating,
 }) {
   const [formValue, setFormValue] = useState({
     jobId: jobDetailEditable.jobID,
@@ -23,6 +24,8 @@ export default function JobDetailEditableContent({
     comments: jobDetailEditable.comments,
   });
 
+  const [hasChanged, setHasChanged] = useState(false);
+
   const contractType =
     formValue.selectedContractType &&
     jobDetailEditable.contractTypes.find(
@@ -31,12 +34,11 @@ export default function JobDetailEditableContent({
     );
 
   const handleOnChange = (name, value) => {
-    console.log("name : ", name, "value : ", value);
     setFormValue((old) => ({ ...old, [name]: value }));
+    setHasChanged(true);
   };
 
   const submit = () => {
-    console.log(formValue);
     onSubmit(formValue);
   };
 
@@ -86,7 +88,7 @@ export default function JobDetailEditableContent({
       render: (field, onChange) => (
         <EditableLabel
           validator={nirValidator}
-          onChange={onChange}
+          onChange={(value) => onChange(field.name, value)}
           initialValue={formValue[field.name]}
           placeholder="1 23 45 67 891 011 12"
         />
@@ -135,6 +137,8 @@ export default function JobDetailEditableContent({
         fields={fields}
         onChange={handleOnChange}
         onSubmit={submit}
+        hasChanged={hasChanged}
+        isLoading={isMutating}
       />
     </div>
   );
