@@ -2,7 +2,6 @@
   "name": "urgence-sante-client",
   "version": "1.1.13",
   "private": true,
-  "homepage": "http://alex.delesse.net/usdev/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -34,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-dev": "SET PUBLIC_URL=http://alex.delesse.net/usdev&& SET NODE_ENV=development & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
