@@ -1,7 +1,12 @@
 import { api } from "./api.config";
 
-const createNewPatient = async ({ firstname, lastname, ddn, contactId, jobId }) => {
-  console.log(firstname, lastname, ddn);
+const createNewPatient = async ({
+  firstname,
+  lastname,
+  ddn,
+  contactId,
+  jobId,
+}) => {
   try {
     return await api.put(
       "/JobDetailEditable",

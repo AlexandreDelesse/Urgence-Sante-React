@@ -26,6 +26,7 @@ export default function JobDetailEditable() {
   return (
     <Box paddingBottom="32px">
       <AsyncDataComponent
+        withRefetchLoader
         data={jobDetailEditableQuery}
         onSuccess={({ data: jobDetailEditable }) => (
           <JobDetailEditableContent

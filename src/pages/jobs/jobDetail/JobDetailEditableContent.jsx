@@ -15,7 +15,7 @@ export default function JobDetailEditableContent({
   const [formValue, setFormValue] = useState({
     jobId: jobDetailEditable.jobID,
     isPmtPresent: jobDetailEditable.isPmtPresent,
-    selectedContractType: jobDetailEditable.selectedContractype,
+    selectedContractType: jobDetailEditable.selectedContractType,
     reference: jobDetailEditable.reference,
     nir: jobDetailEditable.nir,
     emails: jobDetailEditable.emails,

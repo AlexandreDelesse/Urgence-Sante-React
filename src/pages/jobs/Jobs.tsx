@@ -25,8 +25,6 @@ export default function Jobs() {
     }
   );
 
-  console.log(ackMutation);
-
   const onJobClick = (jobId: string) => {
     navigate(`${jobId}/detail`);
   };
