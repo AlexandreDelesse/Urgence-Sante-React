@@ -1,4 +1,4 @@
-interface JobShort {
+interface IShortJob {
   appointment: Date;
   arrival: string;
   departure: string;
@@ -14,4 +14,4 @@ interface JobShort {
   transportType: number;
 }
 
-export type { JobShort };
+export type { IShortJob };

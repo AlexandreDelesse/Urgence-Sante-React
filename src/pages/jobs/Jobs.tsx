@@ -3,13 +3,13 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import AsyncDataComponent from "../../components/shared/AsyncDataComponent";
 import JobList from "./jobList/JobList";
 import JobListItem from "./jobList/JobListItem";
-import { ackJobById } from "../../services/job.service";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "./job.css";
 import DriverSwap from "../../components/shared/driverSwap/DriverSwap";
 import packagejson from "../../../package.json";
 import { ShortJobService } from "../../services/shortJobService";
+import { IShortJob } from "../../interfaces/shortJob/IShortJob";
 
 export default function Jobs() {
   const service = new ShortJobService();
@@ -18,23 +18,34 @@ export default function Jobs() {
   const queryClient = useQueryClient();
 
   const jobQuery = useQuery("jobList", service.getAll);
-  const ackMutation = useMutation((jobId) => ackJobById(jobId), {
-    onSuccess: () => queryClient.invalidateQueries("jobList"),
-  });
+  const ackMutation = useMutation(
+    ({ jobId }: { jobId: string }) => service.aknowledge(jobId),
+    {
+      onSuccess: () => queryClient.invalidateQueries("jobList"),
+    }
+  );
 
-  const onJobClick = (jobId) => {
+  console.log(ackMutation);
+
+  const onJobClick = (jobId: string) => {
     navigate(`${jobId}/detail`);
   };
 
   const toggleShowTerminatedJobs = () =>
     setShowTerminatedJob(!showTerminatedJobs);
 
-  const filterTerminatedJobs = (jobs) => {
-    return jobs.filter((job) => showTerminatedJobs || !job.isTerminated);
+  const filterTerminatedJobs = (shortJobs: IShortJob[]) => {
+    return shortJobs.filter(
+      (shorJob) => showTerminatedJobs || !shorJob.isTerminated
+    );
   };
 
-  const isAckLoading = (jobId) => {
-    return ackMutation.isLoading && ackMutation.variables === jobId;
+  const isAckLoading = (jobId: string) => {
+    return ackMutation.isLoading && ackMutation.variables?.jobId === jobId;
+  };
+
+  const handleOnAck = (jobId: string) => {
+    ackMutation.mutate({ jobId });
   };
 
   return (
@@ -54,12 +65,12 @@ export default function Jobs() {
         onSuccess={({ data: jobList }) => (
           <JobList
             list={filterTerminatedJobs(jobList)}
-            listItem={(job) => (
+            listItem={(shortJob: IShortJob) => (
               <JobListItem
-                key={job.jobId}
-                job={job}
-                onAckJob={ackMutation.mutate}
-                isAckLoading={isAckLoading(job.jobId)}
+                key={shortJob.jobId}
+                job={shortJob}
+                onAckJob={handleOnAck}
+                isAckLoading={isAckLoading(shortJob.jobId)}
                 onClick={onJobClick}
               />
             )}

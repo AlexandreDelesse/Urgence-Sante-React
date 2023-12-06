@@ -1,7 +1,8 @@
-import { JobShort } from "./IShortJob";
+import { IShortJob } from "./IShortJob";
 
 interface IShortJobService {
-  getAll: () => Promise<JobShort[]>;
+  getAll: () => Promise<IShortJob[]>;
+  aknowledge: (jobId: string) => Promise<void>;
 }
 
 export type { IShortJobService };

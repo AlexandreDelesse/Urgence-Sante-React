@@ -17,10 +17,11 @@ const getJobList = async () => {
 
 const ackJobById = async (jobId) => {
   try {
-    return await api.patch("/joblist", {
+    await api.patch("/joblist", {
       jobId,
       acknowledged: true,
     });
+    return;
   } catch (error) {
     throw error;
   }
