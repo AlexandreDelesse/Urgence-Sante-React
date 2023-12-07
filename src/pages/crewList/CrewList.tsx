@@ -59,7 +59,7 @@ export default function CrewList() {
       <CrewListFilters filters={filters} setFilters={setFilters} />
 
       <AsyncDataComponent
-        data={crewsQuery}
+        query={crewsQuery}
         onSuccess={({ data }: any) => (
           <div className="crewList">
             {dataFilter(data, filters).map((crew, index) => (

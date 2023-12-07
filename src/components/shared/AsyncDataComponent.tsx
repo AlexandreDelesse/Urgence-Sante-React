@@ -1,19 +1,19 @@
-import React from "react";
-import Loader from "./Loader";
-import { Alert } from "@mui/material";
+import React from 'react'
+import Loader from './Loader'
+import { Alert } from '@mui/material'
 
 interface IAsyncDataComponentProps {
-  data: any;
-  onLoadingMessage?: string;
-  onErrorMessage?: string;
-  onSuccess: (data: any) => any;
-  withRefetchLoader?: boolean;
-  onError?: (data?: any) => any;
-  withoutLoader?: boolean;
+  query: any
+  onLoadingMessage?: string
+  onErrorMessage?: string
+  onSuccess: (data: any) => any
+  withRefetchLoader?: boolean
+  onError?: (data?: any) => any
+  withoutLoader?: boolean
 }
 
 export default function AsyncDataComponent({
-  data,
+  query,
   onLoadingMessage,
   onErrorMessage,
   onSuccess,
@@ -22,34 +22,35 @@ export default function AsyncDataComponent({
   withoutLoader,
 }: IAsyncDataComponentProps) {
   //TODO: Add context error message
-  if (data.status === "loading" || (withRefetchLoader && data.isRefetching))
+  //TODO: Ajouter un AsyncMultiDataComponent
+  if (query.status === 'loading' || (withRefetchLoader && query.isRefetching))
     return withoutLoader ? null : (
       <Loader loadingMessage={onLoadingMessage || null} />
-    );
+    )
 
-  if (data.status === "error") {
-    if (onError) return onError();
-    if (!data.error.request)
+  if (query.status === 'error') {
+    if (onError) return onError()
+    if (!query.error.request)
       return (
         <Alert severity="warning">
-          {data.error.message || "Une erreur est survenue"}
+          {query.error.message || 'Une erreur est survenue'}
         </Alert>
-      );
-    if (data.error.request.status < 500)
+      )
+    if (query.error.request.status < 500)
       return (
         <Alert severity="warning">
-          {data.error.request.responseText ||
-            `Une erreur est survenue : ${data.error.message}`}
+          {query.error.request.responseText ||
+            `Une erreur est survenue : ${query.error.message}`}
         </Alert>
-      );
+      )
     return (
       <Alert severity="error">
         {onErrorMessage ||
-          data.error.request.responseText ||
-          `Une erreur est survenue : ${data.error.message}`}
+          query.error.request.responseText ||
+          `Une erreur est survenue : ${query.error.message}`}
       </Alert>
-    );
+    )
   }
 
-  return onSuccess(data);
+  return onSuccess(query.data)
 }

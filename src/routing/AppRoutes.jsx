@@ -1,5 +1,4 @@
-import React from "react";
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap'
 import {
   Routes,
   Route,
@@ -7,21 +6,21 @@ import {
   useLocation,
   Navigate,
   Outlet,
-} from "react-router-dom";
+} from 'react-router-dom'
 
-import BackButton from "../components/shared/BackButton";
-import Login from "../pages/Login";
-import ManualLogin from "../pages/ManualLogin";
-import CrewList from "../pages/crewList/CrewList";
-import Jobs from "../pages/jobs/Jobs";
-import JobDetailNavigation from "../pages/jobs/jobDetail/JobDetailNavigation";
-import Signature from "../pages/missions/missionDetails/signature/Signature";
-import JobDetail from "../pages/jobs/jobDetail/JobDetail";
-import JobDetailEditable from "../pages/jobs/jobDetail/JobDetailEditable";
+import BackButton from '../components/shared/BackButton'
+import Login from '../pages/Login'
+import ManualLogin from '../pages/ManualLogin'
+import CrewList from '../pages/crewList/CrewList'
+import Jobs from '../pages/jobs/Jobs'
+import JobDetailNavigation from '../pages/jobs/jobDetail/JobDetailNavigation'
+import Signature from '../pages/missions/missionDetails/signature/Signature'
+import JobDetail from '../pages/jobs/jobDetail/JobDetail'
+import JobDetailEditable from '../pages/jobs/jobDetail/JobDetailEditable'
 
 export default function AppRoutes() {
-  const pathBackButtonExeptions = ["/", "/login", "/regul", "/jobs"];
-  const { pathname } = useLocation();
+  const pathBackButtonExeptions = ['/', '/login', '/regul', '/jobs']
+  const { pathname } = useLocation()
 
   return (
     <Container fluid>
@@ -52,17 +51,17 @@ export default function AppRoutes() {
         <Route path="/*" element={<Page404 />} />
       </Routes>
     </Container>
-  );
+  )
 }
 
 const Page404 = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Container>
       <h1 className="text-center mt-5">404 Not found</h1>
-      <p onClick={() => navigate("/")} className="text-center">
+      <p onClick={() => navigate('/')} className="text-center">
         Retour a la page principale
       </p>
     </Container>
-  );
-};
+  )
+}

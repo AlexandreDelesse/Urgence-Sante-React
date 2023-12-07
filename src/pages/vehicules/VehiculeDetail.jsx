@@ -15,7 +15,6 @@ export default function VehiculeDetail() {
   const queryClient = useQueryClient()
   const [showValidationModal, setShowValidationModal] = useState(false)
 
-  //TODO: Create custom hook for create and delete
   const mutation = useMutation(deleteVehiculeById, {
     onSuccess: () => {
       // Invalidate and refetch
