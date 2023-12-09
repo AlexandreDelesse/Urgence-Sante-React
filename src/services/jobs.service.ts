@@ -38,4 +38,20 @@ const getMissionStatus = async (jobId: string) => {
   }
 }
 
-export { getShortJobList, aknoloedgeJob, getJobDetail, getMissionStatus }
+const getJobDetailEditable = async (jobId: string) => {
+  try {
+    return await api.get(`JobDetailEditable`, {
+      params: { gJobId: jobId },
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export {
+  getShortJobList,
+  aknoloedgeJob,
+  getJobDetail,
+  getMissionStatus,
+  getJobDetailEditable,
+}

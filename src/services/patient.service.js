@@ -1,4 +1,4 @@
-import { api } from "./api.config";
+import { api } from './api.config'
 
 const createNewPatient = async ({
   firstname,
@@ -9,7 +9,7 @@ const createNewPatient = async ({
 }) => {
   try {
     return await api.put(
-      "/JobDetailEditable",
+      '/JobDetailEditable',
       {
         firstName: firstname,
         lastName: lastname,
@@ -18,11 +18,11 @@ const createNewPatient = async ({
       },
       {
         params: { gJobId: contactId },
-      }
-    );
+      },
+    )
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export { createNewPatient };
+export { createNewPatient }
