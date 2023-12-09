@@ -13,6 +13,7 @@ import { ICrew } from "../../interfaces/ICrew";
 
 export default function CrewList() {
   const crewsQuery = useQuery("crews", getAllCrews);
+  
   const userContext = useContext(UserContext);
 //TODO: Update to useQuery custom hooks
   interface IFilter {
