@@ -14,7 +14,7 @@ export default function JobListItem({ job, onAckJob, onClick, isAckLoading }) {
 
   return (
     <Card
-      elevation={2}
+      elevation={0}
       onClick={() => onClick(job.jobId)}
       className="d-flex justify-content-between px-0 my-2"
     >
