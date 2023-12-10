@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import AsyncDataComponent from '../../components/shared/AsyncDataComponent'
 import JobList from './jobList/JobList'
@@ -9,7 +9,6 @@ import DriverSwap from '../../components/shared/driverSwap/DriverSwap'
 import packagejson from '../../../package.json'
 import { ShortJobService } from '../../services/shortJobService'
 import { IShortJob } from '../../interfaces/shortJob/IShortJob'
-import JobListItem from './jobList/JobListItem.jsx'
 import ShortjobListItem from './jobList/ShortjobListItem'
 
 export default function Jobs() {
@@ -39,9 +38,9 @@ export default function Jobs() {
     )
   }
 
-  const isAckLoading = (jobId: string) => {
-    return ackMutation.isLoading && ackMutation.variables?.jobId === jobId
-  }
+  // const isAckLoading = (jobId: string) => {
+  //   return ackMutation.isLoading && ackMutation.variables?.jobId === jobId
+  // }
 
   const handleOnAck = (jobId: string) => {
     ackMutation.mutate({ jobId })

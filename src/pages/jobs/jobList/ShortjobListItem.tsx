@@ -9,7 +9,7 @@ import {
   Divider,
   Typography,
 } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { IShortJob } from '../../../interfaces/shortJob/IShortJob'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -47,15 +47,21 @@ export default function ShortjobListItem({
   return (
     <Card className="my-2">
       <CardActionArea onClick={toggleExpand}>
-        <CardContent className="d-flex justify-content-between align-items-center">
+        <CardContent
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <div>
-            <Typography variant="h6">{shortJob.patient}</Typography>
+            <Typography variant="body1">{shortJob.patient}</Typography>
 
             <Typography>
               <TransportMode mode={shortJob.transportMode} /> -{' '}
               <TransportSens sens={shortJob.transportSens} />
             </Typography>
-            <Typography variant="h6" color="primary">
+            <Typography variant="button" color="primary">
               {shortJob.schedule}
             </Typography>
           </div>
@@ -66,7 +72,7 @@ export default function ShortjobListItem({
           </Box> */}
         </CardContent>
       </CardActionArea>
-      <Collapse in={expand}>
+      <Collapse unmountOnExit in={expand}>
         <CardContent>
           <Box sx={{ display: 'flex', gap: 1 }}>
             {/* <Typography variant="caption">Départ</Typography> */}
@@ -83,25 +89,27 @@ export default function ShortjobListItem({
           </Box>
         </CardContent>
         <CardActions sx={{ display: 'flex' }}>
-          {shortJob.isAck || (
+          <>
+            {shortJob.isAck || (
+              <Button
+                sx={{ width: '100%' }}
+                startIcon={<ThumbUpIcon />}
+                variant="contained"
+                color="success"
+                onClick={handleOnAck}
+              >
+                Ok !
+              </Button>
+            )}
             <Button
               sx={{ width: '100%' }}
-              startIcon={<ThumbUpIcon />}
+              startIcon={<VisibilityIcon />}
               variant="contained"
-              color="success"
-              onClick={handleOnAck}
+              onClick={handleOnGoDetail}
             >
-              Ok !
+              Détail
             </Button>
-          )}
-          <Button
-            sx={{ width: '100%' }}
-            startIcon={<VisibilityIcon />}
-            variant="contained"
-            onClick={handleOnGoDetail}
-          >
-            Détail
-          </Button>
+          </>
         </CardActions>
       </Collapse>
     </Card>
