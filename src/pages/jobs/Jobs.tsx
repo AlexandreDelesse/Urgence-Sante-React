@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
 import AsyncDataComponent from '../../components/shared/AsyncDataComponent'
 import JobList from './jobList/JobList'
 import { useNavigate } from 'react-router-dom'
@@ -7,26 +6,21 @@ import { Form } from 'react-bootstrap'
 import './job.css'
 import DriverSwap from '../../components/shared/driverSwap/DriverSwap'
 import packagejson from '../../../package.json'
-import { ShortJobService } from '../../services/shortJobService'
 import { IShortJob } from '../../interfaces/shortJob/IShortJob'
-import ShortjobListItem from './jobList/ShortjobListItem'
+import useGetShortJobList from '../../hooks/query/useGetShortJobList'
+import useAckJobMutation from '../../hooks/mutation/useAckJobMutation'
 import UserContext from '../../contexts/User.context'
+import ShortjobListItem from './jobList/ShortjobListItem'
 
 export default function Jobs() {
-  const service = new ShortJobService()
   const { getToken } = useContext(UserContext)
   const token = getToken()
+
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false)
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
 
-  const jobQuery = useQuery('jobList', service.getAll)
-  const ackMutation = useMutation(
-    ({ jobId }: { jobId: string }) => service.aknowledge(jobId),
-    {
-      onSuccess: () => queryClient.invalidateQueries('jobList'),
-    },
-  )
+  const shortJobListQuery = useGetShortJobList(token)
+  const ackMutation = useAckJobMutation()
 
   const onJobClick = (jobId: string) => {
     navigate(`${jobId}/detail`)
@@ -62,7 +56,7 @@ export default function Jobs() {
       <DriverSwap />
 
       <AsyncDataComponent
-        data={jobQuery}
+        query={shortJobListQuery}
         onSuccess={({ data: jobList }) => (
           <JobList
             list={filterTerminatedJobs(jobList)}

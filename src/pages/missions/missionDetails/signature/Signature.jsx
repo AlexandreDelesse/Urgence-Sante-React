@@ -16,6 +16,7 @@ export default function Signature() {
   const signatureQuery = useQuery("signature", () => getSignature(jobId), {
     retry: false,
   });
+  //TODO: Update to useQuery custom hooks
   const queryClient = useQueryClient();
 
   const [sign, setSign] = useState();
@@ -24,6 +25,7 @@ export default function Signature() {
     sign.clear();
   };
 
+  // TODO: reafcto better
   const encodeSignature = async () => {
     const imgGenerated = sign.getTrimmedCanvas().toDataURL();
     await putSignature({
@@ -38,7 +40,7 @@ export default function Signature() {
     <>
       <AsyncDataComponent
         withRefetchLoader
-        data={signatureQuery}
+        query={signatureQuery}
         onSuccess={({ data }) => (
           <Card
             sx={{ backgroundImage: `url(${data.data})` }}

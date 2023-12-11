@@ -4,6 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getCrew, getCrewByCrewId } from '../services/crew.service'
 import AsyncDataComponent from '../components/shared/AsyncDataComponent'
 import UserContext from '../contexts/User.context'
+import useGetCrewToken from '../hooks/query/useGetCrewToken'
 
 export default function Login() {
   const params = useParams()
@@ -11,17 +12,11 @@ export default function Login() {
 
   const [id, employee] = params.crewid.split('&')
 
-  const crewToken = useQuery({
-    queryKey: ['crewToken', id, employee],
-    queryFn: () => getCrew(id, employee),
-    onSuccess: ({ data }) => {
-      setCrew(data)
-    },
-  })
+  const crewToken = useGetCrewToken(id, employee, ({ data }) => setCrew(data))
 
   return (
     <AsyncDataComponent
-      data={crewToken}
+      query={crewToken}
       onSuccess={() => <Navigate to="/" />}
     />
   )

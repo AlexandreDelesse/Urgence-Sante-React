@@ -1,42 +1,31 @@
-import React, { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
-import {
-  getJobDetailById,
-  getJobStatusById,
-} from "../../../services/job.service";
-import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
-import JobDetailContent from "./JobDetailContent";
-import StepProgress from "../../missions/missionDetails/missionInformations/stepProgress/StepProgress";
-import { createNewPatient } from "../../../services/patient.service";
-import CreateClientForm from "../../missions/missionDetails/missionInformations/createClientForm/CreateClientForm";
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import AsyncDataComponent from '../../../components/shared/AsyncDataComponent'
+import JobDetailContent from './JobDetailContent'
+import CreateClientForm from '../../missions/missionDetails/missionInformations/createClientForm/CreateClientForm'
+import useGetJobDetail from '../../../hooks/query/useGetJobDetail'
+import useGetMissionStatus from '../../../hooks/query/useGetMissionStatus'
+import StepProgressDecorator from '../../missions/missionDetails/missionInformations/stepProgress/StepProgressDecorator'
+import useCreateNewPatientMutation from '../../../hooks/mutation/useCreateNewPatientMutation'
 
 export default function JobDetail() {
-  const params = useParams();
-  const queryClient = useQueryClient();
-  const [showPatientForm, setShowPatientForm] = useState(false);
+  const params = useParams()
 
-  const jobDetailQuery = useQuery(["jobDetail", params.jobId], () =>
-    getJobDetailById(params.jobId)
-  );
+  const [showPatientForm, setShowPatientForm] = useState(false)
 
-  const missionStatusQuery = useQuery(["missionStatus", params.jobId], () =>
-    getJobStatusById(params.jobId)
-  );
+  const jobDetailQuery = useGetJobDetail(params.jobId)
+  const missionStatusQuery = useGetMissionStatus(params.jobId)
 
-  const newPatientMutation = useMutation(createNewPatient, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("jobDetail");
-      toggleShowPatientForm();
-    },
-  });
+  const toggleShowPatientForm = () => setShowPatientForm(!showPatientForm)
 
-  const toggleShowPatientForm = () => setShowPatientForm(!showPatientForm);
+  const newPatientMutation = useCreateNewPatientMutation({
+    onSuccess: toggleShowPatientForm,
+  })
 
   return (
     <>
       <AsyncDataComponent
-        data={jobDetailQuery}
+        query={jobDetailQuery}
         onSuccess={({ data: jobDetail }) => (
           <JobDetailContent
             jobDetail={jobDetail}
@@ -46,22 +35,13 @@ export default function JobDetail() {
       />
 
       <AsyncDataComponent
-        data={missionStatusQuery}
+        query={missionStatusQuery}
         onSuccess={({ data: jobStatus }) => (
-          <StepProgress
-            jobId={params.jobId}
-            initialStep={{
-              go: jobStatus.go ? new Date(jobStatus.go) : null,
-              onSite: jobStatus.onSite ? new Date(jobStatus.onSite) : null,
-              available: jobStatus.available
-                ? new Date(jobStatus.available)
-                : null,
-            }}
-          />
+          <StepProgressDecorator jobId={params.jobId} initialStep={jobStatus} />
         )}
       />
       <AsyncDataComponent
-        data={jobDetailQuery}
+        query={jobDetailQuery}
         withoutLoader
         onSuccess={({ data: jobDetail }) => (
           <CreateClientForm
@@ -75,5 +55,5 @@ export default function JobDetail() {
         )}
       />
     </>
-  );
+  )
 }

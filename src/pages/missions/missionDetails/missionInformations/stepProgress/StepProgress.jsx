@@ -15,6 +15,8 @@ import {
 import { updateMissionStatus } from "../../../../../services/mission.service";
 import { useQueryClient } from "react-query";
 
+//TODO: refacto do it again, do it better
+
 export default function StepProgress({ jobId, initialStep }) {
   const stepLabelEnum = {
     go: "En route",

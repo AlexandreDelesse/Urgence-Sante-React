@@ -12,9 +12,10 @@ import { useNavigate } from 'react-router-dom'
 import { ICrew } from '../../interfaces/ICrew'
 
 export default function CrewList() {
-  const crewsQuery = useQuery('crews', getAllCrews)
-  const userContext = useContext(UserContext)
-
+  const crewsQuery = useQuery("crews", getAllCrews);
+  
+  const userContext = useContext(UserContext);
+//TODO: Update to useQuery custom hooks
   interface IFilter {
     searchValue: string
   }
@@ -60,7 +61,7 @@ export default function CrewList() {
       <CrewListFilters filters={filters} setFilters={setFilters} />
 
       <AsyncDataComponent
-        data={crewsQuery}
+        query={crewsQuery}
         onSuccess={({ data }: any) => (
           <div className="crewList">
             {dataFilter(data, filters).map((crew, index) => (

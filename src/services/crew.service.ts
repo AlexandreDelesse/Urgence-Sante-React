@@ -32,8 +32,7 @@ const getCrew = async (id: string, employee: string) => {
 
 const getAllCrews = async () => {
   try {
-    const { data: crews } = await api.get('Login')
-    return crews
+    return await api.get('Login')
   } catch (error) {
     throw error
   }
