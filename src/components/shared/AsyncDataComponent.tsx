@@ -7,6 +7,7 @@ interface IAsyncDataComponentProps {
   onLoadingMessage?: string
   onErrorMessage?: string
   onSuccess: (data: any) => any
+  onLoading?: () => any
   withRefetchLoader?: boolean
   onError?: (data?: any) => any
   withoutLoader?: boolean
@@ -17,6 +18,7 @@ export default function AsyncDataComponent({
   onLoadingMessage,
   onErrorMessage,
   onSuccess,
+  onLoading,
   withRefetchLoader,
   onError,
   withoutLoader,
@@ -24,7 +26,9 @@ export default function AsyncDataComponent({
   //TODO: Add context error message
   //TODO: Ajouter un AsyncMultiDataComponent
   if (query.status === 'loading' || (withRefetchLoader && query.isRefetching))
-    return withoutLoader ? null : (
+    return withoutLoader ? null : onLoading ? (
+      onLoading()
+    ) : (
       <Loader loadingMessage={onLoadingMessage || null} />
     )
 

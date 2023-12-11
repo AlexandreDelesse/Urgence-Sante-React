@@ -11,6 +11,7 @@ import useGetShortJobList from '../../hooks/query/useGetShortJobList'
 import useAckJobMutation from '../../hooks/mutation/useAckJobMutation'
 import UserContext from '../../contexts/User.context'
 import ShortjobListItem from './jobList/ShortjobListItem'
+import { Skeleton } from '@mui/material'
 
 export default function Jobs() {
   const { getToken } = useContext(UserContext)
@@ -61,13 +62,6 @@ export default function Jobs() {
           <JobList
             list={filterTerminatedJobs(jobList)}
             listItem={(shortJob: IShortJob) => (
-              // <JobListItem
-              //   key={shortJob.jobId}
-              //   job={shortJob}
-              //   onAckJob={handleOnAck}
-              //   isAckLoading={isAckLoading(shortJob.jobId)}
-              //   onClick={onJobClick}
-              // />
               <ShortjobListItem
                 key={shortJob.jobId}
                 onAck={handleOnAck}
