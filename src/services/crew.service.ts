@@ -1,5 +1,5 @@
-import { api } from "./api.config";
-import { storeDrivers, storeToken } from "./user.service";
+import { api } from './api.config'
+import { storeDrivers, storeToken } from './user.service'
 
 /**
  * Retourne un token pour l'équipage identifié avec un id et un nom d'employée
@@ -8,27 +8,35 @@ import { storeDrivers, storeToken } from "./user.service";
  */
 const getCrewByCrewId = async (crewId: string) => {
   try {
-    const [id, employee] = crewId.split("&");
-    const { data: resp } = await api.post("/login", {
+    const [id, employee] = crewId.split('&')
+    const { data: resp } = await api.post('/login', {
       id,
       employee,
-    });
-    const drivers = [resp.employee1, resp.employee2];
-    storeToken(resp.token);
-    storeDrivers(drivers);
-    return resp;
+    })
+    const drivers = [resp.employee1, resp.employee2]
+    storeToken(resp.token)
+    storeDrivers(drivers)
+    return resp
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
+
+const getCrew = async (id: string, employee: string) => {
+  try {
+    return await api.post('/login', { id, employee })
+  } catch (error) {
+    throw error
+  }
+}
 
 const getAllCrews = async () => {
   try {
-    const { data: crews } = await api.get("Login");
-    return crews;
+    const { data: crews } = await api.get('Login')
+    return crews
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export { getCrewByCrewId, getAllCrews };
+export { getCrewByCrewId, getAllCrews, getCrew }

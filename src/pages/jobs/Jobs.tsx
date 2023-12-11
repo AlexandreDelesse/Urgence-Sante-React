@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import AsyncDataComponent from '../../components/shared/AsyncDataComponent'
 import JobList from './jobList/JobList'
@@ -10,9 +10,12 @@ import packagejson from '../../../package.json'
 import { ShortJobService } from '../../services/shortJobService'
 import { IShortJob } from '../../interfaces/shortJob/IShortJob'
 import ShortjobListItem from './jobList/ShortjobListItem'
+import UserContext from '../../contexts/User.context'
 
 export default function Jobs() {
   const service = new ShortJobService()
+  const { getToken } = useContext(UserContext)
+  const token = getToken()
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false)
   const navigate = useNavigate()
   const queryClient = useQueryClient()

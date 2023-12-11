@@ -1,28 +1,29 @@
-import React, { useContext, useState } from "react";
-import { useQuery } from "react-query";
-import { getAllCrews } from "../../services/crew.service";
-import AsyncDataComponent from "../../components/shared/AsyncDataComponent";
-import CrewCard from "./crewCard/CrewCard";
-import "./crewList.css";
-import UserContext from "../../contexts/User.context";
-import CrewListLogin from "./crewListLogin/CrewListLogin";
-import CrewListFilters from "./crewListFilters/CrewListFilters";
-import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { ICrew } from "../../interfaces/ICrew";
+import React, { useContext, useState } from 'react'
+import { useQuery } from 'react-query'
+import { getAllCrews } from '../../services/crew.service'
+import AsyncDataComponent from '../../components/shared/AsyncDataComponent'
+import CrewCard from './crewCard/CrewCard'
+import './crewList.css'
+import UserContext from '../../contexts/User.context'
+import CrewListLogin from './crewListLogin/CrewListLogin'
+import CrewListFilters from './crewListFilters/CrewListFilters'
+import { Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { ICrew } from '../../interfaces/ICrew'
 
 export default function CrewList() {
-  const crewsQuery = useQuery("crews", getAllCrews);
-  const userContext = useContext(UserContext);
+  const crewsQuery = useQuery('crews', getAllCrews)
+  const userContext = useContext(UserContext)
 
   interface IFilter {
-    searchValue: string;
+    searchValue: string
   }
 
-  const [filters, setFilters] = useState<IFilter>({ searchValue: "" });
+  const [filters, setFilters] = useState<IFilter>({ searchValue: '' })
 
+  //FIXME: A refaire propre.
   const dataFilter = (crews: ICrew[], filters: IFilter) => {
-    if (!crews) return [];
+    if (!crews) return []
     return crews.filter(
       (crew) =>
         !filters.searchValue ||
@@ -41,18 +42,18 @@ export default function CrewList() {
           : false) ||
         (crew.label
           ? crew.label.toLowerCase().includes(filters.searchValue.toLowerCase())
-          : false)
-    );
-  };
+          : false),
+    )
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const navigateTologin = (crewId: string, code: number) => {
-    if (!crewId || !code) return;
-    navigate(`/login/${code}&${crewId}`);
-  };
+    if (!crewId || !code) return
+    navigate(`/login/${code}&${crewId}`)
+  }
 
-  if (!userContext.hasLogged) return <CrewListLogin />;
+  if (!userContext.hasLogged) return <CrewListLogin />
 
   return (
     <Container>
@@ -69,5 +70,5 @@ export default function CrewList() {
         )}
       />
     </Container>
-  );
+  )
 }
