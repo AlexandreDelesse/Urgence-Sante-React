@@ -17,7 +17,6 @@ import JobDetailNavigation from '../pages/jobs/jobDetail/JobDetailNavigation'
 import Signature from '../pages/missions/missionDetails/signature/Signature'
 import JobDetail from '../pages/jobs/jobDetail/JobDetail'
 import JobDetailEditable from '../pages/jobs/jobDetail/JobDetailEditable'
-import LoginHolder from '../pages/LoginHolder'
 
 export default function AppRoutes() {
   const pathBackButtonExeptions = ['/', '/login', '/regul', '/jobs']
@@ -40,7 +39,7 @@ export default function AppRoutes() {
         </Route>
 
         <Route path="regul" element={<CrewList />} />
-        <Route path="login/:crewid" element={<LoginHolder />} />
+        <Route path="login/:crewid" element={<Login />} />
         <Route path="login/*" element={<ManualLogin />} />
 
         {/* <Route path="vehicules" element={<Outlet />}>

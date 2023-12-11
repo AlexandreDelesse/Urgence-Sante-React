@@ -1,12 +1,12 @@
-import { Badge, Card, Col, Row } from "react-bootstrap";
-import { ICrew } from "../../../interfaces/ICrew";
+import { Badge, Card, Col, Row } from 'react-bootstrap'
+import { ICrew } from '../../../interfaces/ICrew'
 
 export default function CrewCard({
   crew,
   onClick,
 }: {
-  crew: ICrew;
-  onClick: (crewId: string, crewCode: number) => void;
+  crew: ICrew
+  onClick: (crewId: string, crewCode: number) => void
 }) {
   return (
     <div>
@@ -26,7 +26,7 @@ export default function CrewCard({
               <Col>
                 <Card.Subtitle>Membre 2</Card.Subtitle>
                 <Card.Text
-                  onClick={() => onClick(crew.member2 || "", crew.crewId)}
+                  onClick={() => onClick(crew.member2 || '', crew.crewId)}
                 >
                   {crew.member2}
                 </Card.Text>
@@ -52,5 +52,5 @@ export default function CrewCard({
         </Card.Body>
       </Card>
     </div>
-  );
+  )
 }

@@ -12,10 +12,10 @@ import { useNavigate } from 'react-router-dom'
 import { ICrew } from '../../interfaces/ICrew'
 
 export default function CrewList() {
-  const crewsQuery = useQuery("crews", getAllCrews);
-  
-  const userContext = useContext(UserContext);
-//TODO: Update to useQuery custom hooks
+  const crewsQuery = useQuery('crews', getAllCrews)
+
+  const userContext = useContext(UserContext)
+  //TODO: Update to useQuery custom hooks
   interface IFilter {
     searchValue: string
   }

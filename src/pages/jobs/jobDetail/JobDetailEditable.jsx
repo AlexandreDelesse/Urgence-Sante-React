@@ -1,10 +1,6 @@
-import React from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
-import {
-  getJobDetailEditableById,
-  patchJobDetailEditable,
-} from '../../../services/job.service'
+import { patchJobDetailEditable } from '../../../services/job.service'
 import AsyncDataComponent from '../../../components/shared/AsyncDataComponent'
 import JobDetailEditableContent from './JobDetailEditableContent'
 import { Box } from '@mui/system'
@@ -17,7 +13,6 @@ export default function JobDetailEditable() {
   const queryClient = useQueryClient()
 
   const jobDetailEditableQuery = useGetJobDetailEditable(params.jobId)
-
 
   //TODO: refacto usemutation
   const jobDetailEditableMutation = useMutation(patchJobDetailEditable, {
