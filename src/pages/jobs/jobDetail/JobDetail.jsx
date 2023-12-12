@@ -7,6 +7,7 @@ import useGetJobDetail from '../../../hooks/query/useGetJobDetail'
 import useGetMissionStatus from '../../../hooks/query/useGetMissionStatus'
 import StepProgressDecorator from '../../missions/missionDetails/missionInformations/stepProgress/StepProgressDecorator'
 import useCreateNewPatientMutation from '../../../hooks/mutation/useCreateNewPatientMutation'
+import BackButton from '../../../components/shared/BackButton'
 
 export default function JobDetail() {
   const params = useParams()

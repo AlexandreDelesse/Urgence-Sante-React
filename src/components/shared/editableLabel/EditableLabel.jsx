@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { BsCheck2 } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
+import React, { useEffect, useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
+import { BsCheck2 } from 'react-icons/bs'
+import { AiOutlineClose } from 'react-icons/ai'
 
 export default function EditableLabel({
   initialValue,
   onChange,
   placeholder,
   validator,
+  type,
+  inputMode,
 }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(initialValue || "");
+  const [isEditing, setIsEditing] = useState(false)
+  const [inputValue, setInputValue] = useState(initialValue || '')
 
   const onCancelChanges = () => {
-    setInputValue(initialValue);
-    setIsEditing(false);
-  };
+    setInputValue(initialValue)
+    setIsEditing(false)
+  }
 
   const onAcceptChanges = () => {
-    if (validator && !validator(inputValue)) return;
-    onChange(inputValue);
-    setIsEditing(false);
-  };
+    if (validator && !validator(inputValue)) return
+    onChange(inputValue)
+    setIsEditing(false)
+  }
 
   const onEdit = () => {
-    setIsEditing(true);
-  };
+    setIsEditing(true)
+  }
 
   useEffect(() => {
-    setInputValue(initialValue);
-  }, [initialValue]);
+    setInputValue(initialValue)
+  }, [initialValue])
 
   if (isEditing)
     return (
@@ -41,6 +43,8 @@ export default function EditableLabel({
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
           placeholder={placeholder}
+          type={type}
+          inputMode={inputMode}
         />
         <Button onClick={onCancelChanges} variant="outline-danger">
           <AiOutlineClose />
@@ -51,11 +55,11 @@ export default function EditableLabel({
           </Button>
         )}
       </Form.Group>
-    );
+    )
   else
     return (
       <div onClick={onEdit}>
         {inputValue || <span className="fw-light">{placeholder}</span>}
       </div>
-    );
+    )
 }

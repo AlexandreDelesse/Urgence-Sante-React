@@ -10,7 +10,6 @@ export default function StepProgressDecorator({
   jobId,
   initialStep,
 }: StepProgressDecoratorProps) {
-  console.log(initialStep)
   const { go, onSite, available } = initialStep
   const setZoulouToIsoDate = (el: string) =>
     el.charAt(el.length - 1) !== 'Z' ? el + 'Z' : el

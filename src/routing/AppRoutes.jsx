@@ -19,12 +19,8 @@ import JobDetail from '../pages/jobs/jobDetail/JobDetail'
 import JobDetailEditable from '../pages/jobs/jobDetail/JobDetailEditable'
 
 export default function AppRoutes() {
-  const pathBackButtonExeptions = ['/', '/login', '/regul', '/jobs']
-  const { pathname } = useLocation()
-
   return (
     <Container fluid>
-      {pathBackButtonExeptions.includes(pathname) || <BackButton />}
       <Routes>
         <Route path="/" element={<Navigate to="jobs" />} />
 

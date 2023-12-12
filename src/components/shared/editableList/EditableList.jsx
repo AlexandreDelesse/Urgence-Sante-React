@@ -26,6 +26,7 @@ export default function EditableList({
     setList(initialList || []);
   }, [initialList]);
 
+  //TODO: numeric type on Editable label
   return (
     <ListGroup variant="flush">
       {list.map((el, index) => (
