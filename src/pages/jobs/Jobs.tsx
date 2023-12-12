@@ -5,20 +5,18 @@ import { useNavigate } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import './job.css'
 import DriverSwap from '../../components/shared/driverSwap/DriverSwap'
-import packagejson from '../../../package.json'
 import { IShortJob } from '../../interfaces/shortJob/IShortJob'
 import useGetShortJobList from '../../hooks/query/useGetShortJobList'
 import useAckJobMutation from '../../hooks/mutation/useAckJobMutation'
 import UserContext from '../../contexts/User.context'
 import ShortjobListItem from './jobList/ShortjobListItem'
-import { Skeleton } from '@mui/material'
 
 export default function Jobs() {
-  const { getToken } = useContext(UserContext)
-  const token = getToken()
-
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false)
+  const { getToken } = useContext(UserContext)
   const navigate = useNavigate()
+
+  const token = getToken()
 
   const shortJobListQuery = useGetShortJobList(token)
   const ackMutation = useAckJobMutation()
@@ -73,8 +71,6 @@ export default function Jobs() {
           />
         )}
       />
-
-      <div>version {packagejson.version}</div>
     </>
   )
 }
