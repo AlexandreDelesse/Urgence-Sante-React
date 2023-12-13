@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@mui/material";
-import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { RiSendPlaneFill } from "react-icons/ri";
 import IconButton from "../../../components/shared/IconButton";
