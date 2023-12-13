@@ -10,6 +10,7 @@ import useGetShortJobList from '../../hooks/query/useGetShortJobList'
 import useAckJobMutation from '../../hooks/mutation/useAckJobMutation'
 import UserContext from '../../contexts/User.context'
 import ShortjobListItem from './jobList/ShortjobListItem'
+import DriverSwapFacade from '../../components/shared/driverSwap/DriverSwapFacade'
 
 export default function Jobs() {
   const [showTerminatedJobs, setShowTerminatedJob] = useState(false)
@@ -53,6 +54,7 @@ export default function Jobs() {
       />
 
       <DriverSwap />
+      <DriverSwapFacade />
 
       <AsyncDataComponent
         query={shortJobListQuery}
