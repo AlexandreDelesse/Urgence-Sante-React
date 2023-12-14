@@ -14,10 +14,10 @@ export default function MainNavbar({
 }) {
   return (
     <Navbar
-      style={{ position: "sticky", top: 0 }}
+      style={{ position: "fixed", top: 0 }}
       fixed="top"
-      bg="dark"
-      variant="dark"
+      bg="light"
+      variant="light"
       expand="lg"
     >
       <Container fluid>
@@ -33,6 +33,7 @@ export default function MainNavbar({
         <Navbar.Toggle
           onClick={toggleSidePanel}
           aria-controls="basic-navbar-nav"
+          className="border-0"
         />
         <Navbar.Offcanvas
           show={showSidePanel}
