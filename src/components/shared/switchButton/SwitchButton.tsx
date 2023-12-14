@@ -17,6 +17,7 @@ export default function SwitchButton({
       selected={selected}
       onChange={onChange}
       color="primary"
+      className={selected ? 'border-0' : ''}
     >
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         {selected ? <VisibilityIcon /> : <VisibilityOffIcon />}
