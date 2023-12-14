@@ -21,7 +21,7 @@ export default function Jobs() {
   const token = getToken()
 
   const shortJobListQuery = useGetShortJobList(token)
-  const ackMutation = useAckJobMutation()
+  const ackMutation = useAckJobMutation(token)
 
   const onJobClick = (jobId: string) => {
     navigate(`${jobId}/detail`)
