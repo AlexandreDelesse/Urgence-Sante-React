@@ -1,6 +1,5 @@
-import { Box, ToggleButton } from '@mui/material'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { ToggleButton } from '@mui/material'
+import FilterAltIcon from '@mui/icons-material/FilterAlt'
 
 interface ISwitchButtonProps {
   selected: boolean
@@ -19,10 +18,7 @@ export default function SwitchButton({
       color="primary"
       className={selected ? 'border-0' : ''}
     >
-      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        {selected ? <VisibilityIcon /> : <VisibilityOffIcon />}
-        Missions terminées
-      </Box>
+      <FilterAltIcon />
     </ToggleButton>
   )
 }

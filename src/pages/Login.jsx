@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import AsyncDataComponent from '../components/shared/AsyncDataComponent'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loader from '../components/shared/Loader'
 import UserContext from '../contexts/User.context'
 import useGetCrewToken from '../hooks/query/useGetCrewToken'

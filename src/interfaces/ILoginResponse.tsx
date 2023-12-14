@@ -4,4 +4,5 @@ export default interface ILoginResponse {
   employee2?: string
   token?: string
   vehicle: string
+  crewId: number
 }

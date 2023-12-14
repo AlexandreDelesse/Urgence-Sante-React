@@ -1,37 +1,37 @@
-import React, { useContext, useState } from "react";
-import { Form } from "react-bootstrap";
-import { useQuery, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { acceptMission, getMissions } from "../../../services/mission.service";
-import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
+import { useContext, useState } from 'react'
+import { Form } from 'react-bootstrap'
+import { useQuery, useQueryClient } from 'react-query'
+import { useNavigate } from 'react-router-dom'
+import { acceptMission, getMissions } from '../../../services/mission.service'
+import AsyncDataComponent from '../../../components/shared/AsyncDataComponent'
 
-import MissionListItem from "./missionListItem/MissionListItem";
-import FilterContext from "../../../contexts/Filter.context";
-import DriverSwap from "../../../components/shared/driverSwap/DriverSwap";
+import MissionListItem from './missionListItem/MissionListItem'
+import FilterContext from '../../../contexts/Filter.context'
+import DriverSwap from '../../../components/shared/driverSwap/DriverSwapFacade'
 
 export default function MissionList() {
-  const navigate = useNavigate();
-  const { showPastMission, setShowPastMission } = useContext(FilterContext);
-  const [loadingButton, setLoadingButton] = useState("");
+  const navigate = useNavigate()
+  const { showPastMission, setShowPastMission } = useContext(FilterContext)
+  const [loadingButton, setLoadingButton] = useState('')
 
-  const asyncMissions = useQuery("missions", getMissions);
-  const queryClient = useQueryClient();
+  const asyncMissions = useQuery('missions', getMissions)
+  const queryClient = useQueryClient()
 
   const onMissionClick = (missionIndex) => {
-    navigate(`jobdetail/${missionIndex}`);
-  };
+    navigate(`jobdetail/${missionIndex}`)
+  }
 
   const onButtonClick = async (e, jobId) => {
-    e.stopPropagation();
-    setLoadingButton(jobId);
-    await acceptMission(jobId);
-    setLoadingButton("");
-    queryClient.invalidateQueries("missions");
-  };
+    e.stopPropagation()
+    setLoadingButton(jobId)
+    await acceptMission(jobId)
+    setLoadingButton('')
+    queryClient.invalidateQueries('missions')
+  }
 
   const toggleShowPastMission = () => {
-    setShowPastMission((old) => !old);
-  };
+    setShowPastMission((old) => !old)
+  }
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function MissionList() {
         )}
       ></AsyncDataComponent>
     </>
-  );
+  )
 }
 
 const ListeMission = ({
@@ -68,7 +68,7 @@ const ListeMission = ({
   loadingButton,
 }) => {
   if (data.length === 0)
-    return <div className="text-center mt-3">Pas de missions en cours</div>;
+    return <div className="text-center mt-3">Pas de missions en cours</div>
 
   return (
     <div className="scroll-component mission-list">
@@ -82,5 +82,5 @@ const ListeMission = ({
         />
       ))}
     </div>
-  );
-};
+  )
+}
