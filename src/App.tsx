@@ -13,6 +13,7 @@ import FilterContext from './contexts/Filter.context'
 import { ThemeProvider, createTheme } from '@mui/material'
 import MainNavbarFacade from './components/nav/mainNavbar/MainNavbarFacade'
 import ILoginResponse from './interfaces/ILoginResponse'
+import PageContent from './pages/pageContent/PageContent'
 
 function App() {
   const [showPastMission, setShowPastMission] = useState(false)
@@ -37,7 +38,9 @@ function App() {
           >
             <ThemeProvider theme={theme}>
               <MainNavbarFacade />
-              <AppRoutes />
+              <PageContent>
+                <AppRoutes />
+              </PageContent>
             </ThemeProvider>
           </FilterContext.Provider>
         </UserContext.Provider>

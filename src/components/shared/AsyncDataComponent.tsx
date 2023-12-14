@@ -29,26 +29,28 @@ export default function AsyncDataComponent({
     return withoutLoader ? null : onLoading ? (
       onLoading()
     ) : (
-      <Loader loadingMessage={onLoadingMessage || null} />
+      <div className="p-4">
+        <Loader loadingMessage={onLoadingMessage || null} />
+      </div>
     )
 
   if (query.status === 'error') {
     if (onError) return onError()
     if (!query.error.request)
       return (
-        <Alert severity="warning">
+        <Alert className="my-2" severity="warning">
           {query.error.message || 'Une erreur est survenue'}
         </Alert>
       )
     if (query.error.request.status < 500)
       return (
-        <Alert severity="warning">
+        <Alert className="my-2" severity="warning">
           {query.error.request.responseText ||
             `Une erreur est survenue : ${query.error.message}`}
         </Alert>
       )
     return (
-      <Alert severity="error">
+      <Alert className="my-2" severity="error">
         {onErrorMessage ||
           query.error.request.responseText ||
           `Une erreur est survenue : ${query.error.message}`}
