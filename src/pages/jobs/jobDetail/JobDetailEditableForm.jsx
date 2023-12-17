@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@mui/material";
+import { Alert, Card, CardContent } from "@mui/material";
 import { Button, Form } from "react-bootstrap";
 import { RiSendPlaneFill } from "react-icons/ri";
 import IconButton from "../../../components/shared/IconButton";
@@ -10,6 +10,8 @@ export default function JobDetailEditableForm({
   onCancel,
   isLoading,
   hasChanged,
+  error,
+  resetError,
 }) {
   return (
     <Form className="d-grid gap-2 mt-2 mb-5">
@@ -21,24 +23,30 @@ export default function JobDetailEditableForm({
         />
       ))}
 
-      <div className="d-flex gap-2 mb-4">
-        <IconButton
-          onClick={onSubmit}
-          variant="success"
-          icon={<RiSendPlaneFill size={16} />}
-          isLoading={isLoading}
-          spinnerVariant="light"
-          label="Sauvegarder"
-          disabled={!hasChanged}
-        />
-        <Button
-          disabled={!hasChanged}
-          onClick={onCancel}
-          variant="outline-danger"
-        >
-          Annuler
-        </Button>
-      </div>
+      {!error ? (
+        <div className="d-flex gap-2 mb-4">
+          <IconButton
+            onClick={onSubmit}
+            variant="success"
+            icon={<RiSendPlaneFill size={16} />}
+            isLoading={isLoading}
+            spinnerVariant="light"
+            label="Sauvegarder"
+            disabled={!hasChanged}
+          />
+          <Button
+            disabled={!hasChanged}
+            onClick={onCancel}
+            variant="outline-danger"
+          >
+            Annuler
+          </Button>
+        </div>
+      ) : (
+        <Alert onClose={resetError} severity="error">
+          {error.message}
+        </Alert>
+      )}
     </Form>
   );
 }

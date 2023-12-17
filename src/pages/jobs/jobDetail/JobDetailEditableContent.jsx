@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import JobDetailEditableForm from './JobDetailEditableForm'
-import ContractTypeSelector from '../../missions/missionDetails/missionOtherInformations/contractTypeSelector/ContractTypeSelector'
-import EditableLabel from '../../../components/shared/editableLabel/EditableLabel'
-import { Form } from 'react-bootstrap'
-import ContractTypeValueSelector from '../../../components/forms/Contract/ContractTypeValueSelector'
-import { nirValidator } from '../../../services/validator'
-import EditableList from '../../../components/shared/editableList/EditableList'
+import { useState } from "react";
+import JobDetailEditableForm from "./JobDetailEditableForm";
+import ContractTypeSelector from "../../missions/missionDetails/missionOtherInformations/contractTypeSelector/ContractTypeSelector";
+import EditableLabel from "../../../components/shared/editableLabel/EditableLabel";
+import { Form } from "react-bootstrap";
+import ContractTypeValueSelector from "../../../components/forms/Contract/ContractTypeValueSelector";
+import { nirValidator } from "../../../services/validator";
+import EditableList from "../../../components/shared/editableList/EditableList";
 
 export default function JobDetailEditableContent({
   jobDetailEditable,
   onSubmit,
   isMutating,
+  mutation,
 }) {
   const [formValue, setFormValue] = useState({
     jobId: jobDetailEditable.jobID,
@@ -22,32 +23,32 @@ export default function JobDetailEditableContent({
     ddn: jobDetailEditable.ddn,
     phones: jobDetailEditable.phones,
     comments: jobDetailEditable.comments,
-  })
+  });
 
-  const [hasChanged, setHasChanged] = useState(false)
+  const [hasChanged, setHasChanged] = useState(false);
 
   const contractType =
     formValue.selectedContractType &&
     jobDetailEditable.contractTypes.find(
       (contractType) =>
-        contractType.id === parseInt(formValue.selectedContractType.id),
-    )
+        contractType.id === parseInt(formValue.selectedContractType.id)
+    );
 
   const handleOnChange = (name, value) => {
-    setFormValue((old) => ({ ...old, [name]: value }))
-    setHasChanged(true)
-  }
+    setFormValue((old) => ({ ...old, [name]: value }));
+    setHasChanged(true);
+  };
 
   const submit = () => {
-    onSubmit(formValue)
-  }
+    onSubmit(formValue);
+  };
 
   const fields = [
     {
-      label: 'Date de naissance',
-      name: 'ddn',
-      type: 'date',
-      format: (value) => (value ? value.split('T')[0] : ''),
+      label: "Date de naissance",
+      name: "ddn",
+      type: "date",
+      format: (value) => (value ? value.split("T")[0] : ""),
       render: (field, onChange) => (
         <CustomFormControl
           name={field.name}
@@ -61,8 +62,8 @@ export default function JobDetailEditableContent({
       ),
     },
     {
-      label: 'Type de contrat',
-      name: 'selectedContractType',
+      label: "Type de contrat",
+      name: "selectedContractType",
       render: (field, onChange) => (
         <>
           <ContractTypeSelector
@@ -83,8 +84,8 @@ export default function JobDetailEditableContent({
       ),
     },
     {
-      label: 'N° sécurité sociale',
-      name: 'nir',
+      label: "N° sécurité sociale",
+      name: "nir",
       render: (field, onChange) => (
         <EditableLabel
           type="number"
@@ -97,8 +98,8 @@ export default function JobDetailEditableContent({
       ),
     },
     {
-      label: 'Emails',
-      name: 'emails',
+      label: "Emails",
+      name: "emails",
       render: (field, onChange) => (
         <EditableList
           buttonLabel="Ajouter une adresse email"
@@ -109,8 +110,8 @@ export default function JobDetailEditableContent({
       ),
     },
     {
-      label: 'Téléphones',
-      name: 'phones',
+      label: "Téléphones",
+      name: "phones",
       render: (field, onChange) => (
         <EditableList
           buttonLabel="Ajouter un téléphone"
@@ -121,7 +122,7 @@ export default function JobDetailEditableContent({
       ),
     },
     {
-      name: 'comments',
+      name: "comments",
       render: (field, onChange) => (
         <EditableLabel
           onChange={(element) => onChange(field.name, element)}
@@ -130,7 +131,7 @@ export default function JobDetailEditableContent({
         />
       ),
     },
-  ]
+  ];
 
   return (
     <div>
@@ -141,13 +142,15 @@ export default function JobDetailEditableContent({
         onSubmit={submit}
         hasChanged={hasChanged}
         isLoading={isMutating}
+        error={mutation.error}
+        resetError={mutation.reset}
       />
     </div>
-  )
+  );
 }
 
 const CustomFormControl = ({ name, value, type, onChange, format }) => {
-  const formattedValue = format ? format(value) : value
+  const formattedValue = format ? format(value) : value;
   return (
     <Form.Control
       value={formattedValue}
@@ -155,8 +158,8 @@ const CustomFormControl = ({ name, value, type, onChange, format }) => {
       name={name}
       onChange={onChange}
     />
-  )
-}
+  );
+};
 // value.split("T")[0] || ""
 
 // const CustomCard = ({ title, content }) => {
