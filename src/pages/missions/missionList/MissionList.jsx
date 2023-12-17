@@ -7,7 +7,7 @@ import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 
 import MissionListItem from "./missionListItem/MissionListItem";
 import FilterContext from "../../../contexts/Filter.context";
-import DriverSwap from "../../../components/shared/driverSwap/DriverSwap";
+import DriverSwap from "../../../components/shared/driverSwap/DriverSwapFacade";
 
 export default function MissionList() {
   const navigate = useNavigate();
