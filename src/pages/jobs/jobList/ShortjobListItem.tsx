@@ -45,7 +45,7 @@ export default function ShortjobListItem({
 
   //FIXME: Gerer le spacing dans un composant list et pas sur la carte.
   return (
-    <Card className="my-2" elevation={0} >
+    <Card sx={{ bgcolor: '#e8eaf6' }} className="my-2" elevation={0}>
       <CardActionArea onClick={toggleExpand}>
         <CardContent
           sx={{

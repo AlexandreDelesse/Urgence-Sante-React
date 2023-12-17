@@ -16,7 +16,8 @@ export default function DriverSwapFacade({
   isLoading,
   onSwapDriver,
 }: IDriverSwapFacadeProps) {
-  const displayTimeFrom = new Date(changeDate || '').toLocaleTimeString([], {
+  const date = changeDate ? new Date(changeDate) : new Date()
+  const displayTimeFrom = date.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   })
