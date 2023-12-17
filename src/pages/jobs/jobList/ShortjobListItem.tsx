@@ -5,6 +5,7 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
+  CircularProgress,
   Collapse,
   Divider,
   Typography,
@@ -19,17 +20,20 @@ import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TransportMode from "../../missions/missionList/missionListItem/transportMode/TransportMode";
 import TransportSens from "../../missions/missionList/missionListItem/transportSens/TransportSens";
+import { Spinner } from "react-bootstrap";
 
 interface IShortjobListItem {
   shortJob: IShortJob;
   onAck: (jobId: string) => void;
   onGoDetail: (jobId: string) => void;
+  isAckLoading: boolean;
 }
 
 export default function ShortjobListItem({
   shortJob,
   onAck,
   onGoDetail,
+  isAckLoading,
 }: IShortjobListItem) {
   const [expand, setExpand] = useState(false);
 
@@ -105,7 +109,13 @@ export default function ShortjobListItem({
             {shortJob.isAck || (
               <Button
                 sx={{ width: "100%" }}
-                startIcon={<ThumbUpIcon />}
+                startIcon={
+                  isAckLoading ? (
+                    <CircularProgress size={16} sx={{ color: "#fff" }} />
+                  ) : (
+                    <ThumbUpIcon />
+                  )
+                }
                 variant="contained"
                 color="success"
                 onClick={handleOnAck}
