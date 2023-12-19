@@ -5,4 +5,5 @@ export default interface ILoginResponse {
   token?: string
   vehicle: string
   crewId: number
+  tokenPeremption?: String
 }

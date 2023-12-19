@@ -1,33 +1,33 @@
-import { useState } from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { HashRouter } from "react-router-dom";
-import AppRoutes from "./routing/AppRoutes";
-import UserContext from "./contexts/User.context";
-import { QueryClient, QueryClientProvider } from "react-query";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import FilterContext from "./contexts/Filter.context";
-import { ThemeProvider, createTheme } from "@mui/material";
-import MainNavbarFacade from "./components/nav/mainNavbar/MainNavbarFacade";
-import ILoginResponse from "./interfaces/ILoginResponse";
-import PageContent from "./pages/pageContent/PageContent";
-import { getCrewFromLocal } from "./services/crew.service";
+import { useState } from 'react'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { HashRouter } from 'react-router-dom'
+import AppRoutes from './routing/AppRoutes'
+import UserContext from './contexts/User.context'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import FilterContext from './contexts/Filter.context'
+import { ThemeProvider, createTheme } from '@mui/material'
+import MainNavbarFacade from './components/nav/mainNavbar/MainNavbarFacade'
+import ILoginResponse from './interfaces/ILoginResponse'
+import PageContent from './pages/pageContent/PageContent'
+import { getCrewFromLocal } from './services/crew.service'
 
 function App() {
-  const [showPastMission, setShowPastMission] = useState(false);
-  const [hasLogged, setHasLogged] = useState(false);
-  const localCrew = getCrewFromLocal();
-  const [crew, setCrew] = useState<ILoginResponse | null>(localCrew);
+  const [showPastMission, setShowPastMission] = useState(false)
+  const [hasLogged, setHasLogged] = useState(false)
+  const localCrew = getCrewFromLocal()
+  const [crew, setCrew] = useState<ILoginResponse | null>(localCrew)
 
-  const getToken = () => crew?.token || null;
-  const queryClient = new QueryClient();
+  const getToken = () => crew?.token || null
+  const queryClient = new QueryClient()
 
   const theme = createTheme({
     palette: {},
-  });
+  })
 
   return (
     <HashRouter>
@@ -48,7 +48,7 @@ function App() {
         </UserContext.Provider>
       </QueryClientProvider>
     </HashRouter>
-  );
+  )
 }
 
-export default App;
+export default App

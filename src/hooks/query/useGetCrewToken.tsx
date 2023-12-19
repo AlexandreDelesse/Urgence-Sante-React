@@ -2,8 +2,8 @@ import { useQuery } from 'react-query'
 import { getCrew } from '../../services/crew.service'
 
 export default function useGetCrewToken(
-  id: string,
-  employee: string,
+  id: string | null,
+  employee: string | null,
   onSuccess: (data: any) => void,
   onError: () => void,
 ) {
