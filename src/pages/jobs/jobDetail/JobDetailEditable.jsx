@@ -19,7 +19,6 @@ export default function JobDetailEditable() {
     onSuccess: () =>
       queryClient.invalidateQueries(["jobDetailEditable", params.jobId]),
   });
-  console.log(jobDetailEditableMutation);
 
   return (
     <Box paddingBottom="32px">

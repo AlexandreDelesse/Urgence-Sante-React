@@ -20,7 +20,6 @@ import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TransportMode from "../../missions/missionList/missionListItem/transportMode/TransportMode";
 import TransportSens from "../../missions/missionList/missionListItem/transportSens/TransportSens";
-import { Spinner } from "react-bootstrap";
 
 interface IShortjobListItem {
   shortJob: IShortJob;
