@@ -5,7 +5,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CircularProgress,
   Collapse,
   Divider,
   Typography,
@@ -14,33 +13,23 @@ import { useState } from "react";
 import { IShortJob } from "../../../interfaces/shortJob/IShortJob";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import FlagIcon from "@mui/icons-material/Flag";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TransportMode from "../../missions/missionList/missionListItem/transportMode/TransportMode";
 import TransportSens from "../../missions/missionList/missionListItem/transportSens/TransportSens";
+import AcknoledgeButton from "./AcknoledgeButton";
 
-interface IShortjobListItem {
+interface IShortjobListItemProps {
   shortJob: IShortJob;
-  onAck: (jobId: string) => void;
   onGoDetail: (jobId: string) => void;
-  isAckLoading: boolean;
 }
 
-export default function ShortjobListItem({
-  shortJob,
-  onAck,
-  onGoDetail,
-  isAckLoading,
-}: IShortjobListItem) {
-  const [expand, setExpand] = useState(false);
+export default function ShortjobListItem(props: IShortjobListItemProps) {
+  const { shortJob, onGoDetail } = props;
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpand = () => setExpand((old) => !old);
-
-  const handleOnAck = () => {
-    onAck(shortJob.jobId);
-  };
+  const toggleExpand = () => setIsExpanded((old) => !old);
 
   const handleOnGoDetail = () => {
     onGoDetail(shortJob.jobId);
@@ -80,17 +69,14 @@ export default function ShortjobListItem({
               </Typography>
             </div>
 
-            {expand ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
-            {/* <Box sx={{ position: 'absolute', top: '8px', right: '8px' }}>
-            <HourglassBottomIcon color="warning" fontSize='small'/>
-          </Box> */}
+            <ExpandIcon isExpanded={isExpanded} />
+            
           </CardContent>
         </Box>
       </CardActionArea>
-      <Collapse unmountOnExit in={expand}>
+      <Collapse unmountOnExit in={isExpanded}>
         <CardContent>
           <Box sx={{ display: "flex", gap: 1 }}>
-            {/* <Typography variant="caption">Départ</Typography> */}
             <FlagIcon color="warning" /> {shortJob.departure}
             <Typography variant="body1"></Typography>
           </Box>
@@ -98,30 +84,13 @@ export default function ShortjobListItem({
           <Divider variant="middle" sx={{ marginY: 2 }} />
 
           <Box sx={{ display: "flex", gap: 1 }}>
-            {/* <Typography variant="caption">Départ</Typography> */}
             <SportsScoreIcon color="success" /> {shortJob.arrival}
             <Typography variant="body1"></Typography>
           </Box>
         </CardContent>
         <CardActions sx={{ display: "flex" }}>
           <>
-            {shortJob.isAck || (
-              <Button
-                sx={{ width: "100%" }}
-                startIcon={
-                  isAckLoading ? (
-                    <CircularProgress size={16} sx={{ color: "#fff" }} />
-                  ) : (
-                    <ThumbUpIcon />
-                  )
-                }
-                variant="contained"
-                color="success"
-                onClick={handleOnAck}
-              >
-                Ok !
-              </Button>
-            )}
+            {shortJob.isAck || <AcknoledgeButton jobId={shortJob.jobId} />}
             <Button
               sx={{ width: "100%" }}
               startIcon={<VisibilityIcon />}
@@ -135,4 +104,13 @@ export default function ShortjobListItem({
       </Collapse>
     </Card>
   );
+}
+
+interface ExpandIconProps {
+  isExpanded: boolean;
+}
+function ExpandIcon(props: ExpandIconProps) {
+  const { isExpanded } = props;
+  if (isExpanded) return <KeyboardArrowDownIcon />;
+  return <KeyboardArrowRightIcon />;
 }

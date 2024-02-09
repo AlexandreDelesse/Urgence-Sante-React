@@ -1,16 +1,16 @@
-import React from 'react'
-import Loader from './Loader'
-import { Alert } from '@mui/material'
+import React from "react";
+import Loader from "./Loader";
+import { Alert } from "@mui/material";
 
 interface IAsyncDataComponentProps {
-  query: any
-  onLoadingMessage?: string
-  onErrorMessage?: string
-  onSuccess: (data: any) => any
-  onLoading?: () => any
-  withRefetchLoader?: boolean
-  onError?: (data?: any) => any
-  withoutLoader?: boolean
+  query: any;
+  onLoadingMessage?: string;
+  onErrorMessage?: string;
+  onSuccess: (data: any) => any;
+  onLoading?: () => any;
+  withRefetchLoader?: boolean;
+  onError?: (data?: any) => any;
+  withoutLoader?: boolean;
 }
 
 export default function AsyncDataComponent({
@@ -25,38 +25,38 @@ export default function AsyncDataComponent({
 }: IAsyncDataComponentProps) {
   //TODO: Add context error message
   //TODO: Ajouter un AsyncMultiDataComponent
-  if (query.status === 'loading' || (withRefetchLoader && query.isRefetching))
+  if (query.status === "loading" || (withRefetchLoader && query.isRefetching))
     return withoutLoader ? null : onLoading ? (
       onLoading()
     ) : (
       <div className="p-4">
         <Loader loadingMessage={onLoadingMessage || null} />
       </div>
-    )
+    );
 
-  if (query.status === 'error') {
-    if (onError) return onError()
+  if (query.status === "error") {
+    if (onError) return onError();
     if (!query.error.request)
       return (
         <Alert className="my-2" severity="warning">
-          {query.error.message || 'Une erreur est survenue'}
+          {query.error.message || "Une erreur est survenue"}
         </Alert>
-      )
+      );
     if (query.error.request.status < 500)
       return (
         <Alert className="my-2" severity="warning">
           {query.error.request.responseText ||
             `Une erreur est survenue : ${query.error.message}`}
         </Alert>
-      )
+      );
     return (
       <Alert className="my-2" severity="error">
         {onErrorMessage ||
           query.error.request.responseText ||
           `Une erreur est survenue : ${query.error.message}`}
       </Alert>
-    )
+    );
   }
 
-  return onSuccess(query.data)
+  return onSuccess(query.data);
 }
