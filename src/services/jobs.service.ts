@@ -1,11 +1,12 @@
 import { ShortJob } from "../models/ShortJob";
 import { api } from "./api.config";
+import { getGCrewToken } from "./crew.service";
 
 const getShortJobList = async (
-  gCrewToken: string | null,
   showTerminated: boolean
 ): Promise<ShortJob[]> => {
   try {
+    const gCrewToken = getGCrewToken();
     console.log("show terminated", showTerminated);
     if (!gCrewToken)
       throw new Error("Pas de token. Veuillez vous authentifier");
