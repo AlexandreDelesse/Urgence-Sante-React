@@ -7,6 +7,7 @@ import {
 import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { Col, Row } from "react-bootstrap";
+import FromTo from "../../../components/shared/fromto/FromTo";
 
 export default function JobDetailContent({ jobDetail, toggleForm }) {
   return (
@@ -40,9 +41,11 @@ export default function JobDetailContent({ jobDetail, toggleForm }) {
         </CardContent>
       </MuiCard>
 
-      <CustomCard title="Départ" content={jobDetail.departure} />
-
-      <CustomCard title="Arrivée" content={jobDetail.arrival} />
+      <MuiCard className="my-2">
+        <CardContent>
+          <FromTo from={jobDetail.departure} to={jobDetail.arrival} />
+        </CardContent>
+      </MuiCard>
 
       {jobDetail.comments && (
         <CustomTypography title="Commentaire" content={jobDetail.comments} />

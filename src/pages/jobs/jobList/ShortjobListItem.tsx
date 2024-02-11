@@ -6,19 +6,17 @@ import {
   CardActions,
   CardContent,
   Collapse,
-  Divider,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { IShortJob } from "../../../interfaces/shortJob/IShortJob";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import FlagIcon from "@mui/icons-material/Flag";
-import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TransportMode from "../../missions/missionList/missionListItem/transportMode/TransportMode";
 import TransportSens from "../../missions/missionList/missionListItem/transportSens/TransportSens";
 import AcknoledgeButton from "./AcknoledgeButton";
+import FromTo from "../../../components/shared/fromto/FromTo";
 
 interface IShortjobListItemProps {
   shortJob: IShortJob;
@@ -70,23 +68,12 @@ export default function ShortjobListItem(props: IShortjobListItemProps) {
             </div>
 
             <ExpandIcon isExpanded={isExpanded} />
-            
           </CardContent>
         </Box>
       </CardActionArea>
       <Collapse unmountOnExit in={isExpanded}>
         <CardContent>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <FlagIcon color="warning" /> {shortJob.departure}
-            <Typography variant="body1"></Typography>
-          </Box>
-
-          <Divider variant="middle" sx={{ marginY: 2 }} />
-
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <SportsScoreIcon color="success" /> {shortJob.arrival}
-            <Typography variant="body1"></Typography>
-          </Box>
+          <FromTo from={shortJob.departure} to={shortJob.arrival} />
         </CardContent>
         <CardActions sx={{ display: "flex" }}>
           <>
