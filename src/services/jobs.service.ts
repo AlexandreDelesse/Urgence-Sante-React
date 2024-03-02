@@ -7,7 +7,6 @@ const getShortJobList = async (
 ): Promise<ShortJob[]> => {
   try {
     const gCrewToken = getGCrewToken();
-    console.log("show terminated", showTerminated);
     if (!gCrewToken)
       throw new Error("Pas de token. Veuillez vous authentifier");
     const response = await api.get("/JobList", {

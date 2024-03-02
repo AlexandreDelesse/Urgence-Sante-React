@@ -5,6 +5,7 @@ import AsyncDataComponent from "../../../components/shared/AsyncDataComponent";
 import JobDetailEditableContent from "./JobDetailEditableContent";
 import { Box } from "@mui/system";
 import useGetJobDetailEditable from "../../../hooks/query/useGetJobDetailEditable";
+import JobDetailEditableFormView from "./JobDetailEditableFormView";
 
 //TODO: Continuer a refactor les useQuery et useMutation
 
@@ -22,18 +23,7 @@ export default function JobDetailEditable() {
 
   return (
     <Box paddingBottom="32px">
-      <AsyncDataComponent
-        withRefetchLoader
-        query={jobDetailEditableQuery}
-        onSuccess={({ data: jobDetailEditable }) => (
-          <JobDetailEditableContent
-            jobDetailEditable={jobDetailEditable}
-            onSubmit={jobDetailEditableMutation.mutate}
-            isMutating={jobDetailEditableMutation.isLoading}
-            mutation={jobDetailEditableMutation}
-          />
-        )}
-      />
+      <JobDetailEditableFormView />;
     </Box>
   );
 }
