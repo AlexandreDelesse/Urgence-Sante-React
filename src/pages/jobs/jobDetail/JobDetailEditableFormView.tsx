@@ -101,12 +101,16 @@ export default function JobDetailEditableFormView() {
         />
       </FormSection>
       <Button
+        className="me-2"
         variant="contained"
         color="primary"
         startIcon={<SaveIcon />}
         onClick={submitForm}
       >
         Sauvegarder
+      </Button>
+      <Button variant="outlined" color="error" onClick={() => {}}>
+        Annuler
       </Button>
     </div>
   );

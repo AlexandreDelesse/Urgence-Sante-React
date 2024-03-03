@@ -70,18 +70,3 @@ const CustomTypography = ({ title, content }) => {
     </>
   );
 };
-
-const CustomCard = ({ title, content }) => {
-  return (
-    <MuiCard className="my-2">
-      <CardContent>
-        <Typography variant="caption" color="text.secondary" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="body2" component="div">
-          {content}
-        </Typography>
-      </CardContent>
-    </MuiCard>
-  );
-};

@@ -13,7 +13,9 @@ export default function useContractTypeFormViewModel() {
 
   const selectContractType = (id: number) => {
     const contractType = getContractTypeById(id);
+    if (!contractType) return;
     setContractTypeSelected(contractType || null);
+    setContractTypeValueOptions(contractType.values);
   };
 
   const initContractTypeSelected = (
@@ -23,6 +25,7 @@ export default function useContractTypeFormViewModel() {
     const contractType = getContractTypeById(contractTypeToInit.id);
     if (!contractType) return;
     setContractTypeSelected(contractType);
+    setContractTypeValueOptions(contractType.values);
     setContractTypeValue(contractTypeToInit.selectedValue);
   };
 
