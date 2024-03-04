@@ -37,6 +37,7 @@ export default function JobDetailEditableFormView() {
     updateComment,
     nir,
     updateNir,
+    resetForm,
   } = useJobDetailEditableFormViewModel(
     EmailFormViewModel,
     ContractTypeFormViewModel,
@@ -109,7 +110,7 @@ export default function JobDetailEditableFormView() {
       >
         Sauvegarder
       </Button>
-      <Button variant="outlined" color="error" onClick={() => {}}>
+      <Button variant="outlined" color="error" onClick={resetForm}>
         Annuler
       </Button>
     </div>

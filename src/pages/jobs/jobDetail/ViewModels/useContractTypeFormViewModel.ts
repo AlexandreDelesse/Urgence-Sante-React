@@ -21,7 +21,10 @@ export default function useContractTypeFormViewModel() {
   const initContractTypeSelected = (
     contractTypeToInit: SelectedContractType | null
   ) => {
-    if (!contractTypeToInit) return;
+    if (!contractTypeToInit) {
+      setContractTypeSelected(null);
+      return;
+    }
     const contractType = getContractTypeById(contractTypeToInit.id);
     if (!contractType) return;
     setContractTypeSelected(contractType);

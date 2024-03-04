@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { ContractType } from "../../../../models/ContractType";
 import { IEmailFormViewModel } from "../../../../interfaces/IEmailFormViewModel";
-import { SelectChangeEvent } from "@mui/material";
 import { IContractTypeSelectorFormViewModel } from "../../../../interfaces/IContractTypeSelectorFormViewModel";
 import { IPhoneFormViewModel } from "../../../../interfaces/IPhonesFormViewModel";
 import { IDatePickerViewModel } from "../../../../interfaces/IDatePickerViewModel";
@@ -40,20 +38,39 @@ export default function useJobDetailEditableFormViewModel(
       }
     : null;
 
+  const [initialFormValues, setInitialFormValues] = useState<any | null>(null);
+
   useEffect(() => {
     getJobDetailEditable(jobId || "")
       .then((request) => {
         console.log("init infos");
         const values = request.data;
-        setNir(values.nir);
-        initDate(values.ddn);
-        initEmails(values.emails);
-        initPhones(values.phones);
-        updateContractTypes(values.contractTypes);
-        initContractTypeSelected(values.selectedContractType);
+        const apiValues = {
+          nir: values.nir,
+          ddn: values.ddn,
+          emails: values.emails,
+          phones: values.phones,
+          selectedContractType: values.SelectedContractType,
+          contractTypes: values.contractTypes,
+          reference: values.reference,
+        };
+        setInitialFormValues(apiValues);
+        initFormFromApi(apiValues);
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const resetForm = () => initFormFromApi(initialFormValues);
+
+  const initFormFromApi = (values: any) => {
+    setNir(values.nir);
+    initDate(values.ddn);
+    initEmails(values.emails);
+    initPhones(values.phones);
+    updateContractTypes(values.contractTypes);
+    initContractTypeSelected(values.selectedContractType);
+    updateReference(values.reference);
+  };
 
   const toggleIsPmtPresent = () => setIsPmtPresent(!isPmtPresent);
 
@@ -64,7 +81,7 @@ export default function useJobDetailEditableFormViewModel(
   const updateReference = (value: string) => setReference(value);
 
   const submitForm = () =>
-    patchJobDetailEditable({
+    console.log({
       jobId,
       emails,
       comments,
@@ -72,9 +89,19 @@ export default function useJobDetailEditableFormViewModel(
       ddn: isoDate,
       phones,
       selectedContractType,
-    })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      reference,
+    });
+  // patchJobDetailEditable({
+  //   jobId,
+  //   emails,
+  //   comments,
+  //   isPmtPresent,
+  //   ddn: isoDate,
+  //   phones,
+  //   selectedContractType,
+  // })
+  //   .then((res) => console.log(res))
+  //   .catch((error) => console.log(error));
 
   return {
     contractTypes,
@@ -89,5 +116,6 @@ export default function useJobDetailEditableFormViewModel(
     contractTypeSelected,
     nir,
     updateNir,
+    resetForm,
   };
 }
