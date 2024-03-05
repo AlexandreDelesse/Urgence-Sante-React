@@ -117,7 +117,10 @@ export default function useJobDetailEditableFormViewModel(
       phones,
       selectedContractType,
     })
-      .then((res) => setUpdateError(null))
+      .then((res) => {
+        setRefresh(!refresh);
+        setUpdateError(null);
+      })
       .catch((error: AxiosError) => setUpdateError(error));
   };
 
