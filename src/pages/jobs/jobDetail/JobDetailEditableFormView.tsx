@@ -77,7 +77,7 @@ export default function JobDetailEditableFormView() {
 
   return (
     <div>
-      <FormSection title="Informations client">
+      <FormSection title="Bénéficiaire">
         <DatePickerView DatePickerViewModel={DatePickerViewModel} />
         <OutlinedTextField
           label="N° sécurité sociale"
@@ -92,7 +92,7 @@ export default function JobDetailEditableFormView() {
         <PhoneListFormView PhoneFormViewModel={PhoneFormViewModel} />
       </FormSection>
 
-      <FormSection title="Mission">
+      <FormSection title="Facturation">
         <ContractTypeFormView
           ContractTypeFormViewModel={ContractTypeFormViewModel}
         />

@@ -12,8 +12,9 @@ const getShortJobList = async (
     const response = await api.get("/JobList", {
       params: { gCrewToken },
     });
-    if (!showTerminated) return response.data;
-    return response.data.filter((el: ShortJob) => el.isAck);
+    console.log(showTerminated);
+    if (showTerminated) return response.data;
+    return response.data.filter((el: ShortJob) => !el.isTerminated);
   } catch (error) {
     throw error;
   }
