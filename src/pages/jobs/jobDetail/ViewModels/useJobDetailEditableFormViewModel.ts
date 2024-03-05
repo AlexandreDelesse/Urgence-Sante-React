@@ -116,7 +116,8 @@ export default function useJobDetailEditableFormViewModel(
       ddn: isoDate,
       phones,
       selectedContractType,
-      nir
+      nir,
+      reference
     })
       .then((res) => {
         setRefresh(!refresh);
