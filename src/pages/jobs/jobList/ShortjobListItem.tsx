@@ -77,15 +77,18 @@ export default function ShortjobListItem(props: IShortjobListItemProps) {
         </CardContent>
         <CardActions sx={{ display: "flex" }}>
           <>
-            {shortJob.isAck || <AcknoledgeButton jobId={shortJob.jobId} />}
-            <Button
-              sx={{ width: "100%" }}
-              startIcon={<VisibilityIcon />}
-              variant="contained"
-              onClick={handleOnGoDetail}
-            >
-              Détail
-            </Button>
+            {!shortJob.isAck ? (
+              <AcknoledgeButton jobId={shortJob.jobId} />
+            ) : (
+              <Button
+                sx={{ width: "100%" }}
+                startIcon={<VisibilityIcon />}
+                variant="contained"
+                onClick={handleOnGoDetail}
+              >
+                Détail
+              </Button>
+            )}
           </>
         </CardActions>
       </Collapse>
