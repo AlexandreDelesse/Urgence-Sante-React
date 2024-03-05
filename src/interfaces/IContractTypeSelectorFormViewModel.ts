@@ -11,5 +11,8 @@ export interface IContractTypeSelectorFormViewModel {
   updateContractTypeValue: (value: string) => any;
   contractTypeValueOptions: string[];
   setContractTypeValueOptions: (value: string[]) => any;
-  initContractTypeSelected: (selectedContract: SelectedContractType) => any;
+  initContractTypeSelected: (
+    contractTypeList: ContractType[],
+    selectedContract: SelectedContractType
+  ) => any;
 }

@@ -8,6 +8,7 @@ import { getJobDetailEditable } from "../../../../services/jobs.service";
 import { patchJobDetailEditable } from "../../../../services/mission.service";
 import { AxiosError } from "axios";
 import { nirValidator } from "../../../../services/validator";
+import { getJobDetailEditableDTO } from "../models/GetJobDetailEditableDTO";
 
 export default function useJobDetailEditableFormViewModel(
   EmailViewModel: IEmailFormViewModel,
@@ -52,20 +53,20 @@ export default function useJobDetailEditableFormViewModel(
   useEffect(() => {
     setIsLoading(true);
     getJobDetailEditable(jobId || "")
-      .then((request) => {
-        const values = request.data;
+      .then(({ data }: { data: getJobDetailEditableDTO }) => {
         const apiValues = {
-          nir: values.nir,
-          ddn: values.ddn,
-          emails: values.emails,
-          phones: values.phones,
-          selectedContractType: values.SelectedContractType,
-          contractTypes: values.contractTypes,
-          reference: values.reference,
-          comments: values.comments,
+          nir: data.nir,
+          ddn: data.ddn,
+          emails: data.emails,
+          phones: data.phones,
+          selectedContractType: data.selectedContractType,
+          contractTypes: data.contractTypes,
+          reference: data.reference,
+          comments: data.comments,
         };
+
+        initFormFromApi(data);
         setInitialFormValues(apiValues);
-        initFormFromApi(apiValues);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -80,13 +81,12 @@ export default function useJobDetailEditableFormViewModel(
     setRefresh(!refresh);
   };
 
-  const initFormFromApi = (values: any) => {
+  const initFormFromApi = (values: getJobDetailEditableDTO) => {
     updateNir(values.nir);
     initDate(values.ddn);
     initEmails(values.emails);
     initPhones(values.phones);
-    updateContractTypes(values.contractTypes);
-    initContractTypeSelected(values.selectedContractType);
+    initContractTypeSelected(values.contractTypes, values.selectedContractType);
     updateReference(values.reference);
     updateComment(values.comments);
   };

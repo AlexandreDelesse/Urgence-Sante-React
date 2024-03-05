@@ -19,13 +19,18 @@ export default function useContractTypeFormViewModel() {
   };
 
   const initContractTypeSelected = (
+    contractTypeList: ContractType[],
     contractTypeToInit: SelectedContractType | null
   ) => {
+    setContractTypes(contractTypeList);
     if (!contractTypeToInit) {
       setContractTypeSelected(null);
       return;
     }
-    const contractType = getContractTypeById(contractTypeToInit.id);
+    const contractType = contractTypeList.find(
+      (contract) => contract.id == contractTypeToInit.id
+    );
+
     if (!contractType) return;
     setContractTypeSelected(contractType);
     setContractTypeValueOptions(contractType.values);
