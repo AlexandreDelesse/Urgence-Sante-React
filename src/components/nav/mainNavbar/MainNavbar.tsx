@@ -2,6 +2,7 @@ import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { ILink } from "../../../interfaces/link/ILink";
 import { useLocation } from "react-router-dom";
 import BackButton from "../../shared/BackButton";
+import VersionDisplayerView from "../../VersionDisplayer/VersionDisplayerView";
 
 export default function MainNavbar({
   navLinks,
@@ -64,6 +65,7 @@ export default function MainNavbar({
               ))}
             </Nav>
           </Offcanvas.Body>
+          <VersionDisplayerView />
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
