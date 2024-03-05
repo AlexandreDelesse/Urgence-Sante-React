@@ -1,22 +1,23 @@
-import { api } from './api.config'
+import { PostDriverDTO } from "../components/shared/driverSwap/model/PostDriverDTO";
+import { GetDriverDTO } from "../models/GetDriverDTO";
+import { api } from "./api.config";
 
-const pathDriver = '/Driver'
+const pathDriver = "/Driver";
 
-const getDriver = async (crewId: number | null) => {
+const getDriver = async (crewId: number | null): Promise<GetDriverDTO> => {
   try {
-    return await api.get(pathDriver, { params: { crewId } })
+    const axiosReponse = await api.get(pathDriver, { params: { crewId } });
+    return axiosReponse.data;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-const swapDriver = async (driverId: number, vehicleId: number) => {
+const swapDriver = async (newtDriver: PostDriverDTO | null) => {
+  if (!newtDriver) return;
   try {
-    return await api.post(pathDriver, {
-      driverId,
-      vehicleId,
-    })
+    return await api.post(pathDriver, newtDriver);
   } catch (error) {}
-}
+};
 
-export { getDriver, swapDriver }
+export { getDriver, swapDriver };

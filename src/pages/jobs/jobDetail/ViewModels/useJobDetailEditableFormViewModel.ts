@@ -6,6 +6,8 @@ import { IDatePickerViewModel } from "../../../../interfaces/IDatePickerViewMode
 import { useParams } from "react-router-dom";
 import { getJobDetailEditable } from "../../../../services/jobs.service";
 import { patchJobDetailEditable } from "../../../../services/mission.service";
+import { AxiosError } from "axios";
+import { nirValidator } from "../../../../services/validator";
 
 export default function useJobDetailEditableFormViewModel(
   EmailViewModel: IEmailFormViewModel,
@@ -14,13 +16,18 @@ export default function useJobDetailEditableFormViewModel(
   DatePickerViewModel: IDatePickerViewModel
 ) {
   const { jobId } = useParams();
-  const { emails, initEmails } = EmailViewModel;
-  const { phones, initPhones } = PhoneViewModel;
+  const { emails, initEmails, hasError: hasEmailError } = EmailViewModel;
+  const { phones, initPhones, hasError: hasPhoneError } = PhoneViewModel;
   const { isoDate, initDate } = DatePickerViewModel;
   const [comments, setComments] = useState("");
   const [isPmtPresent, setIsPmtPresent] = useState(false);
   const [reference, setReference] = useState("");
   const [nir, setNir] = useState("");
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [refresh, setRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [nirErrorMsg, setNirErrorMsg] = useState("");
+  const [updateError, setUpdateError] = useState<AxiosError | null>(null);
 
   const {
     updateContractTypes,
@@ -40,10 +47,12 @@ export default function useJobDetailEditableFormViewModel(
 
   const [initialFormValues, setInitialFormValues] = useState<any | null>(null);
 
+  const isFormValid = !!!nirErrorMsg && !hasPhoneError && !hasEmailError;
+
   useEffect(() => {
+    setIsLoading(true);
     getJobDetailEditable(jobId || "")
       .then((request) => {
-        console.log("init infos");
         const values = request.data;
         const apiValues = {
           nir: values.nir,
@@ -53,35 +62,53 @@ export default function useJobDetailEditableFormViewModel(
           selectedContractType: values.SelectedContractType,
           contractTypes: values.contractTypes,
           reference: values.reference,
+          comments: values.comments,
         };
         setInitialFormValues(apiValues);
         initFormFromApi(apiValues);
+        setIsLoading(false);
       })
-      .catch((error) => console.log(error));
-  }, []);
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error);
+      });
+  }, [refresh]);
 
   const resetForm = () => initFormFromApi(initialFormValues);
+  const retryAfterError = () => {
+    setError(null);
+    setRefresh(!refresh);
+  };
 
   const initFormFromApi = (values: any) => {
-    setNir(values.nir);
+    updateNir(values.nir);
     initDate(values.ddn);
     initEmails(values.emails);
     initPhones(values.phones);
     updateContractTypes(values.contractTypes);
     initContractTypeSelected(values.selectedContractType);
     updateReference(values.reference);
+    updateComment(values.comments);
   };
 
   const toggleIsPmtPresent = () => setIsPmtPresent(!isPmtPresent);
 
   const updateComment = (value: string) => setComments(value);
 
-  const updateNir = (value: string) => setNir(value);
+  const updateNir = (value: string) => {
+    const nirValid = nirValidator(value);
+    if (!nirValid) setNirErrorMsg("Numéro invalide ou clé invalide");
+    else setNirErrorMsg("");
+    setNir(value);
+  };
+
+  const cancelUpdateError = () => setUpdateError(null);
 
   const updateReference = (value: string) => setReference(value);
 
-  const submitForm = () =>
-    console.log({
+  const submitForm = () => {
+    setUpdateError(null);
+    patchJobDetailEditable({
       jobId,
       emails,
       comments,
@@ -89,19 +116,10 @@ export default function useJobDetailEditableFormViewModel(
       ddn: isoDate,
       phones,
       selectedContractType,
-      reference,
-    });
-  // patchJobDetailEditable({
-  //   jobId,
-  //   emails,
-  //   comments,
-  //   isPmtPresent,
-  //   ddn: isoDate,
-  //   phones,
-  //   selectedContractType,
-  // })
-  //   .then((res) => console.log(res))
-  //   .catch((error) => console.log(error));
+    })
+      .then((res) => setUpdateError(null))
+      .catch((error: AxiosError) => setUpdateError(error));
+  };
 
   return {
     contractTypes,
@@ -117,5 +135,12 @@ export default function useJobDetailEditableFormViewModel(
     nir,
     updateNir,
     resetForm,
+    error,
+    retryAfterError,
+    isLoading,
+    nirErrorMsg,
+    isFormValid,
+    updateError,
+    cancelUpdateError,
   };
 }

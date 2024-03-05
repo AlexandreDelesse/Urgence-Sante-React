@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import {
+  Alert,
+  AlertTitle,
   Button,
   Card,
   CardContent,
@@ -19,6 +21,8 @@ import usePhonesFormViewModel from "./ViewModels/usePhonesFormViewModel";
 import PhoneListFormView from "./JobDetailEditableFormFieldsViews/PhoneListFormView";
 import useDatePickerViewModel from "./ViewModels/useDatePickerViewModel";
 import DatePickerView from "./JobDetailEditableFormFieldsViews/DatePickerView";
+import { Spinner } from "react-bootstrap";
+import Loader from "../../../components/shared/Loader";
 
 export default function JobDetailEditableFormView() {
   const EmailFormViewModel = useEmailsFormViewModel();
@@ -38,6 +42,13 @@ export default function JobDetailEditableFormView() {
     nir,
     updateNir,
     resetForm,
+    error,
+    retryAfterError,
+    isLoading,
+    nirErrorMsg,
+    isFormValid,
+    updateError,
+    cancelUpdateError,
   } = useJobDetailEditableFormViewModel(
     EmailFormViewModel,
     ContractTypeFormViewModel,
@@ -51,6 +62,19 @@ export default function JobDetailEditableFormView() {
   const showReference =
     !!contractTypeSelected && contractTypeSelected.referenceLabel;
 
+  if (error)
+    return (
+      <Alert severity="warning">
+        <AlertTitle>{error.message}</AlertTitle>
+        Une erreur est survenue
+        <Button variant="text" color="info" onClick={retryAfterError}>
+          réessayer
+        </Button>
+      </Alert>
+    );
+
+  if (isLoading) return <Loader loadingMessage="" />;
+
   return (
     <div>
       <FormSection title="Informations client">
@@ -59,6 +83,9 @@ export default function JobDetailEditableFormView() {
           label="N° sécurité sociale"
           value={nir}
           onChange={(e) => updateNir(e.target.value)}
+          error={!!nirErrorMsg}
+          helperText={nirErrorMsg}
+          inputMode="numeric"
         />
 
         <EmailListFormView EmailFormViewModel={EmailFormViewModel} />
@@ -99,6 +126,7 @@ export default function JobDetailEditableFormView() {
           value={comments}
           onChange={(e) => updateComment(e.target.value)}
           label="Commentaire"
+          multiline
         />
       </FormSection>
       <Button
@@ -107,12 +135,20 @@ export default function JobDetailEditableFormView() {
         color="primary"
         startIcon={<SaveIcon />}
         onClick={submitForm}
+        disabled={!isFormValid}
       >
         Sauvegarder
       </Button>
       <Button variant="outlined" color="error" onClick={resetForm}>
         Annuler
       </Button>
+      {updateError && (
+        <Alert severity="error" sx={{ mt: 2 }} onClose={cancelUpdateError}>
+          <AlertTitle>{updateError?.message}</AlertTitle>
+          Une erreur est survenue lors de l'envoie.
+          <Button onClick={submitForm}>Rééssayer</Button>
+        </Alert>
+      )}
     </div>
   );
 }

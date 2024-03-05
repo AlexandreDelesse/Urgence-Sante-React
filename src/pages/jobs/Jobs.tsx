@@ -9,8 +9,8 @@ import ShortjobListItem from "./jobList/ShortjobListItem";
 import SwitchButton from "../../components/shared/switchButton/SwitchButton";
 import FilterContext from "../../contexts/Filter.context";
 import { Box } from "@mui/system";
-import DriverSwapWidget from "../../components/shared/driverSwap/DriverSwapWidget";
 import { Skeleton } from "@mui/material";
+import DriverSwapView from "../../components/shared/driverSwap/views/DriverSwapView";
 
 export default function Jobs() {
   const { showPastMission, setShowPastMission } = useContext(FilterContext);
@@ -41,7 +41,8 @@ export default function Jobs() {
           selected={showPastMission}
           onChange={toggleShowTerminatedJobs}
         />
-        <DriverSwapWidget />
+        {/* <DriverSwapWidget /> */}
+        <DriverSwapView />
       </Box>
 
       <AsyncDataComponent

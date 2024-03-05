@@ -1,5 +1,7 @@
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { ILink } from "../../../interfaces/link/ILink";
+import { useLocation } from "react-router-dom";
+import BackButton from "../../shared/BackButton";
 
 export default function MainNavbar({
   navLinks,
@@ -12,6 +14,8 @@ export default function MainNavbar({
   navLinks: ILink[];
   onNavLinkClick: (link: string) => void;
 }) {
+  const location = useLocation();
+  const isMainPage = location.pathname === "/jobs";
   return (
     <Navbar
       style={{ position: "fixed", top: 0 }}
@@ -21,15 +25,19 @@ export default function MainNavbar({
       expand="lg"
     >
       <Container fluid>
-        <Navbar.Brand onClick={() => onNavLinkClick("/")}>
-          <img
-            className="me-3"
-            style={{ height: "32px" }}
-            src={require("../../../assets/logo-us.png")}
-            alt="Logo urgence sante"
-          />
-          Urgence Sante
-        </Navbar.Brand>
+        {isMainPage ? (
+          <Navbar.Brand onClick={() => onNavLinkClick("/")}>
+            <img
+              className="me-3"
+              style={{ height: "32px" }}
+              src={require("../../../assets/logo-us.png")}
+              alt="Logo urgence sante"
+            />
+            Urgence Sante
+          </Navbar.Brand>
+        ) : (
+          <BackButton />
+        )}
         <Navbar.Toggle
           onClick={toggleSidePanel}
           aria-controls="basic-navbar-nav"
@@ -47,7 +55,10 @@ export default function MainNavbar({
           <Offcanvas.Body>
             <Nav className="me-auto align-items-center">
               {navLinks.map((link) => (
-                <Nav.Link key={link.name} onClick={() => onNavLinkClick(link.path)}>
+                <Nav.Link
+                  key={link.name}
+                  onClick={() => onNavLinkClick(link.path)}
+                >
                   {link.name}
                 </Nav.Link>
               ))}

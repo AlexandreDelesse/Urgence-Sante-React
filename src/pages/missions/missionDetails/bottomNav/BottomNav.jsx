@@ -5,6 +5,7 @@ export default function BottomNav({ tabs, activelink, onLinkClick }) {
   return (
     <Paper
       sx={{
+        zIndex: 1000,
         position: "fixed",
         bottom: 0,
         left: 0,

@@ -25,7 +25,7 @@ export default function ContractTypeValueSelectorView(
 
   return (
     <FormControl size="small" sx={{ width: "100%", my: 1 }}>
-      <InputLabel>Type de contrat</InputLabel>
+      <InputLabel>Choisissez une valeur</InputLabel>
       <Select
         onChange={handleOnSelect}
         value={contractTypeValue}
