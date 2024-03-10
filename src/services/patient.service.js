@@ -9,7 +9,7 @@ const createNewPatient = async ({
 }) => {
   try {
     return await api.put(
-      '/JobDetailEditable',
+      '/JobEdit',
       {
         firstName: firstname,
         lastName: lastname,

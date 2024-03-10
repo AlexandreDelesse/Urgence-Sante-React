@@ -1,6 +1,8 @@
 import { api } from './api.config'
 import { getToken } from './user.service'
 
+const JOB_DETAIL_EDIT = 'JobEdit'
+
 const getMissions = async () => {
   try {
     const token = getToken()
@@ -26,7 +28,7 @@ const getMissionById = async (jobId) => {
 
 const getJobDetailEditableFromJobId = async (jobId) => {
   try {
-    const { data: jobDetailEditable } = await api.get(`JobDetailEditable`, {
+    const { data: jobDetailEditable } = await api.get(JOB_DETAIL_EDIT, {
       params: { gJobId: jobId },
     })
     return jobDetailEditable
@@ -37,7 +39,7 @@ const getJobDetailEditableFromJobId = async (jobId) => {
 
 const patchJobDetailEditable = async (jobDetailEditable) => {
   try {
-    await api.patch('JobDetailEditable', jobDetailEditable)
+    await api.patch(JOB_DETAIL_EDIT, jobDetailEditable)
   } catch (error) {
     throw error
   }

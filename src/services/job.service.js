@@ -1,6 +1,8 @@
 import { api } from "./api.config";
 import { getToken } from "./user.service";
 
+const JOB_DETAIL_EDITABLE_URL =  'JobEdit'
+
 const getJobList = async () => {
   try {
     const token = getToken();
@@ -62,7 +64,7 @@ const getJobStatusById = async (jobId) => {
 
 const getJobDetailEditableById = async (jobId) => {
   try {
-    const { data: jobDetailEditable } = await api.get(`JobDetailEditable`, {
+    const { data: jobDetailEditable } = await api.get(JOB_DETAIL_EDITABLE_URL, {
       params: { gJobId: jobId },
     });
     return jobDetailEditable;
@@ -73,7 +75,7 @@ const getJobDetailEditableById = async (jobId) => {
 
 const patchJobDetailEditable = async (jobDetailEditable) => {
   try {
-    await api.patch("JobDetailEditable", jobDetailEditable);
+    await api.patch(JOB_DETAIL_EDITABLE_URL, jobDetailEditable);
   } catch (error) {
     throw error;
   }

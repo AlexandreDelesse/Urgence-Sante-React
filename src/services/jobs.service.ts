@@ -2,6 +2,8 @@ import { ShortJob } from "../models/ShortJob";
 import { api } from "./api.config";
 import { getGCrewToken } from "./crew.service";
 
+const JOB_DETAIL_EDIT = 'JobEdit'
+
 const getShortJobList = async (
   showTerminated: boolean
 ): Promise<ShortJob[]> => {
@@ -49,7 +51,7 @@ const getMissionStatus = async (jobId: string) => {
 
 const getJobDetailEditable = async (jobId: string) => {
   try {
-    return await api.get(`JobDetailEditable`, {
+    return await api.get(JOB_DETAIL_EDIT, {
       params: { gJobId: jobId },
     });
   } catch (error) {
