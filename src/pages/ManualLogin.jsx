@@ -3,7 +3,7 @@ import { Alert, Button, Col, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
 import UserContext from "../contexts/User.context";
-import { getCrewByCrewId } from "../services/crew.service";
+import { getCrewByCrewId, storeCrewInlocal } from "../services/crew.service";
 
 export default function ManualLogin() {
   const [form, setForm] = useState({ nom: "", code: "" });
@@ -23,8 +23,12 @@ export default function ManualLogin() {
       setErrorMsg("");
       setLoading(true);
       const resp = await getCrewByCrewId(`${form.code}&${form.nom}`);
+      const twelveHourLater = new Date()
+      twelveHourLater.setHours(twelveHourLater.getHours() + 12)
+      resp.tokenPeremption = twelveHourLater.toISOString()
       console.log(resp)
       setLoading(false);
+      storeCrewInlocal(resp)
       setCrew(resp)
       navigate("/");
     } catch (error) {
