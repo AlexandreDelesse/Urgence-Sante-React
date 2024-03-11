@@ -1,6 +1,6 @@
 import ILoginResponse from "../interfaces/ILoginResponse";
 import { api } from "./api.config";
-import { storeDrivers, storeToken } from "./user.service";
+import { getToken, storeDrivers, storeToken } from "./user.service";
 
 /**
  * Retourne un token pour l'équipage identifié avec un id et un nom d'employée
@@ -45,9 +45,9 @@ const storeCrewInlocal = (crew: ILoginResponse) => {
 };
 
 const getGCrewToken = (): string | undefined => {
-  const crew = getCrewFromLocal();
-  if (!crew) return undefined;
-  return crew.token;
+  const token = getToken();
+  if (!token) return undefined;
+  return token;
 };
 
 const getCrewFromLocal = (): ILoginResponse | null => {

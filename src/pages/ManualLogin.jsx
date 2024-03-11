@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, Button, Col, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
+import UserContext from "../contexts/User.context";
 import { getCrewByCrewId } from "../services/crew.service";
 
 export default function ManualLogin() {
@@ -9,6 +10,8 @@ export default function ManualLogin() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  const { setCrew } = useContext(UserContext)
+
 
   const onChangeForm = (e) => {
     const { name, value } = e.target;
@@ -19,8 +22,10 @@ export default function ManualLogin() {
     try {
       setErrorMsg("");
       setLoading(true);
-      await getCrewByCrewId(`${form.code}&${form.nom}`);
+      const resp = await getCrewByCrewId(`${form.code}&${form.nom}`);
+      console.log(resp)
       setLoading(false);
+      setCrew(resp)
       navigate("/");
     } catch (error) {
       setLoading(false);
