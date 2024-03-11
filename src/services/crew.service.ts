@@ -52,6 +52,7 @@ const getGCrewToken = (): string | undefined => {
 
 const getCrewFromLocal = (): ILoginResponse | null => {
   const localCrew = window.localStorage.getItem("CREW");
+  console.log("crew from local", localCrew)
   if (!localCrew) return null;
   const jsonLocalCrew: ILoginResponse = JSON.parse(localCrew);
   if (isCrewExpired(jsonLocalCrew)) return null;

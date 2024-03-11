@@ -11,6 +11,7 @@ import JobDetail from "../pages/jobs/jobDetail/JobDetail";
 import JobDetailEditable from "../pages/jobs/jobDetail/JobDetailEditable";
 import React, { useContext } from "react";
 import UserContext from "../contexts/User.context";
+import { getToken } from "../services/user.service";
 
 export default function AppRoutes() {
   return (
@@ -44,6 +45,8 @@ export default function AppRoutes() {
 
 const PrivateRoute = () => {
   const { crew } = useContext(UserContext);
+  console.log("crew ffrom context", crew)
+  
   return crew ? <Outlet /> : <Navigate to="/login" />;
 };
 
