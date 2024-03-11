@@ -89,6 +89,7 @@ export default function useJobDetailEditableFormViewModel(
     initContractTypeSelected(values.contractTypes, values.selectedContractType);
     updateReference(values.reference);
     updateComment(values.comments);
+    setIsPmtPresent(values.isPmtPresent)
   };
 
   const toggleIsPmtPresent = () => setIsPmtPresent(!isPmtPresent);
