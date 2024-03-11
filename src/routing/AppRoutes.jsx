@@ -1,17 +1,19 @@
-import { Container } from "react-bootstrap";
-import { Routes, Route, useNavigate, Navigate, Outlet } from "react-router-dom";
+import { Container } from 'react-bootstrap'
+import { Routes, Route, useNavigate, Navigate, Outlet } from 'react-router-dom'
 
-import Login from "../pages/Login";
-import ManualLogin from "../pages/ManualLogin";
-import CrewList from "../pages/crewList/CrewList";
-import Jobs from "../pages/jobs/Jobs";
-import JobDetailNavigation from "../pages/jobs/jobDetail/JobDetailNavigation";
-import Signature from "../pages/missions/missionDetails/signature/Signature";
-import JobDetail from "../pages/jobs/jobDetail/JobDetail";
-import JobDetailEditable from "../pages/jobs/jobDetail/JobDetailEditable";
-import React, { useContext } from "react";
-import UserContext from "../contexts/User.context";
-import { getToken } from "../services/user.service";
+import Login from '../pages/Login'
+import ManualLogin from '../pages/ManualLogin'
+import CrewList from '../pages/crewList/CrewList'
+import Jobs from '../pages/jobs/Jobs'
+import JobDetailNavigation from '../pages/jobs/jobDetail/JobDetailNavigation'
+import Signature from '../pages/missions/missionDetails/signature/Signature'
+import JobDetail from '../pages/jobs/jobDetail/JobDetail'
+import JobDetailEditable from '../pages/jobs/jobDetail/JobDetailEditable'
+import React, { useContext } from 'react'
+import UserContext from '../contexts/User.context'
+import { getToken } from '../services/user.service'
+import UserLoginView from '../pages/UserLogin/UserLoginView'
+import { CrewServiceLocal } from '../services/Crew/CrewServiceLocal'
 
 export default function AppRoutes() {
   return (
@@ -30,7 +32,7 @@ export default function AppRoutes() {
 
       <Route path="regul" element={<CrewList />} />
       <Route path="login/:crewid" element={<Login />} />
-      <Route path="login/*" element={<ManualLogin />} />
+      <Route path="login/*" element={<UserLoginView />} />
 
       {/* <Route path="vehicules" element={<Outlet />}>
           <Route index element={<Vehicules />} />
@@ -40,24 +42,25 @@ export default function AppRoutes() {
 
       <Route path="/*" element={<Page404 />} />
     </Routes>
-  );
+  )
 }
 
 const PrivateRoute = () => {
-  const { crew } = useContext(UserContext);
-  console.log("crew ffrom context", crew)
-  
-  return crew ? <Outlet /> : <Navigate to="/login" />;
-};
+  const crewService = CrewServiceLocal()
+  const crew = crewService.GetCrew()
+  console.log('crew ffrom context', crew)
+
+  return crew ? <Outlet /> : <Navigate to="/login" />
+}
 
 const Page404 = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Container>
       <h1 className="text-center mt-5">404 Not found</h1>
-      <p onClick={() => navigate("/")} className="text-center">
+      <p onClick={() => navigate('/')} className="text-center">
         Retour a la page principale
       </p>
     </Container>
-  );
-};
+  )
+}
